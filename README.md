@@ -27,12 +27,13 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 # Grupo: *Nome_do_seu_Grupo*
 
 **Integrantes:**
-* Gabriel Caetano Nhoncanse
-* Jonas Viana Sales
-* Mateus Rafael Miranda da Silva
-* Raphael Lisboa Antunes
-* Sarah de Miranda Ribeiro
-* Sergio Brito Amorim Lucas
+* [Gabriel Caetano Nhoncanse](https://www.linkedin.com/in/gabrielcaetanonhoncanse/).
+* [Jonas Viana Sales](https://www.linkedin.com/in/jonas-viana-sales/).
+* [Mateus Rafael Miranda da Silva](https://www.linkedin.com/in/mateus-rmiranda/).
+* [Raphael Lisboa Antunes](https://www.linkedin.com/in/raphael-lisboa/).
+* [Sarah de Miranda Ribeiro](https://www.linkedin.com/in/sarah-ribeiro-361130195/).
+* [Sergio Brito Amorim Lucas](https://www.linkedin.com/in/sergiobalucas/).
+* [Thomas Frajhof Brand](https://www.linkedin.com/in/thomas-frajhof-brand-b37170238/).
 
 # Descrição
 
