@@ -22,6 +22,10 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 
 
 # Projeto: Planejador de trajetórias para voos em baixa altitude.
+
+
+# Grupo: *Nome_do_seu_Grupo*
+
 **Integrantes:**
 * Gabriel Caetano Nhoncanse
 * Jonas Viana Sales
@@ -29,8 +33,6 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 * Raphael Lisboa Antunes
 * Sarah de Miranda Ribeiro
 * Sergio Brito Amorim Lucas
-
-# Grupo: *Nome_do_seu_Grupo*
 
 # Descrição
 
