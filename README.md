@@ -24,7 +24,7 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 # Projeto: Planejador de trajetórias para voos em baixa altitude.
 
 
-# Grupo: *Nome_do_seu_Grupo*
+# Grupo: Stall
 
 **Integrantes:**
 * [Gabriel Caetano Nhoncanse](https://www.linkedin.com/in/gabrielcaetanonhoncanse/).
