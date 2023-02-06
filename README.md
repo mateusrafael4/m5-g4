@@ -32,7 +32,7 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 * [Aluno 03](https://www.linkedin.com/in/mateus-rmiranda/).
 * [Aluno 04](https://www.linkedin.com/in/raphael-lisboa/).
 * [Aluno 05](https://www.linkedin.com/in/sarah-ribeiro-361130195/).
-* [Aluno 06](https://www.linkedin.com/in/sergiobalucas/).
+* [Sergio Brito Amorim Lucas](https://www.linkedin.com/in/sergiobalucas/).
 * [Aluno 07](https://www.linkedin.com/in/thomas-frajhof-brand/).
 
 # Descrição
