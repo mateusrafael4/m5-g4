@@ -31,6 +31,8 @@ Planejador de trajetórias para voos em baixa altitude
   - [Análise do cenário: Matriz SWOT](#análise-do-cenário-matriz-swot)
   - [Proposta de Valor: Value Proposition Canvas](#proposta-de-valor-value-proposition-canvas)
   - [Matriz de Risco](#matriz-de-risco)
+      - [Ameaças:](#ameaças)
+      - [Oportunidades:](#oportunidades)
 - [Requisitos do Sistema](#requisitos-do-sistema)
   - [Personas](#personas)
   - [Histórias dos usuários (user stories)](#histórias-dos-usuários-user-stories)
@@ -62,7 +64,7 @@ Planejador de trajetórias para voos em baixa altitude
 * Aluno 2
 * Aluno 3
 * Aluno 4
-* Aluno 5
+* Sarah Ribeiro
 * Aluno 6
 * Aluno 7
 * Aluno 8
