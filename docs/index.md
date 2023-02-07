@@ -105,7 +105,7 @@ Planejador de trajetórias para voos em baixa altitude
  A meta da análise SWOT é facilitar na identificação de características que ajudem o desenvolvimento do projeto. Assim, ela pode potencializar suas forças, mitigar suas fraquezas e minimizar erros, procurar oportunidades para melhorar seus produtos ou criar novos e se manter alerta às ameaças.
  
 <p align="center">
-<img src="img/Swot.PNG.jpg">
+<img width="500" height="330" src="img/Swot.PNG.jpg">
 </p>
 
 
@@ -120,12 +120,12 @@ Planejador de trajetórias para voos em baixa altitude
  
  #### Ameaças
  <p align="center">
-<img src="img/Ameaças.jpg">
+<img width="500" height="330" src="img/Ameaças.jpg">
 </p>
 
  #### Oportunidades
  <p align="center">
-<img src="img/Oportunidades.jpg">
+<img width="500" height="330" src="img/Oportunidades.jpg">
 </p>
 
 # Requisitos do Sistema
