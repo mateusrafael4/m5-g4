@@ -102,7 +102,11 @@ Planejador de trajetórias para voos em baixa altitude
 
 ## Análise do cenário: Matriz SWOT
 
-*Matriz_SWOT*
+ A meta da análise SWOT é facilitar na identificação de características que ajudem o desenvolvimento do projeto. Assim, ela pode potencializar suas forças, mitigar suas fraquezas e minimizar erros, procurar oportunidades para melhorar seus produtos ou criar novos e se manter alerta às ameaças.
+ 
+<p align="center">
+<img src="docs/img/Swot.PNG.jpg">
+</p>
 
 
 ## Proposta de Valor: Value Proposition Canvas
