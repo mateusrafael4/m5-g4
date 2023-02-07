@@ -105,7 +105,7 @@ Planejador de trajetórias para voos em baixa altitude
  A meta da análise SWOT é facilitar na identificação de características que ajudem o desenvolvimento do projeto. Assim, ela pode potencializar suas forças, mitigar suas fraquezas e minimizar erros, procurar oportunidades para melhorar seus produtos ou criar novos e se manter alerta às ameaças.
  
 <p align="center">
-<img width="500" height="330" src="img/Swot.PNG.jpg">
+<img width="730" height="470" src="img/Swot.PNG.jpg">
 </p>
 
 
@@ -118,14 +118,14 @@ Planejador de trajetórias para voos em baixa altitude
 
  O principal objetivo da matriz de risco e oportunidades é a clareza oferecida ao grupo em relação à eventuais problemas que possam ocorrer ao decorrer do desenvolvimento do projeto, possibilitando ao grupo a possibilidade de se previnir dos riscos e buscar as melhores oportunidades.
  
- #### Ameaças
+ #### Ameaças:
  <p align="center">
-<img width="500" height="330" src="img/Ameaças.jpg">
+<img width="705" height="480" src="img/Ameaças.jpg">
 </p>
 
- #### Oportunidades
+ #### Oportunidades:
  <p align="center">
-<img width="500" height="330" src="img/Oportunidades.jpg">
+<img width="650" height="480" src="img/Oportunidades.jpg">
 </p>
 
 # Requisitos do Sistema
