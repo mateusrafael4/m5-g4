@@ -116,8 +116,17 @@ Planejador de trajetórias para voos em baixa altitude
 
 ## Matriz de Risco
 
-*Matriz_de_risco*
+ O principal objetivo da matriz de risco e oportunidades é a clareza oferecida ao grupo em relação à eventuais problemas que possam ocorrer ao decorrer do desenvolvimento do projeto, possibilitando ao grupo a possibilidade de se previnir dos riscos e buscar as melhores oportunidades.
+ 
+ #### Ameaças
+ <p align="center">
+<img src="img/Ameaças.jpg">
+</p>
 
+ #### Oportunidades
+ <p align="center">
+<img src="img/Oportunidades.jpg">
+</p>
 
 # Requisitos do Sistema
 
