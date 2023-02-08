@@ -60,21 +60,20 @@ Planejador de trajetórias para voos em baixa altitude
 
 # Autores
 
-* Aluno 1
-* Aluno 2
+* Gabriel Caetano Nhoncanse
+* Jonas Viana Sales
 * Mateus Rafael Miranda da Silva
-* Aluno 4
+* Raphael Lisboa Antunes
 * Sarah Ribeiro
-* Aluno 6
-* Aluno 7
-* Aluno 8
+* Sergio Brito Amorim Lucas
+* Thomas Frajhof Brand
 
 
 # Visão Geral do Projeto
 
 ## Empresa
 
-*Descrição_da_empresa*
+A AEL Sistemas é uma empresa brasileira nos seguimentos Aeroespacial, Defesa e Segurança. É baseada na prestação de serviços de tecnologia da informação, incluindo consultoria, projeto, fabricação, implantação e suporte logístico de sistemas eletrônicos militares e espaciais, para aplicações em plataformas aéreas, marítimas e terrestres. Faz parte do grupo Elbit Systems e, também, atua em projetos estratégicos das Forças Armadas Brasileiras como Gripen NG, KC-390, Guarani e SISFRON - Sistema Integrado de Monitoramento de Fronteiras. É pioneira na modernização de várias aeronaves da FAB, Embraer EMB-314 Super Tucano, AMX, F-5EM que leva também o suprimento de peças.
 
 ## O Problema
 
