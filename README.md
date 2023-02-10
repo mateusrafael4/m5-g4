@@ -27,7 +27,7 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 # Grupo: Stall
 
 **Integrantes:**
-* [Aluno 01](https://www.linkedin.com/in/gabrielcaetanonhoncanse/).
+* [Gabriel Caetano Nhoncanse](https://www.linkedin.com/in/gabrielcaetanonhoncanse/).
 * [Aluno 02](https://www.linkedin.com/in/jonas-viana-sales/).
 * [Aluno 03](https://www.linkedin.com/in/mateus-rmiranda/).
 * [Aluno 04](https://www.linkedin.com/in/raphael-lisboa/).
@@ -37,7 +37,7 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 
 # Descrição
 
-*Descrição_resumida_do_projeto*
+  Projeto consiste em um algoritmo em Java responsável por fazer leituras de terreno e altitude, organizando as informações em modelo de grafo. A partir de um ponto inicial e outro final, além de diversos nós espalhados pelo terreno, o sistema deverá calcular a melhor rota entre os pontos, balanceando uma rota com baixa altitude e curta distância, com o objetivo de melhorar a eficiência e segurança nas missões aéreas de baixa altitude.
 
 # Documentação
 
