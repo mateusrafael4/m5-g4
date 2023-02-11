@@ -160,8 +160,10 @@ Analisando a proposta de valor, é possível identificar facilmente quais foram 
 *Descrição_dos_requisitos*
 
 ## Personas
+<p align="center">
+<img src="img/Persona.jpg">
+</p>
 
-*Descrição_das_personas*
 
 
 ## Histórias dos usuários (user stories)
