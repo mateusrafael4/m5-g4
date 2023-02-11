@@ -77,21 +77,25 @@ A AEL Sistemas é uma empresa brasileira nos seguimentos Aeroespacial, Defesa e 
 
 ## O Problema
 
-*Descrição_do_problema*
+A empresa parceira AEL Sistemas, apesar de sua alta requisição de sistemas pelo mercado civil e militar, aéreo, terrestre ou naval, ainda encontra desafios em desenvolver um recurso de mapeamento e sugestão de trajetória para terrain following e vôos em baixa altitude, ao qual possa ser otimizada a viagem e o uso de recursos de forma automatizada ou automática. Assim, trouxe o problema até o Instituto de Tecnologia e Liderança (INTELI), fechando uma parceria para aprendizado dos alunos da instituição e desenvolvimento de um protótipo para o problema apresentado pela tal.
 
 ## Objetivos
 
 ### Objetivos gerais
 
-*Lista_de_objetivos_gerais*
+Este projeto tem como objetivo principal desenvolver um algoritmo base para desenvolvimento de sistemas embarcados para missões ar-ar, ar-solo e solo-solo.
 
 ### Objetivos específicos
 
-*Lista_de_objetivos específicos*
+*Desenvolver uma interface a partir de uma sequência de grafos gerada por um banco de dados de elevação, o qual foi fornecido pela empresa parceira no projeto;*
+
+
 
 ## Partes interessadas
 
-*Lista_e_apresentação_das_partes_interessadas*
+*AEL Sistemas;*
+*Instituto de Tecnologia e Liderança (INTELI);*
+*Alunos/autores do projeto.*
 
 # Análise do Problema
 
@@ -112,7 +116,11 @@ A AEL Sistemas é uma empresa brasileira nos seguimentos Aeroespacial, Defesa e 
 
 ## Proposta de Valor: Value Proposition Canvas
 
-*Value_Proposition_Canvas*
+Analisando a proposta de valor, é possível identificar facilmente quais foram as dores trazidas pela empresa parceira e, analisando cada aspecto, quais foram os pontos que o grupo identificou para sanar essa dor. O conteúdo apresentado a seguir, foi apresentado e validado com os parceiros de projeto, para norteamento do grupo ao iniciar o desenvolvimento do algoritmo a partir da validação.
+
+<p align="center">
+<img width="950" height="530" src="img/CanvasVP.png.jpg">
+</p>
 
 
 ## Matriz de Risco
@@ -140,7 +148,18 @@ A AEL Sistemas é uma empresa brasileira nos seguimentos Aeroespacial, Defesa e 
 
 ## Histórias dos usuários (user stories)
 
-*Descrição_das_histórias_dos_usuários*
+As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma vez que será a base de informações do público que queremos atingir através da solução. Tendo isto em vista, o grupo entendeu que deveria escalar as user stories da nossa persona em 5 tópicos, que serão apresentados a seguir:
+
+  **User Stories Roger Augusto**
+*Eu, como Head da Equipe de Tráfego Aéreo Militar, quero o algoritmo proposto, para me auxiliar no traçamento de rotas mais eficazes.*
+
+*Eu, como Head da Equipe de Tráfego Aéreo Militar, quero saber os possíveis obstáculos na trajetória, para garantir a segurança do piloto e da aeronave levando em conta aspectos naturais, como relevo e clima.*
+
+*Eu, como Head da Equipe de Tráfego Aéreo Militar, quero integrar os dados da aeronave, para saber quando alterar o percurso e os recursos necessários para isso.*
+
+*Eu, como Head da Equipe de Tráfego Aéreo Militar, quero adicionar áreas de exclusão, para que a trajetória não considere esse caminho.*
+
+*Eu, como Head da Equipe de Tráfego Aéreo Militar, quero analisar a trajetória para poder discutir sobre os riscos e ganhos dessa missão.*
 
 
 # Arquitetura do Sistema
