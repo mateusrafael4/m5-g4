@@ -30,6 +30,7 @@ Planejador de trajetórias para voos em baixa altitude
 - [Análise do Problema e Solução](#análise-do-problema-e-solução)
       - [Qual a solução proposta (visão de negócios)](#qual-a-solução-proposta-visão-de-negócios)
   - [Análise do cenário: Matriz SWOT](#análise-do-cenário-matriz-swot)
+  - [5 Forças de Porter](#5-forças-de-porter)
   - [Proposta de Valor: Value Proposition Canvas](#proposta-de-valor-value-proposition-canvas)
   - [Matriz de Risco](#matriz-de-risco)
       - [Ameaças:](#ameaças)
@@ -177,6 +178,15 @@ A solução proposta, sob uma perspectiva empresarial, será avaliada de forma �
 <img width="730" height="470" src="img/Swot.PNG.jpg">
 </p>
 
+## 5 Forças de Porter
+
+A análise das 5 forças de Porter é uma ferramenta que ajuda a identificar as forças competitivas que afetam o setor de atuação de uma empresa. 
+<br>
+Ela aborda 5 tópicos: ameaças de novos entrantes, poder de barganha dos clientes, poder de barganha dos fornecedores, ameaças de produtos ou serviços substitutos e a rivalidade entre os concorrentes, sendo que cada um destes tópicos é avaliado em 3 níveis: baixo, médio e alto, representados pelas cores verde, laranja e roxo, respectivamente.
+<br>
+<p align="center">
+<img width="730" height="470" src="img/5_forcas_porter.jpg">
+</p>
 
 ## Proposta de Valor: Value Proposition Canvas
 
