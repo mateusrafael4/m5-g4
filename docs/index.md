@@ -21,10 +21,14 @@ Planejador de trajetórias para voos em baixa altitude
     - [Limitações](#limitações)
   - [Objetivos](#objetivos)
     - [Objetivos gerais](#objetivos-gerais)
+      - [Qual é o problema a ser resolvido](#qual-é-o-problema-a-ser-resolvido)
+      - [Qual o objetivo da solução ?](#qual-o-objetivo-da-solução-)
     - [Objetivos específicos](#objetivos-específicos)
+      - [Como a solução proposta deverá ser utilizada](#como-a-solução-proposta-deverá-ser-utilizada)
+      - [Qual será o critério de sucesso e qual medida será utilizada para o avaliar](#qual-será-o-critério-de-sucesso-e-qual-medida-será-utilizada-para-o-avaliar)
   - [Partes interessadas](#partes-interessadas)
-- [Análise do Problema](#análise-do-problema)
-  - [Análise da área de atuação](#análise-da-área-de-atuação)
+- [Análise do Problema e Solução](#análise-do-problema-e-solução)
+      - [Qual a solução proposta (visão de negócios)](#qual-a-solução-proposta-visão-de-negócios)
   - [Análise do cenário: Matriz SWOT](#análise-do-cenário-matriz-swot)
   - [Proposta de Valor: Value Proposition Canvas](#proposta-de-valor-value-proposition-canvas)
   - [Matriz de Risco](#matriz-de-risco)
@@ -72,7 +76,14 @@ Planejador de trajetórias para voos em baixa altitude
 
 ## Empresa
 
-A AEL Sistemas é uma empresa brasileira nos seguimentos Aeroespacial, Defesa e Segurança. É baseada na prestação de serviços de tecnologia da informação, incluindo consultoria, projeto, fabricação, implantação e suporte logístico de sistemas eletrônicos militares e espaciais, para aplicações em plataformas aéreas, marítimas e terrestres. Faz parte do grupo Elbit Systems e, também, atua em projetos estratégicos das Forças Armadas Brasileiras como Gripen NG, KC-390, Guarani e SISFRON - Sistema Integrado de Monitoramento de Fronteiras. É pioneira na modernização de várias aeronaves da FAB, Embraer EMB-314 Super Tucano, AMX, F-5EM que leva também o suprimento de peças.
+A AEL Sistemas S.A., anteriormente conhecida como Aeroeletrônica e fundada em 1982, é uma empresa especializada em tecnologias de defesa, espaço e segurança pública. Com sede em Porto Alegre, a empresa é responsável pelo projeto, desenvolvimento, fabricação, suporte logístico e manutenção de sistemas eletrônicos militares e espaciais para plataformas aéreas, marítimas e terrestres e tem como missão fornecer soluções confiáveis e inovadoras para seus clientes nestes segmentos.
+
+A empresa desde 2001 faz parte do grupo Elbit Systems, líder mundial no setor de defesa, e tem participado em projetos estratégicos das Forças Armadas Brasileiras, incluindo o Gripen NG, o KC-390, o Guarani e o Sistema Integrado de Monitoramento de Fronteiras (SISFRON). 
+
+Também tem se destacado como pioneira na modernização de aeronaves militares da Força Aérea Brasileira, incluindo o Embraer EMB-314 Super Tucano, o AMX e o F-5EM, além de ser reconhecida por fornecer peças para veículos aéreos remotamente pilotados, sistemas terrestres, e equipamentos eletro-ópticos para aplicações navais.
+
+Contando com mais de 300 colaboradores (incluindo mais de 100 desenvolvedores) em suas instalações de 10.000 m², a empresa produz ou repara mais de 3.000 equipamentos por ano, gerando uma receita anual de $100 milhões, metade do qual é obtida por meio de exportações. Dentre seus principais clientes nacionais, destacam-se a Embraer, a SAAB e a Helibras. 
+
 
 ## O Problema
 
@@ -97,17 +108,48 @@ Tudo que irá compor o peso das arestas será utilizado na solução, sendo a di
 
 ### Objetivos gerais
 
-<b> Qual o objetivo da solução ? </b>
+<br>
 
+#### <b>Qual é o problema a ser resolvido</b>
+
+<br>
+ 
+As operações de reconhecimento realizadas por meio de aeronaves em baixa altitude apresentam diversos riscos, tais como a detecção por parte de forças inimigas e a ocorrência de colisões com o solo (CFIT) durante voos controlados. Estes riscos podem ser mitigados, se não totalmente evitados, mediante um planejamento rigoroso da trajetória de voo, levando-se em consideração fatores críticos, como o envelope de voo específico da aeronave, sua taxa de subida, sua manobrabilidade lateral, a velocidade operacional, o teto de operação e as condições geográficas da região em questão.
+
+Entretanto, o planejamento da trajetória de voo é um desafio, pois apesar da disponibilidade de informações sobre os aspectos críticos da operação de voo, não existe atualmente um sistema que centralize todas estas informações e, a partir delas, garante matematicamente a escolha da trajetória ideal. Caso a rota escolhida não seja a mais adequada, a operação corre o risco de falhar, colocando em perigo o piloto, que pode ser abatido por forças inimigas ou sofrer uma colisão com o solo.
+
+Assim, a questão central a ser resolvida é a de centralizar as informações e responder com a trajetória ideal a ser seguida para assegurar a segurança e o sucesso de missões de reconhecimento em baixa altitude, realizadas por meio de aeronaves em territórios desconhecidos.
+
+
+<br>
+
+#### <b>Qual o objetivo da solução ?</b>
+
+<br>
+ 
 A solução envisa aumentar a confiança em operações de infiltração e reconhecimento utilizando aeronaves de alta velocidade (jatos) em voo baixo, por meio de planejamento estratégico de trajetória de voo, sendo este alimentado por informações de bancos de dados diversos com informações de topografia, da aeronave, e de possíveis forças opositoras. 
 
 O código, de maneira direta, envisona reduzir os riscos de CFIT (Colisão com o solo em voo controlado) e de abatimento por forças opositoras, respondendo a trajetória mais segura e eficiente possível, e com isso, aumentando a confiança das forças armadas brasileiras para esses tipos de missão. 
 
+<br>
+ 
 ### Objetivos específicos
 
-*Desenvolver uma interface a partir de uma sequência de grafos gerada por um banco de dados de elevação, o qual foi fornecido pela empresa parceira no projeto;*
+<br>
+ 
 
+#### Como a solução proposta deverá ser utilizada
+<br>
 
+A proposta apresentada tem como objetivo ser aplicada inicialmente pela empresa AEL, sendo esta o principal stakeholder. Após uma rigorosa curadoria e as devidas modificações, a solução será oferecida ao cliente final, o exército brasileiro.
+
+Este processo de curadoria é fundamental para assegurar a qualidade e eficácia da proposta, pois inclui a validação rigorosa dos cálculos matemáticos utilizados, a monitoração cuidadosa da sua trajetória, testes em condições reais de utilização, os aprimoramentos necessários e, finalmente, a integração com serviços já existentes.
+
+#### Qual será o critério de sucesso e qual medida será utilizada para o avaliar
+<br>
+Devido à natureza da solução, não é possível testá-la em uma situação real. No entanto, há maneiras de avaliar seu sucesso, como uma análise de complexidade e corretude do algoritmo proposto, que cobre a parte matemática da solução, e uma visualização da trajetória no contexto do mapa utilizado. Estas medidas permitirão verificar a eficiência e a precisão do algoritmo proposto."
+
+<br>
 
 ## Partes interessadas
 
@@ -115,13 +157,17 @@ O código, de maneira direta, envisona reduzir os riscos de CFIT (Colisão com o
 *Instituto de Tecnologia e Liderança (INTELI);*
 *Alunos/autores do projeto.*
 
-# Análise do Problema
+<br>
+ 
+# Análise do Problema e Solução
 
-*Descrição_da_análise_do_problema*
+<br>
+ 
+#### Qual a solução proposta (visão de negócios)
 
-## Análise da área de atuação
+O sistema em questão é projetado para auxiliar um piloto na decisão da melhor rota a seguir em territórios desconhecidos. Ao receber informações sobre o local, o sistema utiliza uma avaliação ponderada dos diferentes trajetos para determinar a trajetória ótima para chegar do ponto de origem ao ponto de destino. Este sistema oferece uma vantagem significativa em relação à segurança de operações de infiltração e reconhecimento, pois permite ao piloto entrar em um território estranho sem se preocupar com a escolha da melhor rota a seguir.
 
-*Descrição_da_análise_da_área_de_atuação*
+A solução proposta, sob uma perspectiva empresarial, será avaliada de forma única, como previamente detalhado. No entanto, a solução em questão, descrita neste documento, não será oferecida diretamente ao consumidor final, sendo neste caso, o exército brasileiro, mas sim à empresa AEL, que, nesta relação, atuará como curadora antes que a solução final alcance o cliente.
 
 ## Análise do cenário: Matriz SWOT
 
