@@ -12,21 +12,17 @@
 Planejador de trajetórias para voos em baixa altitude
 </center></font>
 
->*Observação 1: A estrutura inicial deste documento é só um exemplo. O seu grupo deverá alterar esta estrutura de acordo com o que está sendo solicitado nos artefatos.*
-
->*Observação 2: O índice abaixo não precisa ser editado se você utilizar o Visual Studio Code com a extensão **Markdown All in One**. Essa extensão atualiza o índice automaticamente quando o arquivo é salvo.*
-
-**Conteúdo**
-
 - [Autores](#autores)
 - [Visão Geral do Projeto](#visão-geral-do-projeto)
   - [Empresa](#empresa)
   - [O Problema](#o-problema)
+    - [Contexto do problema](#contexto-do-problema)
+    - [Variáveis de decisão do problema](#variáveis-de-decisão-do-problema)
+    - [Limitações](#limitações)
   - [Objetivos](#objetivos)
     - [Objetivos gerais](#objetivos-gerais)
     - [Objetivos específicos](#objetivos-específicos)
   - [Partes interessadas](#partes-interessadas)
-- [Análise do Problema](#análise-do-problema)
   - [Análise da área de atuação](#análise-da-área-de-atuação)
   - [Análise do cenário: Matriz SWOT](#análise-do-cenário-matriz-swot)
   - [Proposta de Valor: Value Proposition Canvas](#proposta-de-valor-value-proposition-canvas)
@@ -45,12 +41,14 @@ Planejador de trajetórias para voos em baixa altitude
   - [Wireframe + Storyboard](#wireframe--storyboard)
   - [Design de Interface - Guia de Estilos](#design-de-interface---guia-de-estilos)
 - [Projeto de Banco de Dados](#projeto-de-banco-de-dados)
+  - [Modelagem inicial](#modelagem-inicial)
   - [Modelo Conceitual](#modelo-conceitual)
   - [Modelo Lógico](#modelo-lógico)
 - [Teste de Software](#teste-de-software)
   - [Testes Unitários](#testes-unitários)
   - [Teste de Usabilidade](#teste-de-usabilidade)
 - [Análise de Dados](#análise-de-dados)
+  - [Visão geral](#visão-geral)
 - [Manuais](#manuais)
   - [Manual de Implantação](#manual-de-implantação)
   - [Manual do Usuário](#manual-do-usuário)
@@ -77,13 +75,32 @@ A AEL Sistemas é uma empresa brasileira nos seguimentos Aeroespacial, Defesa e 
 
 ## O Problema
 
-*Descrição_do_problema*
+### Contexto do problema
+Existem missões áereas que tem a necessidade de serem feitas em baixa altitude, sejam missões defensivas, de reconhecimento, etc., por buscarem um maior sigilo e segurança. <br>Com isso, surgiu um obstáculo nessas missões, visto que sem um bom reconhecimento do terreno/relevo, o risco da aeronave colidir ou passar por zonas de risco, como território inimigo, são aumentados. <br>Tendo esse contexo em vista, surgiu a necessidade de um sistema que reconheça o terreno e auxilie o piloto e o time no traçar da rota da missão, centralizando informações de terreno, da aeronave e de possíveis obstáculos.
+
+### Variáveis de decisão do problema
+Tudo que irá compor o peso das arestas será utilizado na solução, sendo a distância entre os nós, diferença de altura e intensidade da curva.
+
+### Limitações
+
+<li>Áreas de exclusão, sendo:
+<ul>
+<li>Áreas com radares;
+<li>Áreas povoadas;
+<li>Áreas de patrulha;
+<li>Entre outras que o usuário pode designar.
+</ul>
+<li>Necessidade do algoritmo de dados prévios sobre a aeronave.
 
 ## Objetivos
 
 ### Objetivos gerais
 
-*Lista_de_objetivos_gerais*
+<b> Qual o objetivo da solução ? </b>
+
+A solução envisa aumentar a confiança em operações de infiltração e reconhecimento utilizando aeronaves de alta velocidade (jatos) em voo baixo, por meio de planejamento estratégico de trajetória de voo, sendo este alimentado por informações de bancos de dados diversos com informações de topografia, da aeronave, e de possíveis forças opositoras. 
+
+O código, de maneira direta, envisona reduzir os riscos de CFIT (Colisão com o solo em voo controlado) e de abatimento por forças opositoras, respondendo a trajetória mais segura e eficiente possível, e com isso, aumentando a confiança das forças armadas brasileiras para esses tipos de missão. 
 
 ### Objetivos específicos
 
@@ -92,10 +109,6 @@ A AEL Sistemas é uma empresa brasileira nos seguimentos Aeroespacial, Defesa e 
 ## Partes interessadas
 
 *Lista_e_apresentação_das_partes_interessadas*
-
-# Análise do Problema
-
-*Descrição_da_análise_do_problema*
 
 ## Análise da área de atuação
 
@@ -164,6 +177,14 @@ A AEL Sistemas é uma empresa brasileira nos seguimentos Aeroespacial, Defesa e 
 
 # Projeto de Banco de Dados
 
+## Modelagem inicial
+
+<p align="center">
+<img width="730" height="470" src="img/Grafo_inicial.jpg">
+</p>
+
+<li>No modelo inicial da modelagem dos dados, temos um grafo composto por cidades de São Paulo (Nós em azul) e do Rio de Janeiro (Nós verdes). As arestas representam caminhos que podem ser feitos e, as ligações em vermelho, representam o melhor caminho possível, considerando os pesos das arestas, os quais são calculados pela diferença de altitude entre um nó e outro.
+
 ## Modelo Conceitual
 
 ## Modelo Lógico
@@ -177,6 +198,41 @@ A AEL Sistemas é uma empresa brasileira nos seguimentos Aeroespacial, Defesa e 
 
 
 # Análise de Dados
+
+## Visão geral
+  Atualmente, temos 4 arquivos contendo dados em formato .dt2, os quais, tendo em vista o que foi explorado até o momento, são compostos por longitude, latitude e relevo. Dentre os arquivos, estão listados:
+  <li>DeathValley
+  <ul>
+  <li>W117_N35.dt2
+  <li>W117_N36.dt2
+  <li>W118_N35.dt2
+  <li>W118_N36.dt2
+  </ul>
+  <li>Rio
+  <ul>
+  <li>W043_S23.dt2
+  <li>W043_S24.dt2
+  <li>W044_S23.dt2
+  <li>W044_S24.dt2
+  </ul>
+  <li>SaoPaulo
+  <ul>
+  <li>W045_S23.dt2
+  <li>W045_S24.dt2
+  <li>W046_S23.dt2
+  <li>W046_S24.dt2
+  <li>W047_S23.dt2
+  <li>W047_S24.dt2
+  </ul>
+  <li>Yosemite
+  <ul>
+  <li>W119_N37.dt2
+  <li>W119_N38.dt2
+  <li>W120_N37.dt2
+  <li>W120_N38.dt2
+  <li>W121_N37.dt2
+  <li>W121_N38.dt2
+  </ul>
 
 
 # Manuais
