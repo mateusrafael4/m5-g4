@@ -27,17 +27,17 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 # Grupo: Stall
 
 **Integrantes:**
-* [Aluno 01](https://www.linkedin.com/in/gabrielcaetanonhoncanse/).
-* [Aluno 02](https://www.linkedin.com/in/jonas-viana-sales/).
-* [Aluno 03](https://www.linkedin.com/in/mateus-rmiranda/).
-* [Aluno 04](https://www.linkedin.com/in/raphael-lisboa/).
-* [Aluno 05](https://www.linkedin.com/in/sarah-ribeiro-361130195/).
+* [Gabriel Caetano Nhoncanse](https://www.linkedin.com/in/gabrielcaetanonhoncanse/).
+* [Jonas Viana Sales](https://www.linkedin.com/in/jonas-viana-sales/).
+* [Mateus Rafael Miranda da Silva](https://www.linkedin.com/in/mateus-rmiranda/).
+* [Raphael Lisboa Antunes](https://www.linkedin.com/in/raphael-lisboa/).
+* [Sarah de Miranda Ribeiro](https://www.linkedin.com/in/sarah-ribeiro-361130195/).
 * [Sergio Brito Amorim Lucas](https://www.linkedin.com/in/sergiobalucas/).
-* [Aluno 07](https://www.linkedin.com/in/thomas-frajhof-brand/).
+* [Thomas Frajhof Brand](https://www.linkedin.com/in/thomas-frajhof-brand/).
 
 # Descrição
 
-*Descrição_resumida_do_projeto*
+  Projeto consiste em um algoritmo em Java responsável por fazer leituras de terreno e altitude, organizando as informações em modelo de grafo. A partir de um ponto inicial e outro final, além de diversos nós espalhados pelo terreno, o sistema deverá calcular a melhor rota entre os pontos, balanceando uma rota com baixa altitude e curta distância, com o objetivo de melhorar a eficiência e segurança nas missões aéreas de baixa altitude.
 
 # Documentação
 
