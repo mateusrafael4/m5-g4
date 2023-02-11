@@ -137,7 +137,7 @@ O código, de maneira direta, envisona reduzir os riscos de CFIT (Colisão com o
 Analisando a proposta de valor, é possível identificar facilmente quais foram as dores trazidas pela empresa parceira e, analisando cada aspecto, quais foram os pontos que o grupo identificou para sanar essa dor. O conteúdo apresentado a seguir, foi apresentado e validado com os parceiros de projeto, para norteamento do grupo ao iniciar o desenvolvimento do algoritmo a partir da validação.
 
 <p align="center">
-<img width="950" height="530" src="img/CanvasVP.png.jpg">
+<img width="950" height="530" src="img/CanvasVP.png">
 </p>
 
 
