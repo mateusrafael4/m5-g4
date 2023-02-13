@@ -136,6 +136,8 @@ O código, de maneira direta, envisona reduzir os riscos de CFIT (Colisão com o
  
 ### Objetivos específicos
 
+Desenvolver uma interface a partir de uma sequência de grafos gerada por um banco de dados de elevação, o qual foi fornecido pela empresa parceira no projeto;
+
 <br>
  
 
@@ -154,9 +156,10 @@ Devido à natureza da solução, não é possível testá-la em uma situação r
 
 ## Partes interessadas
 
-*AEL Sistemas;*
-*Instituto de Tecnologia e Liderança (INTELI);*
-*Alunos/autores do projeto.*
+
+<li>AEL Sistemas;
+<li>Instituto de Tecnologia e Liderança (INTELI);
+<li>Alunos/autores do projeto.
 
 <br>
  
@@ -169,6 +172,7 @@ Devido à natureza da solução, não é possível testá-la em uma situação r
 O sistema em questão é projetado para auxiliar um piloto na decisão da melhor rota a seguir em territórios desconhecidos. Ao receber informações sobre o local, o sistema utiliza uma avaliação ponderada dos diferentes trajetos para determinar a trajetória ótima para chegar do ponto de origem ao ponto de destino. Este sistema oferece uma vantagem significativa em relação à segurança de operações de infiltração e reconhecimento, pois permite ao piloto entrar em um território estranho sem se preocupar com a escolha da melhor rota a seguir.
 
 A solução proposta, sob uma perspectiva empresarial, será avaliada de forma única, como previamente detalhado. No entanto, a solução em questão, descrita neste documento, não será oferecida diretamente ao consumidor final, sendo neste caso, o exército brasileiro, mas sim à empresa AEL, que, nesta relação, atuará como curadora antes que a solução final alcance o cliente.
+
 
 ## Análise do cenário: Matriz SWOT
 
@@ -215,7 +219,7 @@ Analisando a proposta de valor, é possível identificar facilmente quais foram 
 
 *Descrição_dos_requisitos*
 
-## Personas
+## Persona
 <p align="center">
 <img src="img/Persona.jpg">
 </p>
@@ -226,16 +230,16 @@ Analisando a proposta de valor, é possível identificar facilmente quais foram 
 
 As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma vez que será a base de informações do público que queremos atingir através da solução. Tendo isto em vista, o grupo entendeu que deveria escalar as user stories da nossa persona em 5 tópicos, que serão apresentados a seguir:
 
-  **User Stories Roger Augusto** </br>
-*Eu, como Head da Equipe de Tráfego Aéreo Militar, quero o algoritmo proposto, para me auxiliar no traçamento de rotas mais eficazes.*
+### **User Stories Roger Augusto**
+<li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero o algoritmo proposto, para me auxiliar no traçamento de rotas mais eficazes.
 
-*Eu, como Head da Equipe de Tráfego Aéreo Militar, quero saber os possíveis obstáculos na trajetória, para garantir a segurança do piloto e da aeronave levando em conta aspectos naturais, como relevo e clima.*
+<li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero saber os possíveis obstáculos na trajetória, para garantir a segurança do piloto e da aeronave levando em conta aspectos naturais, como relevo e clima.
 
-*Eu, como Head da Equipe de Tráfego Aéreo Militar, quero integrar os dados da aeronave, para saber quando alterar o percurso e os recursos necessários para isso.*
+<li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero integrar os dados da aeronave, para saber quando alterar o percurso e os recursos necessários para isso.
 
-*Eu, como Head da Equipe de Tráfego Aéreo Militar, quero adicionar áreas de exclusão, para que a trajetória não considere esse caminho.*
+<li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero adicionar áreas de exclusão, para que a trajetória não considere esse caminho.
 
-*Eu, como Head da Equipe de Tráfego Aéreo Militar, quero analisar a trajetória para poder discutir sobre os riscos e ganhos dessa missão.*
+<li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero analisar a trajetória para poder discutir sobre os riscos e ganhos dessa missão.
 
 
 # Arquitetura do Sistema
