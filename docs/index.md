@@ -181,6 +181,8 @@ A solução proposta, sob uma perspectiva empresarial, será avaliada de forma �
 <p align="center">
 <img width="730" height="470" src="img/Swot.PNG.jpg">
 </p>
+Fonte: Site da AEL
+
 
 ## 5 Forças de Porter
 
@@ -189,7 +191,7 @@ A análise das 5 forças de Porter é uma ferramenta que ajuda a identificar as 
 Ela aborda 5 tópicos: ameaças de novos entrantes, poder de barganha dos clientes, poder de barganha dos fornecedores, ameaças de produtos ou serviços substitutos e a rivalidade entre os concorrentes, sendo que cada um destes tópicos é avaliado em 3 níveis: baixo, médio e alto, representados pelas cores verde, laranja e roxo, respectivamente.
 <br>
 <p align="center">
-<img width="730" height="470" src="img/5_forcas_porter.jpg">
+<img width="730" height="470" src="img/5_forcas_porter.png">
 </p>
 
 ## Proposta de Valor: Value Proposition Canvas
@@ -219,9 +221,13 @@ Analisando a proposta de valor, é possível identificar facilmente quais foram 
 
 *Descrição_dos_requisitos*
 
-## Persona
+## Personas
 <p align="center">
 <img src="img/Persona.jpg">
+<br>
+<br>
+
+<img src="img/pilota.png">
 </p>
 
 
@@ -269,36 +275,7 @@ As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma
 <img width="730" height="470" src="img/Grafo_inicial.jpg">
 </p>
 
-<li>No modelo inicial da modelagem dos dados, temos um grafo composto por cidades de São Paulo (Nós em azul) e do Rio de Janeiro (Nós verdes). As arestas representam caminhos que podem ser feitos e, as ligações em vermelho, representam o melhor caminho possível, considerando os pesos das arestas, os quais são calculados pela diferença de altitude entre um nó e outro. Segue abaixo o código usado para criar o grafo.
-
-``` Cypher 
-CREATE
-(c1:city_rj_great {name: 'Angra dos Reis'}),
-(c2:city_rj {name: 'Barra Grande'}),
-(c3:city_rj {name: 'Paraty'}),
-(c4:city_rj {name: 'Mangaratiba'}),
-(c5:city_rj_great {name: 'Duque de Caxias'}),
-(c6:city_sp {name: 'Ubatuba'}),
-(c7:city_sp {name: 'Caraguatatuba'}),
-(c3)-[:alt_3]->(c2),
-(c2)-[:alt_3]->(c1),
-(c3)-[:alt_6]->(c1),
-(c1)-[:alt_8]->(c4),
-(c3)-[:alt_2]->(c4),
-(c4)-[:alt_6_]->(c5),
-(c6)-[:alt_1]->(c3),
-(c6)-[:alt_5]->(c1),
-(c7)-[:alt_4]->(c6)
-SET
-c1.degreesSouth = 23, c1.minutesSouth = 0, c1.secondsSouth = 24, c1.degreesWest = 44, c1.minutesWest = 19, c1.secondsWest = 6, c1.altura = 10,
-c2.degreesSouth = 23, c2.minutesSouth = 6, c2.secondsSouth = 0, c2.degreesWest = 44, c2.minutesWest = 42, c2.secondsWest = 25, c2.altura = 7,
-c3.degreesSouth = 23, c3.minutesSouth = 13, c3.secondsSouth = 11, c3.degreesWest = 44, c3.minutesWest = 42, c3.secondsWest = 59, c3.altura = 4,
-c4.degreesSouth = 22, c4.minutesSouth = 56, c4.secondsSouth = 30, c4.degreesWest = 44, c4.minutesWest = 2, c4.secondsWest = 30, c4.altura = 2,
-c5.degreesSouth = 22, c5.minutesSouth = 47, c5.secondsSouth = 12, c5.degreesWest = 43, c5.minutesWest = 18, c5.secondsWest = 47, c5.altura = 8,
-c6.degreesSouth = 23, c6.minutesSouth = 26, c6.secondsSouth = 4, c6.degreesWest = 45, c6.minutesWest = 5, c6.secondsWest = 5, c6.altura = 5,
-c7.degreesSouth = 23, c7.minutesSouth = 37, c7.secondsSouth = 12, c7.degreesWest = 45, c7.minutesWest = 24, c7.secondsWest = 43, c7.altura = 1
-RETURN c1, c2, c3, c4, c5, c6, c7 
-```
+<li>No modelo inicial da modelagem dos dados, temos um grafo composto por cidades de São Paulo (Nós em azul) e do Rio de Janeiro (Nós verdes). As arestas representam caminhos que podem ser feitos e, as ligações em vermelho, representam o melhor caminho possível, considerando os pesos das arestas, os quais são calculados pela diferença de altitude entre um nó e outro.
 
 ## Modelo Conceitual
 
