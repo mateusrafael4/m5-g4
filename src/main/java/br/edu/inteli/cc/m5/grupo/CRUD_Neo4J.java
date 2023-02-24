@@ -58,20 +58,6 @@ public class CRUD_Neo4J {
     session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:" + endLabel + " {" + endPropertyKey + ": $endValue}) DELETE r", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue));
     }
 
-
-    /* public static void main(String[] args) {
-        CRUD_Neo4J example = new CRUD_Neo4J();
-        example.connect("bolt://localhost:7687", "neo4j", "12345678");
-        example.createNode("Person", "name", "John");
-        example.createNode("Person", "name", "Jane");
-        example.createRelationship("Person", "Person", "name", "John", "name", "Jane", "KNOWS");
-        Node johnNode = example.readNode("Person", "name", "John");
-        System.out.println(johnNode.get("name").asString());
-        // example.updateNode("Person", "name", "John", "age", 30);
-        // example.deleteNode("Person", "name", "John");
-        example.disconnect();
-    } */ 
-
     public static void main(String[] args) {
 
         CRUD_Neo4J example = new CRUD_Neo4J();
@@ -95,7 +81,7 @@ public class CRUD_Neo4J {
             System.out.println("9. Exit");
 
             option = scanner.nextInt();
-            scanner.nextLine(); // consume the newline character after the int input
+            scanner.nextLine();
 
             switch (option) {
 
