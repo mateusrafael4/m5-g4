@@ -17,6 +17,8 @@ import br.edu.inteli.cc.m5.dted.DtedDatabaseHandler;
  * classe DtedDatabaseHandler.
  * 
  */
+
+
 public class AppDted {
     public static void main(String[] args) {
 
