@@ -38,7 +38,8 @@ Planejador de trajetórias para voos em baixa altitude
 - [Requisitos do Sistema](#requisitos-do-sistema)
   - [Personas](#personas)
   - [Histórias dos usuários (user stories)](#histórias-dos-usuários-user-stories)
-    - [**User Stories Roger Augusto**](#user-stories-roger-augusto)
+    - [**User Stories Róger Augusto**](#user-stories-róger-augusto)
+    - [**User Stories Fabiana Costa**](#user-stories-fabiana-costa)
 - [Arquitetura do Sistema](#arquitetura-do-sistema)
   - [Módulos do Sistema e Visão Geral (Big Picture)](#módulos-do-sistema-e-visão-geral-big-picture)
   - [Descrição dos Subsistemas](#descrição-dos-subsistemas)
@@ -214,7 +215,7 @@ Analisando a proposta de valor, é possível identificar facilmente quais foram 
  
  #### Ameaças:
  <p align="center">
-<img width="705" height="480" src="img/Ameaças.jpg">
+<img width="705" height="480" src="img/Ameaças.png">
 </p>
 
  #### Oportunidades:
@@ -241,7 +242,7 @@ Analisando a proposta de valor, é possível identificar facilmente quais foram 
 
 As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma vez que será a base de informações do público que queremos atingir através da solução. Tendo isto em vista, o grupo entendeu que deveria escalar as user stories da nossa persona em 5 tópicos, que serão apresentados a seguir:
 
-### **User Stories Roger Augusto**
+### **User Stories Róger Augusto**
 <li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero o algoritmo proposto, para me auxiliar no traçamento de rotas mais eficazes.
 
 <li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero saber os possíveis obstáculos na trajetória, para garantir a segurança do piloto e da aeronave levando em conta aspectos naturais, como relevo e clima.
@@ -251,6 +252,20 @@ As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma
 <li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero adicionar áreas de exclusão, para que a trajetória não considere esse caminho.
 
 <li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero analisar a trajetória para poder discutir sobre os riscos e ganhos dessa missão.
+<br>
+<br>
+
+### **User Stories Fabiana Costa**
+  
+<li>Eu, como piloto, quero percorrer a rota tracejada para evitar colisões.
+
+<li>Eu, como piloto, quero entrar em território inimigo para garantir a segurança nacional.
+
+<li>Eu, como piloto, quero ter acesso à rota mais otimizada possível para conseguir completar minha tarefa de uma forma mais otimizada.
+
+<li>Eu, como piloto, quero ter acesso à rota mais otimizada possível para que eu consiga entrar em território inimigo por meio de voos a baixa altitude e garanta a segurança nacional, sem que haja gasto a toa de combustível e tempo.
+<br>
+<br>
 
 
 # Arquitetura do Sistema
