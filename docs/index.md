@@ -248,7 +248,9 @@ As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma
 <li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero adicionar áreas de exclusão, para que a trajetória não considere esse caminho.
 
 <li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero analisar a trajetória para poder discutir sobre os riscos e ganhos dessa missão.
-  
+<br>
+<br>
+
 ### **User Stories Fabiana Costa**
   
 <li>Eu, como piloto, quero percorrer a rota tracejada para evitar colisões.
@@ -258,7 +260,8 @@ As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma
 <li>Eu, como piloto, quero ter acesso à rota mais otimizada possível para conseguir completar minha tarefa de uma forma mais otimizada.
 
 <li>Eu, como piloto, quero ter acesso à rota mais otimizada possível para que eu consiga entrar em território inimigo por meio de voos a baixa altitude e garanta a segurança nacional, sem que haja gasto a toa de combustível e tempo.
-
+<br>
+<br>
 
 
 # Arquitetura do Sistema
