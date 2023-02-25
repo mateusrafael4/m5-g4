@@ -38,6 +38,8 @@ Planejador de trajetórias para voos em baixa altitude
 - [Requisitos do Sistema](#requisitos-do-sistema)
   - [Personas](#personas)
   - [Histórias dos usuários (user stories)](#histórias-dos-usuários-user-stories)
+    - [**User Stories Róger Augusto**](#user-stories-róger-augusto)
+    - [**User Stories Fabiana Costa**](#user-stories-fabiana-costa)
 - [Arquitetura do Sistema](#arquitetura-do-sistema)
   - [Módulos do Sistema e Visão Geral (Big Picture)](#módulos-do-sistema-e-visão-geral-big-picture)
   - [Descrição dos Subsistemas](#descrição-dos-subsistemas)
@@ -209,7 +211,7 @@ Analisando a proposta de valor, é possível identificar facilmente quais foram 
  
  #### Ameaças:
  <p align="center">
-<img width="705" height="480" src="img/Ameaças.jpg">
+<img width="705" height="480" src="img/Ameaças.png">
 </p>
 
  #### Oportunidades:
