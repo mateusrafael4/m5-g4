@@ -5,12 +5,11 @@ import org.neo4j.driver.*;
 import org.neo4j.driver.types.Node;
 import org.neo4j.driver.types.Relationship;
 
-
 import java.util.Scanner;
 
 // Nesta classe, executamos as operações de CRUD no Neo4J, e como exemplo, criamos um nó com o nome "John", e depois imprimimos o nome do nó criado.
 public class CRUD_Neo4J {
-
+    
     private Driver driver;
     private Session session;
 
@@ -28,14 +27,17 @@ public class CRUD_Neo4J {
 
     // Método que cria um nó, que será chamado caso a pessoa selecione essa opção. Nele são exigidos 3 parametros: o conjunto a qual o nó irá pertencer, a categoria e o valor do nó
     public void createNode(String label, String propertyKey, Object propertyValue) {
-        session.run("CREATE (n:" + label + " {" + propertyKey + ": $value})", Values.parameters("value", propertyValue));
+        session.run("CREATE (n:" + label + " {" + propertyKey + ": $value})",
+                Values.parameters("value", propertyValue));
     }
 
     // Método que "encontra" um nó, passando os parâmetros: conjunto, categoria e o valor, o método encontra o nó no Neo4J e mostra ele
     public Node readNode(String label, String propertyKey, Object propertyValue) {
-        Record result = session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) RETURN n", Values.parameters("value", propertyValue)).single();
+        Record result = session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) RETURN n",
+                Values.parameters("value", propertyValue)).single();
         return result.get("n").asNode();
     }
+
 
     // Método que atualiza um nó, para isso são necessários os parâmetros: conjunto, categoria antiga, valor antigo, nova categoria e novo valor. Assim ele substitui os valores antigos pelos novos
     public void updateNode(String label, String propertyKey, Object propertyValue, String updateKey, Object updateValue) {
@@ -44,7 +46,8 @@ public class CRUD_Neo4J {
 
     // Método que deleta um nó, passando os parâmetros: conjunto, categoria e valor ele já encontra o nó e deleta ele
     public void deleteNode(String label, String propertyKey, Object propertyValue) {
-        session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) DELETE n", Values.parameters("value", propertyValue));
+        session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) DELETE n",
+                Values.parameters("value", propertyValue));
     }
 
     // Método que cria um relacionamento entre nós, para isso é necessário passar os parâmetros: conjunto, categoria e valores, isso dos 2 nós que serão interconectados
@@ -56,7 +59,7 @@ public class CRUD_Neo4J {
     public Relationship readRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
         Record result = session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:" + endLabel + " {" + endPropertyKey + ": $endValue}) RETURN r", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue)).single();
         return result.get("r").asRelationship();
-    }    
+    }
 
     // Métoodo que atualiza um relacionamento por meios dos parametros conjunto, categoria e valor tanto do nó inicial, quanto do final
     public void updateRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType, String updatePropertyKey, Object updatePropertyValue) {
@@ -168,73 +171,76 @@ public class CRUD_Neo4J {
                     System.out.print("Enter relationship type: ");
                     String relationshipType = scanner.nextLine();
 
-                    example.createRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey, endPropertyValue, relationshipType);
+                    example.createRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel,
+                            endPropertyKey, endPropertyValue, relationshipType);
                     break;
-                    
-                case 6:
-                    
-                        System.out.print("Enter start label: ");
-                        startLabel = scanner.nextLine();
-                        System.out.print("Enter start property key: ");
-                        startPropertyKey = scanner.nextLine();
-                        System.out.print("Enter start property value: ");
-                        startPropertyValue = scanner.nextLine();
-                        System.out.print("Enter end label: ");
-                        endLabel = scanner.nextLine();
-                        System.out.print("Enter end property key: ");
-                        endPropertyKey = scanner.nextLine();
-                        System.out.print("Enter end property value: ");
-                        endPropertyValue = scanner.nextLine();
-                        System.out.print("Enter relationship type: ");
-                        relationshipType = scanner.nextLine();
-    
-                        example.readRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey, endPropertyValue, relationshipType);
-                        break;
-                
-                case 7:
-                            System.out.print("Enter start label: ");
-                            startLabel = scanner.nextLine();
-                            System.out.print("Enter start property key: ");
-                            startPropertyKey = scanner.nextLine();
-                            System.out.print("Enter start property value: ");
-                            startPropertyValue = scanner.nextLine();
-                            System.out.print("Enter end label: ");
-                            endLabel = scanner.nextLine();
-                            System.out.print("Enter end property key: ");
-                            endPropertyKey = scanner.nextLine();
-                            System.out.print("Enter end property value: ");
-                            endPropertyValue = scanner.nextLine();
-                            System.out.print("Enter relationship type: ");
-                            relationshipType = scanner.nextLine();
-        
-                            example.deleteRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey, endPropertyValue, relationshipType);
-                            break;
 
-                
+                case 6:
+
+                    System.out.print("Enter start label: ");
+                    startLabel = scanner.nextLine();
+                    System.out.print("Enter start property key: ");
+                    startPropertyKey = scanner.nextLine();
+                    System.out.print("Enter start property value: ");
+                    startPropertyValue = scanner.nextLine();
+                    System.out.print("Enter end label: ");
+                    endLabel = scanner.nextLine();
+                    System.out.print("Enter end property key: ");
+                    endPropertyKey = scanner.nextLine();
+                    System.out.print("Enter end property value: ");
+                    endPropertyValue = scanner.nextLine();
+                    System.out.print("Enter relationship type: ");
+                    relationshipType = scanner.nextLine();
+
+                    example.readRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey,
+                            endPropertyValue, relationshipType);
+                    break;
+
+                case 7:
+                    System.out.print("Enter start label: ");
+                    startLabel = scanner.nextLine();
+                    System.out.print("Enter start property key: ");
+                    startPropertyKey = scanner.nextLine();
+                    System.out.print("Enter start property value: ");
+                    startPropertyValue = scanner.nextLine();
+                    System.out.print("Enter end label: ");
+                    endLabel = scanner.nextLine();
+                    System.out.print("Enter end property key: ");
+                    endPropertyKey = scanner.nextLine();
+                    System.out.print("Enter end property value: ");
+                    endPropertyValue = scanner.nextLine();
+                    System.out.print("Enter relationship type: ");
+                    relationshipType = scanner.nextLine();
+
+                    example.deleteRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel,
+                            endPropertyKey, endPropertyValue, relationshipType);
+                    break;
+
                 case 8:
-                            System.out.print("Enter start label: ");
-                            startLabel = scanner.nextLine();
-                            System.out.print("Enter start property key: ");
-                            startPropertyKey = scanner.nextLine();
-                            System.out.print("Enter start property value: ");
-                            startPropertyValue = scanner.nextLine();
-                            System.out.print("Enter end label: ");
-                            endLabel = scanner.nextLine();
-                            System.out.print("Enter end property key: ");
-                            endPropertyKey = scanner.nextLine();
-                            System.out.print("Enter end property value: ");
-                            endPropertyValue = scanner.nextLine();
-                            System.out.print("Enter relationship type: ");
-                            relationshipType = scanner.nextLine();
-                            System.out.print("Enter update key: ");
-                            updateKey = scanner.nextLine();
-                            System.out.print("Enter update value: ");
-                            updateValue = scanner.nextLine();
-        
-                            example.updateRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey, endPropertyValue, relationshipType, updateKey, updateValue);
-                            break;
+                    System.out.print("Enter start label: ");
+                    startLabel = scanner.nextLine();
+                    System.out.print("Enter start property key: ");
+                    startPropertyKey = scanner.nextLine();
+                    System.out.print("Enter start property value: ");
+                    startPropertyValue = scanner.nextLine();
+                    System.out.print("Enter end label: ");
+                    endLabel = scanner.nextLine();
+                    System.out.print("Enter end property key: ");
+                    endPropertyKey = scanner.nextLine();
+                    System.out.print("Enter end property value: ");
+                    endPropertyValue = scanner.nextLine();
+                    System.out.print("Enter relationship type: ");
+                    relationshipType = scanner.nextLine();
+                    System.out.print("Enter update key: ");
+                    updateKey = scanner.nextLine();
+                    System.out.print("Enter update value: ");
+                    updateValue = scanner.nextLine();
+
+                    example.updateRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel,
+                            endPropertyKey, endPropertyValue, relationshipType, updateKey, updateValue);
+                    break;
                 case 9:
-        
+
                     System.out.println("Exiting...");
                     break;
 
@@ -243,7 +249,7 @@ public class CRUD_Neo4J {
 
                     System.out.println("Invalid option.");
                     break;
-                    
+
             }
         }
 
