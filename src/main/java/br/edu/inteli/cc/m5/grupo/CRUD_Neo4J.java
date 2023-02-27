@@ -13,100 +13,77 @@ public class CRUD_Neo4J {
     private Driver driver;
     private Session session;
 
+    // Método responsavel por conectar o terminal com o localhost do Neo4J
     public void connect(String uri, String user, String password) {
         this.driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
         this.session = driver.session();
     }
 
+    // Método responsável por desconectar o terminal
     public void disconnect() {
         session.close();
         driver.close();
     }
 
+    // Método que cria um nó, que será chamado caso a pessoa selecione essa opção. Nele são exigidos 3 parametros: o conjunto a qual o nó irá pertencer, a categoria e o valor do nó
     public void createNode(String label, String propertyKey, Object propertyValue) {
         session.run("CREATE (n:" + label + " {" + propertyKey + ": $value})",
                 Values.parameters("value", propertyValue));
     }
 
+    // Método que "encontra" um nó, passando os parâmetros: conjunto, categoria e o valor, o método encontra o nó no Neo4J e mostra ele
     public Node readNode(String label, String propertyKey, Object propertyValue) {
         Record result = session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) RETURN n",
                 Values.parameters("value", propertyValue)).single();
         return result.get("n").asNode();
     }
 
-    public void updateNode(String label, String propertyKey, Object propertyValue, String updateKey,
-            Object updateValue) {
-        session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) SET n." + updateKey + " = $newValue",
-                Values.parameters("value", propertyValue, "newValue", updateValue));
+
+    // Método que atualiza um nó, para isso são necessários os parâmetros: conjunto, categoria antiga, valor antigo, nova categoria e novo valor. Assim ele substitui os valores antigos pelos novos
+    public void updateNode(String label, String propertyKey, Object propertyValue, String updateKey, Object updateValue) {
+        session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) SET n." + updateKey + " = $newValue", Values.parameters("value", propertyValue, "newValue", updateValue));
     }
 
+    // Método que deleta um nó, passando os parâmetros: conjunto, categoria e valor ele já encontra o nó e deleta ele
     public void deleteNode(String label, String propertyKey, Object propertyValue) {
         session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) DELETE n",
                 Values.parameters("value", propertyValue));
     }
 
-    public void createRelationship(String startLabel, String startPropertyKey, Object startPropertyValue,
-            String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
-        session.run(
-                "MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue}), (b:" + endLabel + " {"
-                        + endPropertyKey + ": $endValue}) CREATE (a)-[r:" + relationshipType + "]->(b)",
-                Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue));
+    // Método que cria um relacionamento entre nós, para isso é necessário passar os parâmetros: conjunto, categoria e valores, isso dos 2 nós que serão interconectados
+    public void createRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
+        session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue}), (b:" + endLabel + " {" + endPropertyKey + ": $endValue}) CREATE (a)-[r:" + relationshipType + "]->(b)", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue));
     }
 
-    public Relationship readRelationship(String startLabel, String startPropertyKey, Object startPropertyValue,
-            String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
-        Record result = session.run(
-                "MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:"
-                        + endLabel + " {" + endPropertyKey + ": $endValue}) RETURN r",
-                Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue)).single();
+    // Método que busca um relacionamento através dos parametros: conjunto, categoria e valor tanto do nó inicial, quanto do final
+    public Relationship readRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
+        Record result = session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:" + endLabel + " {" + endPropertyKey + ": $endValue}) RETURN r", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue)).single();
         return result.get("r").asRelationship();
     }
 
-    public void updateRelationship(String startLabel, String startPropertyKey, Object startPropertyValue,
-            String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType,
-            String updatePropertyKey, Object updatePropertyValue) {
-        session.run(
-                "MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:"
-                        + endLabel + " {" + endPropertyKey + ": $endValue}) SET r." + updatePropertyKey
-                        + " = $newValue",
-                Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue, "newValue",
-                        updatePropertyValue));
+    // Métoodo que atualiza um relacionamento por meios dos parametros conjunto, categoria e valor tanto do nó inicial, quanto do final
+    public void updateRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType, String updatePropertyKey, Object updatePropertyValue) {
+        session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:" + endLabel + " {" + endPropertyKey + ": $endValue}) SET r." + updatePropertyKey + " = $newValue", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue, "newValue", updatePropertyValue));
     }
 
-    public void deleteRelationship(String startLabel, String startPropertyKey, Object startPropertyValue,
-            String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
-        session.run(
-                "MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:"
-                        + endLabel + " {" + endPropertyKey + ": $endValue}) DELETE r",
-                Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue));
+    // Método que ao serem passados os parametros: conjunto do nó inicial, categoria do nó inicial e valor do nó inicial, conjunto do nó final, categoria do nó final e valor do nó final, deleta um relacionamento
+    public void deleteRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
+    session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:" + endLabel + " {" + endPropertyKey + ": $endValue}) DELETE r", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue));
     }
-
-    /*
-     * public static void main(String[] args) {
-     * CRUD_Neo4J example = new CRUD_Neo4J();
-     * example.connect("bolt://localhost:7687", "neo4j", "12345678");
-     * example.createNode("Person", "name", "John");
-     * example.createNode("Person", "name", "Jane");
-     * example.createRelationship("Person", "Person", "name", "John", "name",
-     * "Jane", "KNOWS");
-     * Node johnNode = example.readNode("Person", "name", "John");
-     * System.out.println(johnNode.get("name").asString());
-     * // example.updateNode("Person", "name", "John", "age", 30);
-     * // example.deleteNode("Person", "name", "John");
-     * example.disconnect();
-     * }
-     */
 
     public static void main(String[] args) {
 
+        // Instancia do objeto example
         CRUD_Neo4J example = new CRUD_Neo4J();
 
+        // Conectando o objeto no localhost do Neo4J
         example.connect("bolt://localhost:7687", "neo4j", "12345678");
 
         Scanner scanner = new Scanner(System.in);
 
         int option = 0;
 
+        // O terminal oferece 9 opções de escolha pro usuario
         while (option != 9) {
             System.out.println("Select an option:");
             System.out.println("1. Create new Vertice");
@@ -120,8 +97,9 @@ public class CRUD_Neo4J {
             System.out.println("9. Exit");
 
             option = scanner.nextInt();
-            scanner.nextLine(); // consume the newline character after the int input
+            scanner.nextLine();
 
+            // Baseado na escolha do usuario, o programa solicita os parametros necessários e chama o método
             switch (option) {
 
                 case 1:
@@ -266,6 +244,7 @@ public class CRUD_Neo4J {
                     System.out.println("Exiting...");
                     break;
 
+                // Caso o que  é solicitado não seja realizado, ou o usuario insira algum argumento invalido, o programa responde um erro
                 default:
 
                     System.out.println("Invalid option.");
@@ -274,6 +253,7 @@ public class CRUD_Neo4J {
             }
         }
 
+        // No fim do que é feito, o objeto se desconecta do localhost
         scanner.close();
         example.disconnect();
     }

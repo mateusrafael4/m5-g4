@@ -38,6 +38,8 @@ Planejador de trajetórias para voos em baixa altitude
 - [Requisitos do Sistema](#requisitos-do-sistema)
   - [Personas](#personas)
   - [Histórias dos usuários (user stories)](#histórias-dos-usuários-user-stories)
+    - [**User Stories Róger Augusto**](#user-stories-róger-augusto)
+    - [**User Stories Fabiana Costa**](#user-stories-fabiana-costa)
 - [Arquitetura do Sistema](#arquitetura-do-sistema)
   - [Módulos do Sistema e Visão Geral (Big Picture)](#módulos-do-sistema-e-visão-geral-big-picture)
   - [Descrição dos Subsistemas](#descrição-dos-subsistemas)
@@ -48,6 +50,10 @@ Planejador de trajetórias para voos em baixa altitude
   - [Design de Interface - Guia de Estilos](#design-de-interface---guia-de-estilos)
 - [Projeto de Banco de Dados](#projeto-de-banco-de-dados)
   - [Modelagem inicial](#modelagem-inicial)
+    - [Modelagem Matemática do Problema](#modelagem-matemática-do-problema)
+      - [Tomada de Decisão - Variáveis de Decisão](#tomada-de-decisão---variáveis-de-decisão)
+      - [Objetivo - Função Objetivo](#objetivo---função-objetivo)
+      - [Restrições - Limitações](#restrições---limitações)
   - [Modelo Conceitual](#modelo-conceitual)
   - [Modelo Lógico](#modelo-lógico)
 - [Teste de Software](#teste-de-software)
@@ -209,7 +215,7 @@ Analisando a proposta de valor, é possível identificar facilmente quais foram 
  
  #### Ameaças:
  <p align="center">
-<img width="705" height="480" src="img/Ameaças.jpg">
+<img width="705" height="480" src="img/Ameaças.png">
 </p>
 
  #### Oportunidades:
@@ -236,7 +242,7 @@ Analisando a proposta de valor, é possível identificar facilmente quais foram 
 
 As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma vez que será a base de informações do público que queremos atingir através da solução. Tendo isto em vista, o grupo entendeu que deveria escalar as user stories da nossa persona em 5 tópicos, que serão apresentados a seguir:
 
-### **User Stories Roger Augusto**
+### **User Stories Róger Augusto**
 <li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero o algoritmo proposto, para me auxiliar no traçamento de rotas mais eficazes.
 
 <li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero saber os possíveis obstáculos na trajetória, para garantir a segurança do piloto e da aeronave levando em conta aspectos naturais, como relevo e clima.
@@ -246,6 +252,20 @@ As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma
 <li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero adicionar áreas de exclusão, para que a trajetória não considere esse caminho.
 
 <li>Eu, como Head da Equipe de Tráfego Aéreo Militar, quero analisar a trajetória para poder discutir sobre os riscos e ganhos dessa missão.
+<br>
+<br>
+
+### **User Stories Fabiana Costa**
+  
+<li>Eu, como piloto, quero percorrer a rota tracejada para evitar colisões.
+
+<li>Eu, como piloto, quero entrar em território inimigo para garantir a segurança nacional.
+
+<li>Eu, como piloto, quero ter acesso à rota mais otimizada possível para conseguir completar minha tarefa de uma forma mais otimizada.
+
+<li>Eu, como piloto, quero ter acesso à rota mais otimizada possível para que eu consiga entrar em território inimigo por meio de voos a baixa altitude e garanta a segurança nacional, sem que haja gasto a toa de combustível e tempo.
+<br>
+<br>
 
 
 # Arquitetura do Sistema
@@ -275,7 +295,41 @@ As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma
 <img width="730" height="470" src="img/Grafo_inicial.jpg">
 </p>
 
-<li>No modelo inicial da modelagem dos dados, temos um grafo composto por cidades de São Paulo (Nós em azul) e do Rio de Janeiro (Nós verdes). As arestas representam caminhos que podem ser feitos e, as ligações em vermelho, representam o melhor caminho possível, considerando os pesos das arestas, os quais são calculados pela diferença de altitude entre um nó e outro.
+<li>No modelo inicial da modelagem dos dados, temos um grafo composto por cidades de São Paulo (Nós em azul) e do Rio de Janeiro (Nós verdes). As arestas representam caminhos que podem ser feitos e, as ligações em vermelho, representam o melhor caminho possível, considerando os pesos das arestas, os quais são calculados pela diferença de altitude entre um nó e outro.<br>
+<br>
+<br>
+
+
+### Modelagem Matemática do Problema
+<img width="730" height="470" src="img/grafo-modelagem-matematica.png">
+
+<li>OBS: Pelo fato do nosso grafo ter muitos nós e arestas, iremos representar a modelagem matemática de forma mais genérica. Apresentaremos sempre os nós inicial e final, porém, como os nós intermediários são muito similares iremos expor apenas alguns deles.
+<br>
+<br>
+
+#### Tomada de Decisão - Variáveis de Decisão
+
+x = <sub>ij</sub> {1  se usar o caminho i-j; 0 caso contrário
+<br>
+
+#### Objetivo - Função Objetivo
+
+Min C = peso_74_5 . X<sub>af</sub> + pese_102_35 . X<sub>ag</sub> + peso_76 . X<sub>ab</sub> + peso_127 . X<sub>fk</sub> + peso_171_85 . X<sub>fl</sub> + peso_63 . X<sub>fg</sub> + peso_86_35 . X<sub>fb</sub> + {...} + peso_75_5 . X<sub>xy</sub> + peso_124_35 . X <sub>sy</sub> + peso_71 . X<sub>ty</sub>
+
+
+#### Restrições - Limitações
+
+nó A: 1 = X<sub>af</sub> + X<sub>ag</sub> + X<sub>ab</sub><br>
+nó B: X<sub>ab</sub> + X<sub>fb</sub> + X<sub>gb</sub> + X<sub>hb</sub> + X<sub>cb</sub> = X<sub>ba</sub> + X<sub>bf</sub> + X<sub>bg</sub> + X<sub>bh</sub> + X<sub>bc</sub><br>
+nó C: X<sub>bc</sub> + X<sub>gc</sub> + X<sub>hc</sub> + X<sub>ic</sub> + X<sub>dc</sub> = X<sub>cb</sub> + X<sub>cg</sub> + X<sub>ch</sub> + X<sub>ci</sub> + X<sub>cd</sub><br>
+nó D: X<sub>cd</sub>  + X<sub>hd</sub> + X<sub>id</sub> + X<sub>jd</sub> + X<sub>ed</sub> = X<sub>dc</sub> + X<sub>dh</sub> + X<sub>di</sub> + X<sub>dj</sub> + X<sub>de</sub><br>
+nó E: X<sub>de</sub> + X<sub>ie</sub> + X<sub>je</sub> = X<sub>ed</sub> + X<sub>ei</sub> + X<sub>ej</sub><br>
+nó F: X<sub>af</sub> + X<sub>kf</sub> + X<sub>lf</sub> + X<sub>gf</sub> + X<sub>bf</sub> = X<sub>fa</sub> + X<sub>fk</sub> + X<sub>fl</sub> + X<sub>fg</sub> + X<sub>fb</sub><br>
+...<br>
+nó Y: X<sub>xy</sub> + X<sub>sy</sub> + X<sub>ty</sub> = X<sub>yx</sub> + X<sub>ys</sub> + X<sub>yt</sub><br>
+
+
+
 
 ## Modelo Conceitual
 
