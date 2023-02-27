@@ -301,6 +301,7 @@ As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma
 
 
 ### Modelagem Matemática do Problema
+<img width="730" height="470" src="img/grafo-modelagem-matematica.png">
 
 <li>OBS: Pelo fato do nosso grafo ter muitos nós e arestas, iremos representar a modelagem matemática de forma mais genérica. Apresentaremos sempre os nós inicial e final, porém, como os nós intermediários são muito similares iremos expor apenas alguns deles.
 <br>
