@@ -5,12 +5,11 @@ import org.neo4j.driver.*;
 import org.neo4j.driver.types.Node;
 import org.neo4j.driver.types.Relationship;
 
-
 import java.util.Scanner;
 
 // Nesta classe, executamos as operações de CRUD no Neo4J, e como exemplo, criamos um nó com o nome "John", e depois imprimimos o nome do nó criado.
 public class CRUD_Neo4J {
-
+    
     private Driver driver;
     private Session session;
 
@@ -25,52 +24,78 @@ public class CRUD_Neo4J {
     }
 
     public void createNode(String label, String propertyKey, Object propertyValue) {
-        session.run("CREATE (n:" + label + " {" + propertyKey + ": $value})", Values.parameters("value", propertyValue));
+        session.run("CREATE (n:" + label + " {" + propertyKey + ": $value})",
+                Values.parameters("value", propertyValue));
     }
 
     public Node readNode(String label, String propertyKey, Object propertyValue) {
-        Record result = session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) RETURN n", Values.parameters("value", propertyValue)).single();
+        Record result = session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) RETURN n",
+                Values.parameters("value", propertyValue)).single();
         return result.get("n").asNode();
     }
 
-    public void updateNode(String label, String propertyKey, Object propertyValue, String updateKey, Object updateValue) {
-        session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) SET n." + updateKey + " = $newValue", Values.parameters("value", propertyValue, "newValue", updateValue));
+    public void updateNode(String label, String propertyKey, Object propertyValue, String updateKey,
+            Object updateValue) {
+        session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) SET n." + updateKey + " = $newValue",
+                Values.parameters("value", propertyValue, "newValue", updateValue));
     }
 
     public void deleteNode(String label, String propertyKey, Object propertyValue) {
-        session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) DELETE n", Values.parameters("value", propertyValue));
+        session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) DELETE n",
+                Values.parameters("value", propertyValue));
     }
 
-    public void createRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
-        session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue}), (b:" + endLabel + " {" + endPropertyKey + ": $endValue}) CREATE (a)-[r:" + relationshipType + "]->(b)", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue));
+    public void createRelationship(String startLabel, String startPropertyKey, Object startPropertyValue,
+            String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
+        session.run(
+                "MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue}), (b:" + endLabel + " {"
+                        + endPropertyKey + ": $endValue}) CREATE (a)-[r:" + relationshipType + "]->(b)",
+                Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue));
     }
 
-    public Relationship readRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
-        Record result = session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:" + endLabel + " {" + endPropertyKey + ": $endValue}) RETURN r", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue)).single();
+    public Relationship readRelationship(String startLabel, String startPropertyKey, Object startPropertyValue,
+            String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
+        Record result = session.run(
+                "MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:"
+                        + endLabel + " {" + endPropertyKey + ": $endValue}) RETURN r",
+                Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue)).single();
         return result.get("r").asRelationship();
-    }    
-
-    public void updateRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType, String updatePropertyKey, Object updatePropertyValue) {
-        session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:" + endLabel + " {" + endPropertyKey + ": $endValue}) SET r." + updatePropertyKey + " = $newValue", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue, "newValue", updatePropertyValue));
     }
 
-    public void deleteRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
-    session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:" + endLabel + " {" + endPropertyKey + ": $endValue}) DELETE r", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue));
+    public void updateRelationship(String startLabel, String startPropertyKey, Object startPropertyValue,
+            String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType,
+            String updatePropertyKey, Object updatePropertyValue) {
+        session.run(
+                "MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:"
+                        + endLabel + " {" + endPropertyKey + ": $endValue}) SET r." + updatePropertyKey
+                        + " = $newValue",
+                Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue, "newValue",
+                        updatePropertyValue));
     }
 
+    public void deleteRelationship(String startLabel, String startPropertyKey, Object startPropertyValue,
+            String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
+        session.run(
+                "MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:"
+                        + endLabel + " {" + endPropertyKey + ": $endValue}) DELETE r",
+                Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue));
+    }
 
-    /* public static void main(String[] args) {
-        CRUD_Neo4J example = new CRUD_Neo4J();
-        example.connect("bolt://localhost:7687", "neo4j", "12345678");
-        example.createNode("Person", "name", "John");
-        example.createNode("Person", "name", "Jane");
-        example.createRelationship("Person", "Person", "name", "John", "name", "Jane", "KNOWS");
-        Node johnNode = example.readNode("Person", "name", "John");
-        System.out.println(johnNode.get("name").asString());
-        // example.updateNode("Person", "name", "John", "age", 30);
-        // example.deleteNode("Person", "name", "John");
-        example.disconnect();
-    } */ 
+    /*
+     * public static void main(String[] args) {
+     * CRUD_Neo4J example = new CRUD_Neo4J();
+     * example.connect("bolt://localhost:7687", "neo4j", "12345678");
+     * example.createNode("Person", "name", "John");
+     * example.createNode("Person", "name", "Jane");
+     * example.createRelationship("Person", "Person", "name", "John", "name",
+     * "Jane", "KNOWS");
+     * Node johnNode = example.readNode("Person", "name", "John");
+     * System.out.println(johnNode.get("name").asString());
+     * // example.updateNode("Person", "name", "John", "age", 30);
+     * // example.deleteNode("Person", "name", "John");
+     * example.disconnect();
+     * }
+     */
 
     public static void main(String[] args) {
 
@@ -168,73 +193,76 @@ public class CRUD_Neo4J {
                     System.out.print("Enter relationship type: ");
                     String relationshipType = scanner.nextLine();
 
-                    example.createRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey, endPropertyValue, relationshipType);
+                    example.createRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel,
+                            endPropertyKey, endPropertyValue, relationshipType);
                     break;
-                    
-                case 6:
-                    
-                        System.out.print("Enter start label: ");
-                        startLabel = scanner.nextLine();
-                        System.out.print("Enter start property key: ");
-                        startPropertyKey = scanner.nextLine();
-                        System.out.print("Enter start property value: ");
-                        startPropertyValue = scanner.nextLine();
-                        System.out.print("Enter end label: ");
-                        endLabel = scanner.nextLine();
-                        System.out.print("Enter end property key: ");
-                        endPropertyKey = scanner.nextLine();
-                        System.out.print("Enter end property value: ");
-                        endPropertyValue = scanner.nextLine();
-                        System.out.print("Enter relationship type: ");
-                        relationshipType = scanner.nextLine();
-    
-                        example.readRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey, endPropertyValue, relationshipType);
-                        break;
-                
-                case 7:
-                            System.out.print("Enter start label: ");
-                            startLabel = scanner.nextLine();
-                            System.out.print("Enter start property key: ");
-                            startPropertyKey = scanner.nextLine();
-                            System.out.print("Enter start property value: ");
-                            startPropertyValue = scanner.nextLine();
-                            System.out.print("Enter end label: ");
-                            endLabel = scanner.nextLine();
-                            System.out.print("Enter end property key: ");
-                            endPropertyKey = scanner.nextLine();
-                            System.out.print("Enter end property value: ");
-                            endPropertyValue = scanner.nextLine();
-                            System.out.print("Enter relationship type: ");
-                            relationshipType = scanner.nextLine();
-        
-                            example.deleteRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey, endPropertyValue, relationshipType);
-                            break;
 
-                
+                case 6:
+
+                    System.out.print("Enter start label: ");
+                    startLabel = scanner.nextLine();
+                    System.out.print("Enter start property key: ");
+                    startPropertyKey = scanner.nextLine();
+                    System.out.print("Enter start property value: ");
+                    startPropertyValue = scanner.nextLine();
+                    System.out.print("Enter end label: ");
+                    endLabel = scanner.nextLine();
+                    System.out.print("Enter end property key: ");
+                    endPropertyKey = scanner.nextLine();
+                    System.out.print("Enter end property value: ");
+                    endPropertyValue = scanner.nextLine();
+                    System.out.print("Enter relationship type: ");
+                    relationshipType = scanner.nextLine();
+
+                    example.readRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey,
+                            endPropertyValue, relationshipType);
+                    break;
+
+                case 7:
+                    System.out.print("Enter start label: ");
+                    startLabel = scanner.nextLine();
+                    System.out.print("Enter start property key: ");
+                    startPropertyKey = scanner.nextLine();
+                    System.out.print("Enter start property value: ");
+                    startPropertyValue = scanner.nextLine();
+                    System.out.print("Enter end label: ");
+                    endLabel = scanner.nextLine();
+                    System.out.print("Enter end property key: ");
+                    endPropertyKey = scanner.nextLine();
+                    System.out.print("Enter end property value: ");
+                    endPropertyValue = scanner.nextLine();
+                    System.out.print("Enter relationship type: ");
+                    relationshipType = scanner.nextLine();
+
+                    example.deleteRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel,
+                            endPropertyKey, endPropertyValue, relationshipType);
+                    break;
+
                 case 8:
-                            System.out.print("Enter start label: ");
-                            startLabel = scanner.nextLine();
-                            System.out.print("Enter start property key: ");
-                            startPropertyKey = scanner.nextLine();
-                            System.out.print("Enter start property value: ");
-                            startPropertyValue = scanner.nextLine();
-                            System.out.print("Enter end label: ");
-                            endLabel = scanner.nextLine();
-                            System.out.print("Enter end property key: ");
-                            endPropertyKey = scanner.nextLine();
-                            System.out.print("Enter end property value: ");
-                            endPropertyValue = scanner.nextLine();
-                            System.out.print("Enter relationship type: ");
-                            relationshipType = scanner.nextLine();
-                            System.out.print("Enter update key: ");
-                            updateKey = scanner.nextLine();
-                            System.out.print("Enter update value: ");
-                            updateValue = scanner.nextLine();
-        
-                            example.updateRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey, endPropertyValue, relationshipType, updateKey, updateValue);
-                            break;
+                    System.out.print("Enter start label: ");
+                    startLabel = scanner.nextLine();
+                    System.out.print("Enter start property key: ");
+                    startPropertyKey = scanner.nextLine();
+                    System.out.print("Enter start property value: ");
+                    startPropertyValue = scanner.nextLine();
+                    System.out.print("Enter end label: ");
+                    endLabel = scanner.nextLine();
+                    System.out.print("Enter end property key: ");
+                    endPropertyKey = scanner.nextLine();
+                    System.out.print("Enter end property value: ");
+                    endPropertyValue = scanner.nextLine();
+                    System.out.print("Enter relationship type: ");
+                    relationshipType = scanner.nextLine();
+                    System.out.print("Enter update key: ");
+                    updateKey = scanner.nextLine();
+                    System.out.print("Enter update value: ");
+                    updateValue = scanner.nextLine();
+
+                    example.updateRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel,
+                            endPropertyKey, endPropertyValue, relationshipType, updateKey, updateValue);
+                    break;
                 case 9:
-        
+
                     System.out.println("Exiting...");
                     break;
 
@@ -242,7 +270,7 @@ public class CRUD_Neo4J {
 
                     System.out.println("Invalid option.");
                     break;
-                    
+
             }
         }
 
