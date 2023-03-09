@@ -1,5 +1,12 @@
 const neo4j = require('neo4j-driver');
 
+function calcular(){
+    const lat_str = document.querySelector("lat_str");
+    const lon_str = document.querySelector("lon_str");
+    const lat_end = document.querySelector("lat_end");
+    const lon_end = document.querySelector("lon_end");
+}
+
 function hide_show() {
     var in_box = document.getElementById("input_box");
     var open_eye = document.getElementById("open_eye");
@@ -9,10 +16,7 @@ function hide_show() {
     var ext_in = document.getElementById("ext_in");
     var sht_in = document.getElementById("sht_in");
 
-    var lat_str = document.getElementById("lat_str").value;
-    var lon_str = document.getElementById("lon_str").value;
-    var lat_end = document.getElementById("lat_end").value;
-    var lon_end = document.getElementById("lon_end").value;
+
 
     var lat_1 = document.getElementById("lat_1");
     var lon_1 = document.getElementById("lon_1");
