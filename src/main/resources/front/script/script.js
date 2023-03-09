@@ -1,6 +1,6 @@
 const neo4j = require('neo4j-driver');
 
-function calcular(){
+function calcular(){ // função que pega os valores dos inputs no frontend
     const lat_str = document.querySelector("lat_str");
     const lon_str = document.querySelector("lon_str");
     const lat_end = document.querySelector("lat_end");
@@ -17,7 +17,10 @@ function hide_show() {
     var ext_in = document.getElementById("ext_in");
     var sht_in = document.getElementById("sht_in");
 
-
+    var lat_str = document.getElementById("lat_str").value;
+    var lon_str = document.getElementById("lon_str").value;
+    var lat_end = document.getElementById("lat_end").value;
+    var lon_end = document.getElementById("lon_end").value;
 
     var lat_1 = document.getElementById("lat_1");
     var lon_1 = document.getElementById("lon_1");
@@ -32,7 +35,7 @@ function hide_show() {
         ext_in.style.display = "block";
         sht_in.style.display = "none";
     }
-    
+
     else {
         in_box.style.height = "40px"; // diminui o tamanho da caixa de input
         open_eye.style.display = "block"; // mostra a imagem do olho aberto
