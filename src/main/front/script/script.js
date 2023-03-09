@@ -35,10 +35,10 @@ function hide_show() {
         eye_icon.style.top = "16px"; // sobe o ícone do olho
         ext_in.style.display = "none";
         sht_in.style.display = "block";
-        lat_1.innerHTML = "lat" + lat_str;
-        lon_1.innerHTML = "lon" + lon_str;
-        lat_2.innerHTML = "lat" + lat_end;
-        lon_2.innerHTML = "lon" + lon_end;
+        lat_1.innerHTML = "Latitude: " + lat_str + " - ";
+        lon_1.innerHTML = "Longitude: " + lon_str;
+        lat_2.innerHTML = "Latitude: " + lat_end + " - ";
+        lon_2.innerHTML = "Longitude: " + lon_end;
     }
 }
 
