@@ -46,7 +46,16 @@ body {
 }
 
 #bot-calc{
-    border-radius: 120px;
+    border-radius: 10px;
     border: 1px;
     background-color: #d4d9de;
+    height: 40px;
+    width: 80px;
+
 }
+.btn:active {
+    background-color: #333;
+    color: #474343;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.2);
+  }
+  

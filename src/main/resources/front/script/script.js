@@ -5,6 +5,7 @@ function calcular(){
     const lon_str = document.querySelector("lon_str");
     const lat_end = document.querySelector("lat_end");
     const lon_end = document.querySelector("lon_end");
+    console.log("gg")
 }
 
 function hide_show() {
@@ -30,8 +31,8 @@ function hide_show() {
         eye_icon.style.top = "278px"; // desce o ícone do olho
         ext_in.style.display = "block";
         sht_in.style.display = "none";
-
     }
+    
     else {
         in_box.style.height = "40px"; // diminui o tamanho da caixa de input
         open_eye.style.display = "block"; // mostra a imagem do olho aberto
