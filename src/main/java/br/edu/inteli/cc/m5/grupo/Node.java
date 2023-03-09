@@ -1,5 +1,6 @@
 package br.edu.inteli.cc.m5.grupo;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Node {
     private String key; // teste
@@ -16,6 +17,7 @@ public class Node {
         this.key = key;
         this.lat = lat;
         this.lon = lon;
+        this.neighbors = new ArrayList<>();
     }
 
     public String getName(){

@@ -34,8 +34,6 @@ public class AStar {
                 if (!unvisitedList.contains(neighbor)) {
                     unvisitedList.add(neighbor);
                 }
-
-                neighbor.set_gScore(heuristic(neighbor, start));
                 neighbor.set_parent(current);
             }
         }
@@ -53,7 +51,21 @@ public class AStar {
     }
 
     private static Double heuristic(Node node, Node goal){
-        return Math.sqrt(Math.pow(node.get_lon() - goal.get_lon(), 2) + Math.pow(node.get_lat() - goal.get_lat(), 2));
+        // Raio da Terra
+        double r = 6371.0;
+        
+        //  Latitude e longitude inicial
+        double x1 = Math.toRadians(node.get_lat());
+        double y1 = Math.toRadians(node.get_lon());
+        
+        // Latitude e longitude do destino
+        double x2 = Math.toRadians(goal.get_lat());
+        double y2 = Math.toRadians(goal.get_lon());
+        
+        // Fórmula de haversine para calcular a distancia total
+        
+        // ponto horizontal
+        return (2 * r * Math.asin(Math.sqrt(Math.pow(Math.sin((x2 - x1) / 2), 2) + Math.cos(x1) * Math.cos(x2) * Math.pow(Math.sin((y2 - y1) / 2), 2))));
     }
     
     public static void main(String[] args){
