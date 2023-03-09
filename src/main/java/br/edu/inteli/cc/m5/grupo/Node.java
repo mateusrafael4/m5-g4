@@ -2,6 +2,7 @@ package br.edu.inteli.cc.m5.grupo;
 import java.util.List;
 
 public class Node {
+    private String key; // teste
     private double lat; // y
     private double lon; // x
     private double height;
@@ -11,10 +12,20 @@ public class Node {
     private Node parent;
     private List<Node> neighbors;
         
-    public Node(){
-        
+    public Node(String key, double lon, double lat){
+        this.key = key;
+        this.lat = lat;
+        this.lon = lon;
+    }
+
+    public String getName(){
+        return key;
     }
     
+    public void addNeighbor(Node node){ // teste 
+        neighbors.add(node);
+    }
+
     public double get_lat(){
         return lat;
     }
