@@ -9,7 +9,7 @@ import br.edu.inteli.cc.m5.dted.DtedDatabaseHandler;
 // Classe principal
 public class Intermediary_Points {
 
-    private static final double DISTANCE_BETWEEN_POINTS = 25.0;
+    private static final double DISTANCE_BETWEEN_POINTS = 0.12;
 
     public static List<LatLon> calculateIntermediaryPoints(double startLat, double startLon, double endLat, double endLon) {
         
