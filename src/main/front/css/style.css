@@ -1,0 +1,44 @@
+body {
+    background-color: #d4d9de;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.input_box {
+    background-color: rgb(162, 162, 162);
+    height: 300px;
+    border-radius: 10px;
+}
+
+.eye_icon {
+    position: absolute;
+    top: 278px;
+    right: 16px;
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+.eye_button {
+    cursor: pointer;
+    border-radius: 100%;
+    border-width: 1.5px;
+}
+
+#closed_eye {
+    width: 22px;
+    height: 20px;
+}
+
+#open_eye {
+    width: 22px;
+    height: 20px;
+}
+
+.extended_input {
+    display: block;
+}
+
+.short_input {
+    display: none;
+    height: 1000px;
+    /* background-color: aqua;*/
+}
