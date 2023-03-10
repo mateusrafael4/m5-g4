@@ -33,7 +33,7 @@ public class CRUD_Neo4J {
 
     // Método que "encontra" um nó, passando os parâmetros: conjunto, categoria e o valor, o método encontra o nó no Neo4J e mostra ele
     public Node readNode(String label, String propertyKey, Object propertyValue) {
-        Record result = session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) RETURN n",
+        org.neo4j.driver.Record result = session.run("MATCH (n:" + label + " {" + propertyKey + ": $value}) RETURN n",
                 Values.parameters("value", propertyValue)).single();
         return result.get("n").asNode();
     }
@@ -57,7 +57,7 @@ public class CRUD_Neo4J {
 
     // Método que busca um relacionamento através dos parametros: conjunto, categoria e valor tanto do nó inicial, quanto do final
     public Relationship readRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
-        Record result = session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:" + endLabel + " {" + endPropertyKey + ": $endValue}) RETURN r", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue)).single();
+        org.neo4j.driver.Record result = session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue})-[r:" + relationshipType + "]->(b:" + endLabel + " {" + endPropertyKey + ": $endValue}) RETURN r", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue)).single();
         return result.get("r").asRelationship();
     }
 

@@ -46,10 +46,13 @@ public class Grid {
             Intermediary_Points.calculateIntermediaryPoints(getLatLon[j][0], getLatLon[j][1], getLatLon[j][2], getLatLon[j][3]);
         }
 
-        private void postRelationship(){
 
-        }
     }
+
+    private void postRelationship(){
+
+    }
+
     public static void main(String[] args) {
 
     }
