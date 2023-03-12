@@ -1,0 +1,61 @@
+body {
+    background-color: #d4d9de;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.input_box {
+    background-color: rgb(162, 162, 162);
+    height: 300px;
+    border-radius: 10px;
+}
+
+.eye_icon {
+    position: absolute;
+    top: 278px;
+    right: 16px;
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+.eye_button {
+    cursor: pointer;
+    border-radius: 100%;
+    border-width: 1.5px;
+}
+
+#closed_eye {
+    width: 22px;
+    height: 20px;
+}
+
+#open_eye {
+    width: 22px;
+    height: 20px;
+}
+
+.extended_input {
+    display: block;
+    margin-left: 10px;
+    
+}
+
+.short_input {
+    display: none;
+    height: 1000px;
+    /* background-color: aqua;*/
+}
+
+#bot-calc{
+    border-radius: 10px;
+    border: 1px;
+    background-color: #d4d9de;
+    height: 40px;
+    width: 80px;
+
+}
+.btn:active {
+    background-color: #333;
+    color: #474343;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.2);
+  }
+  
