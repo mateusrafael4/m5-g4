@@ -9,6 +9,7 @@ import br.edu.inteli.cc.m5.dted.DtedDatabaseHandler;
 // Classe principal
 public class Intermediary_Points {
 
+
     private static final double DISTANCE_BETWEEN_POINTS = 0.12;
 
     public static List<LatLon> calculateIntermediaryPoints(double startLat, double startLon, double endLat, double endLon) {
@@ -32,6 +33,8 @@ public class Intermediary_Points {
         double y2 = Math.toRadians(endLon);
 
         // Fórmula de haversine para calcular a distancia total
+
+        // ponto horizontal
         double totalDistance = 2 * r * Math.asin(Math.sqrt(Math.pow(Math.sin((x2 - x1) / 2), 2) + Math.cos(x1) * Math.cos(x2) * Math.pow(Math.sin((y2 - y1) / 2), 2)));
 
         System.out.println(totalDistance + " Kilometers");
@@ -77,7 +80,7 @@ public class Intermediary_Points {
     public static void main(String[] args) {
 
         // Exemplo dado algumas coordenadas
-        List<LatLon> intermediaryPoints = calculateIntermediaryPoints(-22.5889042043, -43.4855748, -22.359194448201, -42.5794347619519);
+        List<LatLon> intermediaryPoints = calculateIntermediaryPoints(-22.5889042043, -43.172953, -22.905374, -42.5794347619519);
 
         for (LatLon point : intermediaryPoints) {
             System.out.println(point.toString());
