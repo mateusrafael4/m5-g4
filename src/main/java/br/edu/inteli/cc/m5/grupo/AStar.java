@@ -70,7 +70,6 @@ public class AStar {
     
     public static void main(String[] args){
 
-    // Create some nodes
     Node a = new Node("A", 0.0, 0.0);
     Node b = new Node("B", 1.0, 0.0);
     Node c = new Node("C", 2.0, 0.0);
@@ -81,7 +80,6 @@ public class AStar {
     Node h = new Node("H", 1.0, 2.0);
     Node i = new Node("I", 2.0, 2.0);
 
-    // Create some edges
     a.addNeighbor(f);
     b.addNeighbor(c);
     c.addNeighbor(i);
@@ -97,7 +95,6 @@ public class AStar {
     b.addNeighbor(c);
     i.addNeighbor(g);
 
-    // Create the grid
     List<Node> grid = new ArrayList<Node>();
     grid.add(a);
     grid.add(b);
@@ -109,13 +106,10 @@ public class AStar {
     grid.add(h);
     grid.add(i);
 
-    // Create the AStar object
     AStar astar = new AStar();
 
-    // Test the findPath method
     LinkedList<Node> path = astar.findPath(grid, a, d);
 
-    // Print the path
     for (Node node : path){
         System.out.println(node.getName());
     }
