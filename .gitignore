@@ -2,3 +2,6 @@
 target
 *.docx
 *.pdf
+node_modules
+./src/main/resources/static/script/node_modules
+.DS_Store
