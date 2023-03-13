@@ -1,117 +1,116 @@
 package br.edu.inteli.cc.m5.grupo;
 
 import java.util.*;
+import br.edu.inteli.cc.m5.grupo.Nodes;
+import br.edu.inteli.cc.m5.grupo.Grid;
+import br.edu.inteli.cc.m5.dted.DtedDatabaseHandler;
+
+// Abaixo, estão as bibliotecas necessárias para a conexão com o Neo4J
+import org.neo4j.driver.Session;
+import org.neo4j.driver.Driver;
+import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.AuthTokens;
 
 public class AStar {
 
-    public AStar(){
-
-    }
-
-    public LinkedList<Node> findPath(List<Node> grid, Node start, Node end){
-        for (Node node : grid){
-            node.set_hScore(heuristic(node, end));
+    public List<Nodes> findPath(Grid grid, Nodes start, Nodes end){
+        // Calcula a distância de cada nó até o fim
+        LinkedList<Nodes> trueGrid = grid.getGrid();
+        for (Nodes node : trueGrid){
+            node.setHScore(heuristic(node, end));
         }
-        PriorityQueue<Node> unvisitedList = new PriorityQueue<Node>((node1, node2) -> Double.compare(node1.get_fScore(), node2.get_fScore()));
-        HashSet<Node> visitedList = new HashSet<Node>();
+        // Cria uma fila de nós ainda não visitados que são organizados pelo fScore (mais informações em fScore em Node)
+        // e uma de visitados para não retornar a eles e entrar num loop.
+        PriorityQueue<Nodes> unvisitedList = new PriorityQueue<Nodes>((node1, node2) -> Double.compare(node1.getFScore(), node2.getFScore()));
+        HashSet<Nodes> visitedList = new HashSet<Nodes>();
         unvisitedList.add(start);
-        while (!unvisitedList.isEmpty()){
-            Node current = unvisitedList.remove();
-            if (current.equals(end)){
+        while (!unvisitedList.isEmpty()){ // Irá procurar uma rota enquanto não tiver mais nós para visitar.
+            Nodes current = unvisitedList.remove();
+            if (current.equals(end)){ // Se encontrar o nó final, retorne o caminho.
                 return createPath(current);
             }
             visitedList.add(current);
-            for (Node neighbor : current.get_neighbors()){
+            for (int ID : current.getEdges().keySet()){ // Como não encontrou o nó final olhe os vizinhos.
+                Nodes neighbor = grid.getGrid().get(ID);
                 if (visitedList.contains(neighbor)){
                     continue;
                 }
-                double tentativeGScore = current.get_gScore() + current.get_distance(neighbor);
+                // Calcula o gScore dos próximos caminhos.
+                double tentativeGScore = current.getGScore() + current.getEdges().get(neighbor.getID());
 
-                if (tentativeGScore < neighbor.get_gScore()) {
-                    neighbor.set_gScore(tentativeGScore);
-                    neighbor.set_parent(current);
+                // Se não for bom, não vá.
+                // Se for bom, e procure o caminho utilizando o nó escolhido dessa vez.
+                if (tentativeGScore < neighbor.getGScore()) {
+                    neighbor.setGScore(tentativeGScore);
+                    neighbor.setParent(current);
                 }
                 if (!unvisitedList.contains(neighbor)) {
                     unvisitedList.add(neighbor);
                 }
-                neighbor.set_parent(current);
+                neighbor.setParent(current);
             }
         }
         return null;
     }
 
-
-    private static LinkedList<Node> createPath(Node current){
-        LinkedList<Node> path = new LinkedList<Node>();
+    // Cria o caminho depois o inverte, pois a rota é feita do caminho final e vai voltando até chegar o caminho inicial.
+    private static List<Nodes> createPath(Nodes current){
+        List<Nodes> path = new ArrayList<>();
         while (current != null){
             path.add(current);
-            current = current.get_parent();
+            current = current.getParent();
         }
+        Collections.reverse(path);
         return path;
     }
 
-    private static Double heuristic(Node node, Node goal){
+public class Neo4JConnector {
+    private Driver driver;
+    private Session session;
+
+    // Método responsável por conectar o terminal com o localhost do Neo4J
+    public void connect(String uri, String user, String password) {
+        this.driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
+        this.session = driver.session();
+    }
+
+    // Método responsável por enviar os dados do List path para o Neo4J
+    public void sendToNeo4J(List<Nodes> path) {
+        // Lógica para enviar dados para o Neo4J usando driver e session
+    }
+
+    // Método responsável por desconectar o terminal
+    public void disconnect() {
+        session.close();
+        driver.close();
+    }
+}
+
+    private static Double heuristic(Nodes node, Nodes goal){
         // Raio da Terra
         double r = 6371.0;
         
         //  Latitude e longitude inicial
-        double x1 = Math.toRadians(node.get_lat());
-        double y1 = Math.toRadians(node.get_lon());
+        double x1 = Math.toRadians(node.getLat());
+        double y1 = Math.toRadians(node.getLon());
         
         // Latitude e longitude do destino
-        double x2 = Math.toRadians(goal.get_lat());
-        double y2 = Math.toRadians(goal.get_lon());
+        double x2 = Math.toRadians(goal.getLat());
+        double y2 = Math.toRadians(goal.getLon());
         
         // Fórmula de haversine para calcular a distancia total
         
-        // ponto horizontal
+        // Ponto horizontal
         return (2 * r * Math.asin(Math.sqrt(Math.pow(Math.sin((x2 - x1) / 2), 2) + Math.cos(x1) * Math.cos(x2) * Math.pow(Math.sin((y2 - y1) / 2), 2))));
     }
-    
+
     public static void main(String[] args){
+        // Instancia do objeto example
+        CRUD_Neo4J example = new CRUD_Neo4J();
 
-    Node a = new Node("A", 0.0, 0.0);
-    Node b = new Node("B", 1.0, 0.0);
-    Node c = new Node("C", 2.0, 0.0);
-    Node d = new Node("D", 0.0, 1.0);
-    Node e = new Node("E", 1.0, 1.0);
-    Node f = new Node("F", 2.0, 1.0);
-    Node g = new Node("G", 0.0, 2.0);
-    Node h = new Node("H", 1.0, 2.0);
-    Node i = new Node("I", 2.0, 2.0);
+        // Conectando o objeto no localhost do Neo4J
+        example.connect("bolt://localhost:7687", "neo4j-AStar", "12345678");
 
-    a.addNeighbor(f);
-    b.addNeighbor(c);
-    c.addNeighbor(i);
-    d.addNeighbor(b);
-    b.addNeighbor(e);
-    c.addNeighbor(d);
-    e.addNeighbor(b);
-    b.addNeighbor(i);
-    g.addNeighbor(h);
-    a.addNeighbor(b);
-    f.addNeighbor(c);
-    a.addNeighbor(b);
-    b.addNeighbor(c);
-    i.addNeighbor(g);
-
-    List<Node> grid = new ArrayList<Node>();
-    grid.add(a);
-    grid.add(b);
-    grid.add(c);
-    grid.add(d);
-    grid.add(e);
-    grid.add(f);
-    grid.add(g);
-    grid.add(h);
-    grid.add(i);
-
-    AStar astar = new AStar();
-
-    LinkedList<Node> path = astar.findPath(grid, a, d);
-
-    for (Node node : path){
-        System.out.println(node.getName());
-    }
-}  
+        Scanner scanner = new Scanner(System.in);
+    }  
 }
