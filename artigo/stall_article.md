@@ -1,10 +1,14 @@
 ---
 title: Modelo para o artigo do Módulo 5
-author: 
- - "Sergio Brito Amorim Lucas"
+author:
  - "Gabriel Caetano Nhoncanse"
+ - "Jonas Vianas Sales"
+ - "Matheus Rafael Miranda da Silva"
+ - "Raphael Lisboa Antunes"
+ - "Sarah de Miranda Ribeiro"
+ - "Sergio Brito Amorim Lucas"
  - "Thomas Frajhof Brand"
-date: Janeiro de 2023
+date: Março de 2023
 abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um texto descrevendo os resultados do projeto no formato de um artigo científico. Este arquivo no formato markdown contém a estrutura básica deste artigo. Cada grupo deverá editar este arquivo com a descrição do projeto que desenvolveu.
 ---
 
@@ -26,7 +30,7 @@ abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um 
 
 # Trabalhos relacionados
 
-Pela natureza do projeto, não foi possível encontrar projetos que se aplicam a situações de missões militares em baixa altitude, no entanto, foi possível encontrar algo similar em um artigo sobre "Uma Abordagem de Risco Mínimo para Planejamento de Trajeto de VANTs (Veículos Aéreos Não Tripulados)". 
+Pela natureza do projeto, não foi possível encontrar projetos que se aplicam a situações de missões militares em baixa altitude, no entanto, foi possível encontrar algo similar em um artigo sobre "Uma Abordagem de Risco Mínimo para Planejamento de Trajeto de VANTs (Veiculos Aéreos Não Tripulados)". 
 Muitos dos conceitos utilizados no artigo são semelhantes aos utilizados no projeto, como a utilização de um grafo para representar o terreno e a utilização de um algoritmo de busca para encontrar a melhor rota, estas semelhanças serão discutidas mais a frente.
 
 # Motivação
@@ -99,7 +103,7 @@ domínio, aprimorando o processo de solução com mais eficiência do que os mé
 
 <p>A heurística no algoritmo A* é utilizada para estimar a distância restante do nó atual ao nó de destino. Esta heurística se prova muito adequada a este projeto, visto que utilizaremos da variação de altitude entre diferentes pontos, e este valor será alterado dependendo se estamos subindo, ou descendo.</p>
 
-<p>Neste caso, utilizaremos como heurística a fórmula α * distancia + β * altura, sendo que β + α = 1. Desta forma, podemos ponderar melhor as possíveis opções do algoritmo e obter a melhor trajetória.</p>
+<p>Neste caso, utilizaremos como heurística a fórmula X * distancia + Y * altura, sendo que X + Y = 1. Desta forma, podemos ponderar melhor as possíveis opções do algoritmo e obter a melhor trajetória.</p>
 
 <p>Estamos, então, procurando o menor valor de peso; visto que quanto maior a distância/altura, o menos desejável é aquela trajetória.</p>
 
