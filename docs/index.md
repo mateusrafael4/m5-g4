@@ -21,20 +21,16 @@ Planejador de trajetórias para voos em baixa altitude
     - [Limitações](#limitações)
   - [Objetivos](#objetivos)
     - [Objetivos gerais](#objetivos-gerais)
-      - [Qual é o problema a ser resolvido](#qual-é-o-problema-a-ser-resolvido)
-      - [Qual o objetivo da solução ?](#qual-o-objetivo-da-solução-)
     - [Objetivos específicos](#objetivos-específicos)
-      - [Como a solução proposta deverá ser utilizada](#como-a-solução-proposta-deverá-ser-utilizada)
-      - [Qual será o critério de sucesso e qual medida será utilizada para o avaliar](#qual-será-o-critério-de-sucesso-e-qual-medida-será-utilizada-para-o-avaliar)
   - [Partes interessadas](#partes-interessadas)
 - [Análise do Problema e Solução](#análise-do-problema-e-solução)
-      - [Qual a solução proposta (visão de negócios)](#qual-a-solução-proposta-visão-de-negócios)
+  - [Solução proposta](#solução-proposta)
   - [Análise do cenário: Matriz SWOT](#análise-do-cenário-matriz-swot)
   - [5 Forças de Porter](#5-forças-de-porter)
   - [Proposta de Valor: Value Proposition Canvas](#proposta-de-valor-value-proposition-canvas)
   - [Matriz de Risco](#matriz-de-risco)
-      - [Ameaças:](#ameaças)
-      - [Oportunidades:](#oportunidades)
+      - [Ameaças](#ameaças)
+      - [Oportunidades](#oportunidades)
 - [Requisitos do Sistema](#requisitos-do-sistema)
   - [Personas](#personas)
   - [Histórias dos usuários (user stories)](#histórias-dos-usuários-user-stories)
@@ -65,6 +61,8 @@ Planejador de trajetórias para voos em baixa altitude
   - [Manual de Implantação](#manual-de-implantação)
   - [Manual do Usuário](#manual-do-usuário)
   - [Manual do Administrador](#manual-do-administrador)
+- [Sistema](#sistema)
+  - [Arquitetura da Solução](#arquitetura-da-solução)
 - [Referências](#referências)
 
 
@@ -117,7 +115,7 @@ Tudo que irá compor o peso das arestas será utilizado na solução, sendo a di
 
 <br>
 
-#### <b>Qual é o problema a ser resolvido</b>
+<b>Qual é o problema a ser resolvido</b>
 
 <br>
  
@@ -130,7 +128,7 @@ Assim, a questão central a ser resolvida é a de centralizar as informações e
 
 <br>
 
-#### <b>Qual o objetivo da solução ?</b>
+<b>Qual o objetivo da solução ?</b>
 
 <br>
  
@@ -147,14 +145,17 @@ Desenvolver uma interface a partir de uma sequência de grafos gerada por um ban
 <br>
  
 
-#### Como a solução proposta deverá ser utilizada
+<b>Como a solução proposta deverá ser utilizada </b>
+
+
 <br>
 
 A proposta apresentada tem como objetivo ser aplicada inicialmente pela empresa AEL, sendo esta o principal stakeholder. Após uma rigorosa curadoria e as devidas modificações, a solução será oferecida ao cliente final, o exército brasileiro.
 
 Este processo de curadoria é fundamental para assegurar a qualidade e eficácia da proposta, pois inclui a validação rigorosa dos cálculos matemáticos utilizados, a monitoração cuidadosa da sua trajetória, testes em condições reais de utilização, os aprimoramentos necessários e, finalmente, a integração com serviços já existentes.
 
-#### Qual será o critério de sucesso e qual medida será utilizada para o avaliar
+<b>Qual será o critério de sucesso e qual medida será utilizada para o avaliar? </b>
+
 <br>
 Devido à natureza da solução, não é possível testá-la em uma situação real. No entanto, há maneiras de avaliar seu sucesso, como uma análise de complexidade e corretude do algoritmo proposto, que cobre a parte matemática da solução, e uma visualização da trajetória no contexto do mapa utilizado. Estas medidas permitirão verificar a eficiência e a precisão do algoritmo proposto."
 
@@ -171,10 +172,9 @@ Devido à natureza da solução, não é possível testá-la em uma situação r
  
 # Análise do Problema e Solução
 
-<br>
+</br>
  
-#### Qual a solução proposta (visão de negócios)
-
+## Solução proposta 
 O sistema em questão é projetado para auxiliar um piloto na decisão da melhor rota a seguir em territórios desconhecidos. Ao receber informações sobre o local, o sistema utiliza uma avaliação ponderada dos diferentes trajetos para determinar a trajetória ótima para chegar do ponto de origem ao ponto de destino. Este sistema oferece uma vantagem significativa em relação à segurança de operações de infiltração e reconhecimento, pois permite ao piloto entrar em um território estranho sem se preocupar com a escolha da melhor rota a seguir.
 
 A solução proposta, sob uma perspectiva empresarial, será avaliada de forma única, como previamente detalhado. No entanto, a solução em questão, descrita neste documento, não será oferecida diretamente ao consumidor final, sendo neste caso, o exército brasileiro, mas sim à empresa AEL, que, nesta relação, atuará como curadora antes que a solução final alcance o cliente.
@@ -213,12 +213,12 @@ Analisando a proposta de valor, é possível identificar facilmente quais foram 
 
  O principal objetivo da matriz de risco e oportunidades é a clareza oferecida ao grupo em relação à eventuais problemas que possam ocorrer ao decorrer do desenvolvimento do projeto, possibilitando ao grupo a possibilidade de se previnir dos riscos e buscar as melhores oportunidades.
  
- #### Ameaças:
+ #### Ameaças
  <p align="center">
 <img width="705" height="480" src="img/Ameaças.png">
 </p>
 
- #### Oportunidades:
+ #### Oportunidades
  <p align="center">
 <img width="650" height="480" src="img/Oportunidades.jpg">
 </p>
@@ -388,6 +388,14 @@ nó Y: X<sub>xy</sub> + X<sub>sy</sub> + X<sub>ty</sub> = X<sub>yx</sub> + X<sub
 ## Manual do Usuário
 
 ## Manual do Administrador
+
+# Sistema
+
+## Arquitetura da Solução
+Nosso sistema será composto por 3 "fases". Primeiro o usuário fará um input com as coordenadas do ponto inicial e do ponto final. Após isso, o nosso back-end será responsável por tranferir essas informações para o código que gera a grid e calcula o caminho mínimo. Assim, será possível encontrar o resultado no Neo4j, que é o banco de dados que estará conectado com o front para a visualização da rota final.
+
+<img width="730" height="400" src="img/Apresentação%201002.png">
+
 
 
 # Referências
