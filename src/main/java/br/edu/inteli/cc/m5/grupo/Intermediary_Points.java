@@ -12,10 +12,10 @@ public class Intermediary_Points {
 
     private static final double DISTANCE_BETWEEN_POINTS = 0.12;
 
-    public static List<LatLon> calculateIntermediaryPoints(double startLat, double startLon, double endLat, double endLon) {
+    public static List<Nodes> calculateIntermediaryPoints(double startLat, double startLon, double endLat, double endLon) {
         
         // Haversine formula
-        List<LatLon> intermediaryPoints = new ArrayList<>();
+        List<Nodes> intermediaryPoints = new ArrayList<>();
 
         // Principais atributos pra instancia do objeto
         double distanceBetweenLat = endLat - startLat;
@@ -56,7 +56,7 @@ public class Intermediary_Points {
         double currentLat = startLat;
         double currentLon = startLon;
 
-        intermediaryPoints.add(new LatLon(currentLat, currentLon));
+        intermediaryPoints.add(new Nodes(currentLat, currentLon));
 
         System.out.println(numPoints);
 
@@ -68,10 +68,10 @@ public class Intermediary_Points {
                 System.out.println("Failed to retrieve elevation for point (" + currentLat + ", " + currentLon + ")");
                 break;
             }
-            intermediaryPoints.add(new LatLon(currentLat, currentLon, elevation.get()));
+            intermediaryPoints.add(new Nodes(currentLat, currentLon, elevation.get()));
         }
 
-        intermediaryPoints.add(new LatLon(endLat, endLon));
+        intermediaryPoints.add(new Nodes(endLat, endLon));
 
         return intermediaryPoints;
     }
@@ -80,34 +80,10 @@ public class Intermediary_Points {
     public static void main(String[] args) {
 
         // Exemplo dado algumas coordenadas
-        List<LatLon> intermediaryPoints = calculateIntermediaryPoints(-22.5889042043, -43.172953, -22.905374, -42.5794347619519);
+        List<Nodes> intermediaryPoints = calculateIntermediaryPoints(-22.5889042043, -43.172953, -22.905374, -42.5794347619519);
 
-        for (LatLon point : intermediaryPoints) {
+        for (Nodes point : intermediaryPoints) {
             System.out.println(point.toString());
         }
-    }
-}
-
-// Classe que guarda os atributos de latitude e longitude
-class LatLon {
-    public double latitude;
-    public double longitude;
-    public int elevation;
-
-    // Constructor indicando como o objeto vai ser instanciado caso seja dado apenas latitude e longitude
-    public LatLon(double latitude, double longitude) {
-        this(latitude, longitude, 0);
-    }
-
-    // Outro constructor para caso a elevação seja dada tambem, alem da latitude e longitude
-    public LatLon(double latitude, double longitude, int elevation) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.elevation = elevation;
-    }
-
-    // Método que formata o objeto para o formato de string
-    public String toString() {
-        return "LatLon: (" + latitude + ", " + longitude + ", " + elevation + ")";
     }
 }

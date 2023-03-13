@@ -2,6 +2,11 @@ package br.edu.inteli.cc.m5.grupo.controllers;
 
 import br.edu.inteli.cc.m5.grupo.entities.Coordinates;
 import br.edu.inteli.cc.m5.grupo.repositories.CoordinatesRepository;
+import br.edu.inteli.cc.m5.grupo.AStar;
+import br.edu.inteli.cc.m5.grupo.Grid;
+import br.edu.inteli.cc.m5.grupo.Nodes;
+import java.util.Optional;
+import br.edu.inteli.cc.m5.dted.DtedDatabaseHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +14,6 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
-
 
 
 @RestController
@@ -45,7 +49,10 @@ public class CoordinatesController {
      * @param Coordinates the Coordinate object to store.
      * @return the newly stored Coordinate object.
      */
+     
     @PostMapping("/process")
+
+    
         // public Coordinates storeCoordinates(@RequestBody Coordinates coordinates) {
         //     return coordinatesRepository.save(coordinates);
         // }
@@ -53,11 +60,23 @@ public class CoordinatesController {
     public Coordinates enviarDados(@RequestBody Coordinates newCoord) {
         System.out.println("lat_str: " + newCoord.getLat_str());
         System.out.println("lon_str: " + newCoord.getLon_str());
-        System.out.println("alt_end: " + newCoord.getLat_end());
+        System.out.println("lat_end: " + newCoord.getLat_end());
         System.out.println("lon_end: " + newCoord.getLon_end());
 
         
+        Grid grid = new Grid(newCoord.getLat_str(), newCoord.getLon_str(), newCoord.getLat_end(), newCoord.getLon_end());
+        AStar aStar = new AStar();
+        List<Nodes> path = aStar.findPath(grid, grid.getGrid().get(0), grid.getGrid().get(grid.getGrid().size() - 1));
+        // grid.getGrid().get(0) = Nó inicial.
+        // grid.getGrid().get(grid.getGrid().size() - 1) = Nó final.
+        for (Nodes node : path){
+            System.out.println(node);
+        }
         // chame um método que execute o algoritmo usando as informações extraídas do formulário HTML
+
+        
+
+
         return newCoord;
     }
 
