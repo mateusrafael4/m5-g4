@@ -26,7 +26,8 @@ abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um 
 
 # Trabalhos relacionados
 
-
+Pela natureza do projeto, não foi possível encontrar projetos que se aplicam a situações de missões militares em baixa altitude, no entanto, foi possível encontrar algo similar em um artigo sobre "Uma Abordagem de Risco Mínimo para Planejamento de Trajeto de VANTs (Veículos Aéreos Não Tripulados)". 
+Muitos dos conceitos utilizados no artigo são semelhantes aos utilizados no projeto, como a utilização de um grafo para representar o terreno e a utilização de um algoritmo de busca para encontrar a melhor rota.
 
 # Motivação
 
@@ -90,6 +91,12 @@ Em nosso caso, estamos utilizando o Spring Boot , que serve para enviar utilizar
 
 <p>A razão pela escolha do algoritmo A* sobre o algoritmo de Dijkstra é pela sua adequação ao projeto; enquanto o algoritmo de Dijkstra se comporta melhor com grafos menores onde os pesos são positivos e iguais, o algoritmo A* consegue lidar com grafos maiores e de pesos diferentes pela sua implementação de uma heurística.</p>
 
+<p>Esta escolha entra em concordância com nossa revisão bibliográfica; "*O algoritmo A* representa um dos métodos mais amplamente utilizados para geração de caminhos, sendo aplicado a problemas de ciência robótica, exploração espacial e videogames.
+Este algoritmo combina características dos algoritmos Djikstra e Bellman-Ford, porém,
+foi mais especificamente desenvolvido para analisar de forma mais eficaz o domínio a fim de para evitar obstáculos distribuídos. Na presença de ameaças passivas, como cânions e
+armadilhas, A* associa uma função de custo heurística combinada com uma varredura aprimorada do
+domínio, aprimorando o processo de solução com mais eficiência do que os métodos Djikstra e Bellman-Ford podem fazer*" (DE FILIPPIS; GUGLIERI; QUAGLIOTTI, 2010) </p>
+
 <p>A heurística no algoritmo A* é utilizada para estimar a distância restante do nó atual ao nó de destino. Esta heurística se prova muito adequada a este projeto, visto que utilizaremos da variação de altitude entre diferentes pontos, e este valor será alterado dependendo se estamos subindo, ou descendo.</p>
 
 <p>Neste caso, utilizaremos como heurística a fórmula α * distancia + β * altura, sendo que β + α = 1. Desta forma, podemos ponderar melhor as possíveis opções do algoritmo e obter a melhor trajetória.</p>
@@ -149,3 +156,5 @@ NEO4J. Neo4j Graph Database. [S. l.], 2023. Disponível em: https://neo4j.com/pr
 VMTANZU. Spring. Why Spring?. [S. l.], 2023. Disponível em: https://spring.io/why-spring. Acesso em: 10 mar. 2023.
 
 BOSTOCK, Mike. D3.js - Data-Driven Documents. [S. l.], 2021. Disponível em: https://d3js.org/. Acesso em: 12 mar. 2023.
+
+DE FILIPPIS, Luca; GUGLIERI, Giorgio; QUAGLIOTTI, Fulvia. A Minimum Risk Approach for Path Planning of UAVs. Journal of Intelligent & Robotic Systems, Holanda, ano 2011, v. 61, n. 1-4, p. 203 - 219, Disponível em: https://doi.org/10.1007/s10846-010-9493-9 Acesso em: 12 mar. 2023.
