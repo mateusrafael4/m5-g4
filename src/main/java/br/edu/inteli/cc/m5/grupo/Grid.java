@@ -31,6 +31,7 @@ public class Grid {
         this.lonRegInit = lonRegInit;
         this.latRegEnd = latRegEnd;
         this.lonRegEnd = lonRegEnd;
+        this.grid = new LinkedList<Nodes>();
         plotNodes();
         plotEdges();
     }
@@ -55,6 +56,7 @@ public class Grid {
         if (!dbHandlerInitializedRio || !dbHandlerInitializedSP) {
             throw new IllegalArgumentException("Failed to initialize DtedDatabaseHandler");
         }
+        
         
         // Dependendo do caso indicado pelo método checkCases() ele trata a criação da grid de uma forma diferente
         switch (checkCases()){
@@ -122,7 +124,6 @@ public class Grid {
                     for(int j = 0; j < lengthNodes; j++){
                         currentElevation = dbHandler.QueryLatLonElevation(currentLon, currentLat);
                         grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
-
                         currentLon = addLongitude(currentLon, currentLat);
                     }
                     currentLat = addLatitude(currentLat);
@@ -194,15 +195,22 @@ public class Grid {
     private void plotEdges(){
         for(Nodes node : grid){
             int nodeID = node.getID();
-            if (nodeID - lengthNodes >= 0){ // Verifica se existe um vizinho acima.
-                int neighborNodeID = nodeID - lengthNodes; // Vê qual é o ID do seu vizinho.
+            if (nodeID + lengthNodes < (lengthNodes * heightNodes)){ // Verifica se existe um vizinho embaixo.
+                int neighborNodeID = nodeID + lengthNodes; // Vê qual é o ID do seu vizinho.
                 Nodes neighborNode = grid.get(neighborNodeID); // Busca o nó vizinho.
                 double weight = calculateNeighborWeight(node, neighborNode); // (1)
                 Edge edge = new Edge(neighborNodeID, weight); // Cria a aresta que relaciona os dois nós.
                 node.addNeighbor(edge); // (2)
             };
-            if (nodeID + lengthNodes <= (lengthNodes * heightNodes)){ // Verifica se existe um vizinho embaixo.
-                int neighborNodeID = nodeID + lengthNodes;
+            if ((nodeID + 1) % lengthNodes != 0){ // Verifica se existe um vizinho na direita.
+                int neighborNodeID = nodeID + 1;
+                Nodes neighborNode = grid.get(neighborNodeID);
+                double weight = calculateNeighborWeight(node, neighborNode);
+                Edge edge = new Edge(neighborNodeID, weight);
+                node.addNeighbor(edge);
+            };
+            if (nodeID - lengthNodes >= 0){ // Verifica se existe um vizinho acima.
+                int neighborNodeID = nodeID - lengthNodes;
                 Nodes neighborNode = grid.get(neighborNodeID);
                 double weight = calculateNeighborWeight(node, neighborNode);
                 Edge edge = new Edge(neighborNodeID, weight);
@@ -215,20 +223,12 @@ public class Grid {
                 Edge edge = new Edge(neighborNodeID, weight);
                 node.addNeighbor(edge);
             };
-            if ((nodeID + 1) % length != 0){ // Verifica se existe um vizinho na direita.
-                int neighborNodeID = nodeID + 1;
-                Nodes neighborNode = grid.get(neighborNodeID);
-                double weight = calculateNeighborWeight(node, neighborNode);
-                Edge edge = new Edge(neighborNodeID, weight);
-                node.addNeighbor(edge);
-            };
         }
     }
 
     // Método que calcula o peso de cada aresta baseado no modulo da diferença de (altura + distancia)/2
     // por fim é dividido por 2 visto que estamos dando uma importancia de 50% para a altura (visibilidade) a 50%
     private double calculateNeighborWeight(Nodes node1, Nodes node2){
-        double result;
         double distance;
 
         if (node2.getLat() == node1.getLat() || node2.getLon() == node1.getLon()){
