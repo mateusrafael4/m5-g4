@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.LinkedList;
 //import br.edu.inteli.cc.m5.grupo.Nodes;
 import br.edu.inteli.cc.m5.dted.DtedDatabaseHandler;
+import br.edu.inteli.cc.m5.geo.Area;
+import scala.collection.immutable.List;
 
 public class Grid {
 
@@ -31,6 +33,7 @@ public class Grid {
         this.lonRegInit = lonRegInit;
         this.latRegEnd = latRegEnd;
         this.lonRegEnd = lonRegEnd;
+        this.grid = new LinkedList<Nodes>();
         plotNodes();
         plotEdges();
     }
@@ -55,7 +58,7 @@ public class Grid {
         if (!dbHandlerInitializedRio || !dbHandlerInitializedSP) {
             throw new IllegalArgumentException("Failed to initialize DtedDatabaseHandler");
         }
-        
+
         // Dependendo do caso indicado pelo método checkCases() ele trata a criação da grid de uma forma diferente
         switch (checkCases()){
 
@@ -122,7 +125,6 @@ public class Grid {
                     for(int j = 0; j < lengthNodes; j++){
                         currentElevation = dbHandler.QueryLatLonElevation(currentLon, currentLat);
                         grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
-
                         currentLon = addLongitude(currentLon, currentLat);
                     }
                     currentLat = addLatitude(currentLat);
@@ -166,9 +168,11 @@ public class Grid {
                 for(int i = 0; i < heightNodes; i++){
                     for(int j = 0; j < lengthNodes; j++){
                         currentElevation = dbHandler.QueryLatLonElevation(currentLon, currentLat);
-                        grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
+                        if (currentElevation.isPresent()) {
+                            grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
 
-                        currentLon = subtractLongitude(currentLon, currentLat);
+                            currentLon = subtractLongitude(currentLon, currentLat);
+                        }
                     }
                     currentLat = addLatitude(currentLat);
                     currentLon = lonRegInit;
@@ -194,15 +198,22 @@ public class Grid {
     private void plotEdges(){
         for(Nodes node : grid){
             int nodeID = node.getID();
-            if (nodeID - lengthNodes >= 0){ // Verifica se existe um vizinho acima.
-                int neighborNodeID = nodeID - lengthNodes; // Vê qual é o ID do seu vizinho.
+            if (nodeID + lengthNodes < (lengthNodes * heightNodes)){ // Verifica se existe um vizinho embaixo.
+                int neighborNodeID = nodeID + lengthNodes; // Vê qual é o ID do seu vizinho.
                 Nodes neighborNode = grid.get(neighborNodeID); // Busca o nó vizinho.
                 double weight = calculateNeighborWeight(node, neighborNode); // (1)
                 Edge edge = new Edge(neighborNodeID, weight); // Cria a aresta que relaciona os dois nós.
                 node.addNeighbor(edge); // (2)
             };
-            if (nodeID + lengthNodes <= (lengthNodes * heightNodes)){ // Verifica se existe um vizinho embaixo.
-                int neighborNodeID = nodeID + lengthNodes;
+            if ((nodeID + 1) % lengthNodes != 0){ // Verifica se existe um vizinho na direita.
+                int neighborNodeID = nodeID + 1;
+                Nodes neighborNode = grid.get(neighborNodeID);
+                double weight = calculateNeighborWeight(node, neighborNode);
+                Edge edge = new Edge(neighborNodeID, weight);
+                node.addNeighbor(edge);
+            };
+            if (nodeID - lengthNodes >= 0){ // Verifica se existe um vizinho acima.
+                int neighborNodeID = nodeID - lengthNodes;
                 Nodes neighborNode = grid.get(neighborNodeID);
                 double weight = calculateNeighborWeight(node, neighborNode);
                 Edge edge = new Edge(neighborNodeID, weight);
@@ -215,20 +226,12 @@ public class Grid {
                 Edge edge = new Edge(neighborNodeID, weight);
                 node.addNeighbor(edge);
             };
-            if ((nodeID + 1) % length != 0){ // Verifica se existe um vizinho na direita.
-                int neighborNodeID = nodeID + 1;
-                Nodes neighborNode = grid.get(neighborNodeID);
-                double weight = calculateNeighborWeight(node, neighborNode);
-                Edge edge = new Edge(neighborNodeID, weight);
-                node.addNeighbor(edge);
-            };
         }
     }
 
     // Método que calcula o peso de cada aresta baseado no modulo da diferença de (altura + distancia)/2
     // por fim é dividido por 2 visto que estamos dando uma importancia de 50% para a altura (visibilidade) a 50%
     private double calculateNeighborWeight(Nodes node1, Nodes node2){
-        double result;
         double distance;
 
         if (node2.getLat() == node1.getLat() || node2.getLon() == node1.getLon()){
@@ -341,5 +344,18 @@ public class Grid {
 
         // retorna a nova longitude
         return newLongitude;
+    }
+
+    public static void main(String[] args) {
+        Grid grid = new Grid(-22.5889042043, -45.172953, -22.905374, -44.5794347619519);
+    
+        Nodes no1 = grid.getGrid().get(0);
+        Nodes no2 = grid.getGrid().get(303);
+
+        AStar aixtrela = new AStar();
+        java.util.List<Nodes> path = aixtrela.findPath(grid, no1, no2);
+        for(Nodes node : path){
+            System.out.println(node);
+        }
     }
 }

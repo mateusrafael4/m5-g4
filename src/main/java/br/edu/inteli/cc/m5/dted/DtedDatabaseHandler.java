@@ -17,6 +17,8 @@ import org.gdal.gdal.gdal;
 import org.gdal.gdal.Dataset;
 import org.gdal.gdalconst.gdalconst;
 
+import br.edu.inteli.cc.m5.geo.Area;
+
 /**
  * Implementa operações básicas de acesso a dados geográficos armazenados em arquivos
  * no formato DTED utilizando a biblioteca GDAL.
@@ -117,7 +119,7 @@ public class DtedDatabaseHandler {
 
     public Optional<Integer> QueryLatLonElevation(Double queryLon, Double queryLat)
     {
-        Optional<Integer> ret = null;
+        Optional<Integer> ret = Optional.empty();
 
         for (Dataset d : m_DatabaseDtedDatasets)
         {
@@ -187,5 +189,26 @@ public class DtedDatabaseHandler {
         return queryResult;
     }
 
+    private static Area getArea(Dataset d) {
+        int xsize = d.getRasterXSize();
+        int ysize = d.getRasterYSize();
 
+        double[] geoTransform = d.GetGeoTransform();
+
+        double minLon = geoTransform[0];
+        double maxLon = minLon + (xsize - 1) * geoTransform[1];
+
+        double maxLat = geoTransform[3];
+        double minLat = maxLat + (ysize - 1) * geoTransform[5];
+
+        return new Area(minLon, maxLon, minLat, maxLat);
+    }
+    
+    public Iterable<Area> getAreas() {
+        List<Area> areas = new ArrayList<>();
+        for (Dataset d : m_DatabaseDtedDatasets) {
+            areas.add(getArea(d));
+        }
+        return areas;
+    }
 }
