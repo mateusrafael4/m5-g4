@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.LinkedList;
 //import br.edu.inteli.cc.m5.grupo.Nodes;
 import br.edu.inteli.cc.m5.dted.DtedDatabaseHandler;
+import br.edu.inteli.cc.m5.geo.Area;
+import scala.collection.immutable.List;
 
 public class Grid {
 
@@ -56,8 +58,7 @@ public class Grid {
         if (!dbHandlerInitializedRio || !dbHandlerInitializedSP) {
             throw new IllegalArgumentException("Failed to initialize DtedDatabaseHandler");
         }
-        
-        
+
         // Dependendo do caso indicado pelo método checkCases() ele trata a criação da grid de uma forma diferente
         switch (checkCases()){
 
@@ -167,9 +168,11 @@ public class Grid {
                 for(int i = 0; i < heightNodes; i++){
                     for(int j = 0; j < lengthNodes; j++){
                         currentElevation = dbHandler.QueryLatLonElevation(currentLon, currentLat);
-                        grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
+                        if (currentElevation.isPresent()) {
+                            grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
 
-                        currentLon = subtractLongitude(currentLon, currentLat);
+                            currentLon = subtractLongitude(currentLon, currentLat);
+                        }
                     }
                     currentLat = addLatitude(currentLat);
                     currentLon = lonRegInit;
@@ -341,5 +344,18 @@ public class Grid {
 
         // retorna a nova longitude
         return newLongitude;
+    }
+
+    public static void main(String[] args) {
+        Grid grid = new Grid(-22.5889042043, -45.172953, -22.905374, -44.5794347619519);
+    
+        Nodes no1 = grid.getGrid().get(0);
+        Nodes no2 = grid.getGrid().get(303);
+
+        AStar aixtrela = new AStar();
+        java.util.List<Nodes> path = aixtrela.findPath(grid, no1, no2);
+        for(Nodes node : path){
+            System.out.println(node);
+        }
     }
 }
