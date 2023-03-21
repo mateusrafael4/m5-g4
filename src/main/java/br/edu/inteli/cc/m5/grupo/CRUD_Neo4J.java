@@ -26,9 +26,9 @@ public class CRUD_Neo4J {
     }
 
     // Método que cria um nó, que será chamado caso a pessoa selecione essa opção. Nele são exigidos 3 parametros: o conjunto a qual o nó irá pertencer, a categoria e o valor do nó
-    public void createNode(String label, String propertyKey, Object propertyValue) {
-        session.run("CREATE (n:" + label + " {" + propertyKey + ": $value})",
-                Values.parameters("value", propertyValue));
+    public void createNode(int id, double latKey, double lonKey, double elevationKey) {
+        session.run("CREATE (node:id  {id: $id, latitude: $latKey, longitude: $lonKey, elevation: $elevationKey})",
+                Values.parameters("id", id, "latKey", latKey, "lonKey", lonKey, "elevationKey", elevationKey));
     }
 
     // Método que "encontra" um nó, passando os parâmetros: conjunto, categoria e o valor, o método encontra o nó no Neo4J e mostra ele
@@ -51,8 +51,8 @@ public class CRUD_Neo4J {
     }
 
     // Método que cria um relacionamento entre nós, para isso é necessário passar os parâmetros: conjunto, categoria e valores, isso dos 2 nós que serão interconectados
-    public void createRelationship(String startLabel, String startPropertyKey, Object startPropertyValue, String endLabel, String endPropertyKey, Object endPropertyValue, String relationshipType) {
-        session.run("MATCH (a:" + startLabel + " {" + startPropertyKey + ": $startValue}), (b:" + endLabel + " {" + endPropertyKey + ": $endValue}) CREATE (a)-[r:" + relationshipType + "]->(b)", Values.parameters("startValue", startPropertyValue, "endValue", endPropertyValue));
+    public void createRelationship(int idInit, int idEnd, double peso) {
+        session.run("MATCH (a:id) , (b:id) WHERE a.id = $idInit AND b.id = $idEnd CREATE (a)-[r:peso {peso: $peso}]->(b)", Values.parameters("idInit", idInit, "idEnd", idEnd, "peso", peso));
     }
 
     // Método que busca um relacionamento através dos parametros: conjunto, categoria e valor tanto do nó inicial, quanto do final
@@ -72,7 +72,7 @@ public class CRUD_Neo4J {
     }
 
     public static void main(String[] args) {
-
+        /*
         // Instancia do objeto example
         CRUD_Neo4J example = new CRUD_Neo4J();
 
@@ -111,7 +111,6 @@ public class CRUD_Neo4J {
                     System.out.print("Enter property value: ");
                     Object propertyValue = scanner.nextLine();
 
-                    example.createNode(label, propertyKey, propertyValue);
                     break;
 
                 case 2:
@@ -123,7 +122,6 @@ public class CRUD_Neo4J {
                     System.out.print("Enter property value: ");
                     propertyValue = scanner.nextLine();
 
-                    example.readNode(label, propertyKey, propertyValue);
                     break;
 
                 case 3:
@@ -135,7 +133,6 @@ public class CRUD_Neo4J {
                     System.out.print("Enter property value: ");
                     propertyValue = scanner.nextLine();
 
-                    example.deleteNode(label, propertyKey, propertyValue);
                     break;
 
                 case 4:
@@ -151,7 +148,6 @@ public class CRUD_Neo4J {
                     System.out.print("Enter update value: ");
                     Object updateValue = scanner.nextLine();
 
-                    example.updateNode(label, propertyKey, propertyValue, updateKey, updateValue);
                     break;
 
                 case 5:
@@ -171,8 +167,6 @@ public class CRUD_Neo4J {
                     System.out.print("Enter relationship type: ");
                     String relationshipType = scanner.nextLine();
 
-                    example.createRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel,
-                            endPropertyKey, endPropertyValue, relationshipType);
                     break;
 
                 case 6:
@@ -192,8 +186,6 @@ public class CRUD_Neo4J {
                     System.out.print("Enter relationship type: ");
                     relationshipType = scanner.nextLine();
 
-                    example.readRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel, endPropertyKey,
-                            endPropertyValue, relationshipType);
                     break;
 
                 case 7:
@@ -212,8 +204,6 @@ public class CRUD_Neo4J {
                     System.out.print("Enter relationship type: ");
                     relationshipType = scanner.nextLine();
 
-                    example.deleteRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel,
-                            endPropertyKey, endPropertyValue, relationshipType);
                     break;
 
                 case 8:
@@ -236,16 +226,15 @@ public class CRUD_Neo4J {
                     System.out.print("Enter update value: ");
                     updateValue = scanner.nextLine();
 
-                    example.updateRelationship(startLabel, startPropertyKey, startPropertyValue, endLabel,
-                            endPropertyKey, endPropertyValue, relationshipType, updateKey, updateValue);
                     break;
+
                 case 9:
 
                     System.out.println("Exiting...");
                     break;
 
-                // Caso o que  é solicitado não seja realizado, ou o usuario insira algum argumento invalido, o programa responde um erro
-                default:
+                    // Caso o que  é solicitado não seja realizado, ou o usuario insira algum argumento invalido, o programa responde um erro
+                    default:
 
                     System.out.println("Invalid option.");
                     break;
@@ -257,5 +246,6 @@ public class CRUD_Neo4J {
         scanner.close();
         example.disconnect();
     }
-
+ */
+    }
 }
