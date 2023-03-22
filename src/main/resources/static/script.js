@@ -8,77 +8,32 @@ function enviarDados() { // botão que enviará os inputs do front para o back
     var mbr_lat_end = document.getElementById("mbr_lat_end").value;
     var mbr_lon_end = document.getElementById("mbr_lon_end").value;
 
+
     const URL = `/coordinates/process`;
-	        	const dadosCoords = {
-	        		'lat_str': lat_str,
-	        		'lon_str': lon_str,
-	        		'lat_end': lat_end,
-                    'lon_end': lon_end,
-                    'mbr_lat_str': mbr_lat_str,
-	        		'mbr_lon_str': mbr_lon_str,
-	        		'mbr_lat_end': mbr_lat_end,
-                    'mbr_lon_end': mbr_lon_end,
-	        	};
+    const dadosCoords = {
+        'lat_str': lat_str,
+        'lon_str': lon_str,
+        'lat_end': lat_end,
+        'lon_end': lon_end,
+        'mbr_lat_str': mbr_lat_str,
+        'mbr_lon_str': mbr_lon_str,
+        'mbr_lat_end': mbr_lat_end,
+        'mbr_lon_end': mbr_lon_end,
+    };
 
-	        	const postRequest = {
-	        		method: 'POST',
-	        		body: JSON.stringify(dadosCoords),
-	        		headers: { 'Content-type': 'application/json' }
-	        	};
+    const postRequest = {
+        method: 'POST',
+        body: JSON.stringify(dadosCoords),
+        headers: { 'Content-type': 'application/json' }
+    };
 
-	        	fetch(URL, postRequest)
-	        		.then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; } )
-	        		.then(resposta => resposta.json());
-	        		//.then(jsonResponse => inicializar(jsonResponse))
-	        		// .catch(function(error) { paragrafoMensagem.innerHTML = 'Erro ao criar novo professor (código ' + error.message + ')'; } );
-	        }
+    fetch(URL, postRequest)
+        .then(resposta => { if (!resposta.ok) throw Error(resposta.status); return resposta; })
+        .then(resposta => resposta.json());
+    //.then(jsonResponse => inicializar(jsonResponse))
+    // .catch(function(error) { paragrafoMensagem.innerHTML = 'Erro ao criar novo professor (código ' + error.message + ')'; } );
+}
 
-// function hide_show() { // funcionamento do botão do "olho" (ocultar/mostrar)
-//     var in_box = document.getElementById("input_box");
-//     var open_eye = document.getElementById("open_eye");
-//     var closed_eye = document.getElementById("closed_eye");
-//     var in_style = getComputedStyle(in_box);
-//     var eye_icon = document.getElementById("eye_icon");
-//     var ext_in = document.getElementById("ext_in");
-//     var sht_in = document.getElementById("sht_in");
-//     var graph_dim = document.getElementById("graph");
-//     var svg = document.getElementById("svg");
-
-//     var lat_str = document.getElementById("lat_str").value;
-//     var lon_str = document.getElementById("lon_str").value;
-//     var lat_end = document.getElementById("lat_end").value;
-//     var lon_end = document.getElementById("lon_end").value;
-
-//     var lat_1 = document.getElementById("lat_1");
-//     var lon_1 = document.getElementById("lon_1");
-//     var lat_2 = document.getElementById("lat_2");
-//     var lon_2 = document.getElementById("lon_2");
-
-//     if (in_style.height === "40px") {
-//         in_box.style.height = "300px"; // aumenta o tamanho da caixa de input
-//         open_eye.style.display = "none"; // esconde a imagem do olho aberto
-//         closed_eye.style.display = "block"; // mostra a imagem do olho fechado
-//         eye_icon.style.top = "278px"; // desce o ícone do olho
-//         ext_in.style.display = "block";
-//         sht_in.style.display = "none";
-//         graph_dim.style.height = "1000px";
-//         svg.style.height = "500px";
-//     }
-//     else {
-//         in_box.style.height = "40px"; // diminui o tamanho da caixa de input
-//         open_eye.style.display = "block"; // mostra a imagem do olho aberto
-//         closed_eye.style.display = "none"; // esconde a imagem do olho fechado
-//         eye_icon.style.top = "16px"; // sobe o ícone do olho
-//         ext_in.style.display = "none";
-//         sht_in.style.display = "block";
-//         lat_1.innerHTML = "Latitude: " + lat_str + " - ";
-//         lon_1.innerHTML = "Longitude: " + lon_str;
-//         lat_2.innerHTML = "Latitude: " + lat_end + " - ";
-//         lon_2.innerHTML = "Longitude: " + lon_end;
-//         graph_dim.style.height = "450px";
-//         svg.style.height = "450px";
-//     }
-// }
 var nodes;
 var links;
 
@@ -168,3 +123,4 @@ fetch('http://localhost:8080/coordinates/Data', { // acessa a rota get/data cria
                 .on('end', dragended);
         }
     });
+
