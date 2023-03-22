@@ -48,79 +48,16 @@ fetch('http://localhost:8080/coordinates/Data', { // acessa a rota get/data cria
         nodes = data.nodes;
         links = data.links;
 
-        // cria o grafo com a biblioteca d3 através das informações das arrays nodes e links
-        var svg = d3.select('#graph')
-            .append('svg')
-            .attr('class', 'svg')
-            .attr('id', 'svg')
-        width = +svg.attr("width"),
-            height = +svg.attr("height");
-
-
-        const simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(links).id(function (d) { return d.id; }).distance(80))
-            .force('charge', d3.forceManyBody().strength(-200))
-            .force("center", d3.forceCenter(width / 2, height / 2));
-
-        const link = svg.append('g')
-            .attr('stroke', '#999')
-            .attr('stroke-opacity', 7)
-            .selectAll('line')
-            .data(links)
-            .join('line')
-            .attr('stroke-width', 7);
-
-        const node = svg.append('g')
-            .attr("class", "nodes")
-            .attr('stroke', '#fff')
-            .attr('stroke-width', 1.5)
-            .selectAll('circle')
-            .data(nodes)
-            .join('circle')
-            .attr('r', 20)
-            .attr('fill', '#555')
-            .attr('cx', d => d.x + padding) // adiciona o padding à coordenada x
-            .attr('cy', d => d.y + padding) // adiciona o padding à coordenada y
-            .call(drag(simulation));
-
-
-
-        node.append('title')
-            .text(d => d.label);
-
-        simulation.on('tick', () => {
-            link
-                .attr('x1', d => d.source.x + padding)
-                .attr('y1', d => d.source.y + padding)
-                .attr('x2', d => d.target.x + padding)
-                .attr('y2', d => d.target.y + padding);
-
-            node
-                .attr('cx', d => d.x + padding)
-                .attr('cy', d => d.y + padding);
-        });
-
-        function drag(simulation) {
-            function dragstarted(event, d) {
-                if (!event.active) simulation.alphaTarget(0.3).restart();
-                d.fx = d.x;
-                d.fy = d.y;
-            }
-
-            function dragged(event, d) {
-                d.fx = event.x;
-                d.fy = event.y;
-            }
-
-            function dragended(event, d) {
-                if (!event.active) simulation.alphaTarget(0);
-                d.fx = null;
-                d.fy = null;
-            }
-            return d3.drag()
-                .on('start', dragstarted)
-                .on('drag', dragged)
-                .on('end', dragended);
-        }
     });
 
+
+// mapa
+
+
+mapboxgl.accessToken = 'pk.eyJ1Ijoic29sZW1uIiwiYSI6ImNsZmlvbDBibjBrNTg0M25taG1xM2x2YXIifQ.aiMQpTd20YpCaWJfL5BmIg';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-48.63, -22.50], // initial map center
+    zoom: 6 // initial map zoom level
+});
