@@ -2,20 +2,24 @@ body {
     display: flex;
     background-color: #F2F2F2;
     font-family: 'Open Sans', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
 }
 
 .input_box {
     background-color: #D9D9D9;
-    height: 100vh;
-    width: 30vw;
-    border-radius: 10px;
+    height: 100%;
+    width: 30%;
+    overflow-y: scroll;
 }
 
 #title {
     color: #027065;
     font-weight: 800;
     font-family: 'Montserrat', sans-serif;
-    font-size: 32px;
+    font-size: 1.5em;
     margin-left: 2vw;
 
 
@@ -76,26 +80,28 @@ body {
 }
 
 #bot-calc {
-    border-radius: 10px;
-    border: 1px;
-    background-color: #027065;
-    color: #F2F2F2;
-    height: 40px;
-    width: 80px;
-    margin-left: 12.5vw;
-    margin-top: 2vh;
-    box-shadow: #474343;
+    background-color: rgb(2, 112, 101);
+    color: rgb(242, 242, 242);
+    height: 4em;
+    width: 100%;
+    font-weight: 800;
+    margin-top: 2em;
+    text-transform: uppercase;
+    border-style: none;
+}
+
+#bot-calc:hover {
+    background-color: rgb(242, 242, 242);
+    color: rgb(2, 112, 101);
+    cursor: pointer;
+}
+
+#bot-calc:active {
+    background-color: rgb(242, 242, 242, 0.75);
 }
 
 .btn:active {
-    background-color: #333;
-    color: #474343;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
-}
-
-#graph {
-    position: relative;
-    border: 5px solid #93f245;
+    font-size: 0.75em;
 }
 
 .svg {
@@ -104,6 +110,9 @@ body {
     height: 100vh;
 }
 
+#graph {
+    width: 70%;
+}
 /* #map {
     width: 50%;
     height: 500px;
