@@ -13,9 +13,30 @@ import org.neo4j.driver.AuthTokens;
 
 public class AStar {
 
-    public List<Nodes> findPath(Grid grid, Nodes start, Nodes end){
+    public List<Nodes> findPath(Grid grid, double latStart, double lonStart, double latEnd, double lonEnd){
         // Calcula a distância de cada nó até o fim
+        boolean gotStart = false;
+        boolean gotEnd = false;
+        Nodes start = null;
+        Nodes end = null;
         LinkedList<Nodes> trueGrid = grid.getGrid();
+        for (Nodes node : trueGrid){
+            if (node.getLat() == latStart && node.getLon() == lonStart && !gotStart){
+                start = node;
+                gotStart = true;
+            }
+            if (node.getLat() == latEnd && node.getLon() == lonEnd && !gotEnd){
+                end = node;
+                gotEnd = true;
+            }
+            if (gotStart && gotEnd){
+                break;
+            }
+        }
+        if(start == null || end == null){
+            System.out.println();
+            return null;
+        }
         for (Nodes node : trueGrid){
             node.setHScore(heuristic(node, end));
         }
