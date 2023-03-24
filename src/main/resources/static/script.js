@@ -55,9 +55,11 @@ fetch('http://localhost:8080/coordinates/Data', { // acessa a rota get/data cria
 
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoic29sZW1uIiwiYSI6ImNsZmlvbDBibjBrNTg0M25taG1xM2x2YXIifQ.aiMQpTd20YpCaWJfL5BmIg';
+
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [-48.63, -22.50], // initial map center
     zoom: 6 // initial map zoom level
 });
+

@@ -73,7 +73,8 @@ public class Nodes {
     
     // Não necessário, mas está aqui para evitar qualquer erro no futuro.
     public String toString() {
-        return "Node: (" + id + ", " + lat + ", " + lon + ", " + elevation + ")";
+        String parentInfo = parent == null ? "null" : "" + parent.id;
+        return "Node: (" + id + ", " + lat + ", " + lon + ", " + elevation + ", " + parentInfo + ")";
     }
 
     public double getDistance(Nodes that){
