@@ -121,22 +121,16 @@ public class CoordinatesController {
         System.out.println("mbr_lon_end: " + newCoord.getMbr_lon_end());
 
         
-        // Grid grid = new Grid(newCoord.getLat_str(), newCoord.getLon_str(), newCoord.getLat_end(), newCoord.getLon_end());
-        // AStar aStar = new AStar();
-        // List<Nodes> path = aStar.findPath(grid, grid.getGrid().get(0), grid.getGrid().get(grid.getGrid().size() - 1));
-        // // grid.getGrid().get(0) = Nó inicial.
-        // // grid.getGrid().get(grid.getGrid().size() - 1) = Nó final.
-        // for (Nodes node : path){
-        //     System.out.println(node);
-        // }
+        Grid grid = new Grid(newCoord.getMbr_lat_str(), newCoord.getMbr_lon_str(), newCoord.getMbr_lat_end(), newCoord.getMbr_lon_end());
+        AStar aStar = new AStar();
+        List<Nodes> path = aStar.findPath(grid, newCoord.getLat_str(), newCoord.getLon_str(), newCoord.getLat_end(), newCoord.getLon_end());
+        for (Nodes node : path){
+            System.out.println(node);
+        }
         // chame um método que execute o algoritmo usando as informações extraídas do formulário HTML
 
         return newCoord;
-    }
-
-
-
-    
+    }    
 
     /**
      * This method handles a PUT request for updating an existing coordinate.

@@ -6,16 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-	<script src="./script.js"></script>
-    <link href='//fonts.googleapis.com/css?family=Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800' 
-    rel='stylesheet' type='text/css'>	
-	
-	
-	
-	<script src="https://d3js.org/d3.v7.min.js"></script>
-	
-	<!-- Referência direta ao neo4j driver -->
-	<script src="lib/browser/neo4j-web.min.js"></script>
+    <link href='//fonts.googleapis.com/css?family=Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800'
+        rel='stylesheet' type='text/css'>
+
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+
+    <!-- Referência direta ao neo4j driver -->
+    <script src="lib/browser/neo4j-web.min.js"></script>
 
     <title>Stall</title>
 </head>
@@ -25,7 +24,7 @@
         <div class="extended_input" id="ext_in">
             <div> <!--ponto inicial-->
                 <p id="title">Ponto inicial</p>
-                <p id="subtitle"> Latitude:  
+                <p id="subtitle"> Latitude:
                     <input placeholder="XXºXX'" id="lat_str" class="input" type="number">
                 </p>
                 <p id="subtitle"> Longitude:
@@ -34,35 +33,32 @@
             </div>
             <br>
             <div> <!--ponto final-->
-                <div> <!--ponto inicial-->
-                    <p id="title">Ponto final</p>
-                    <p id="subtitle"> Latitude:
-                        <input placeholder="XXºXX'" id="lat_end" class="input" type="number">
-                    </p>
-                    <p id="subtitle"> Longitude:
-                        <input placeholder="XXºXX'" id="lon_end" class="input" type="number">
-                    </p>
-                </div>
+                <p id="title">Ponto final</p>
+                <p id="subtitle"> Latitude:
+                    <input placeholder="XXºXX'" id="lat_end" class="input" type="number">
+                </p>
+                <p id="subtitle"> Longitude:
+                    <input placeholder="XXºXX'" id="lon_end" class="input" type="number">
+                </p>
             </div>
-            <div> <!--ponto final-->
-                <div> <!--ponto inicial-->
-                    <p id="title">MBR</p>
-                    <p id="subtitle2">Ponto Inicial</p>
-                    <p id="subtitle"> Latitude:
-                        <input placeholder="XXºXX'" id="mbr_lat_str" class="input" type="number">
-                    </p>
-                    <p id="subtitle"> Longitude:
-                        <input placeholder="XXºXX'" id="mbr_lon_str" class="input" type="number"> 
-                    </p>
-                    <p id="subtitle2">Ponto Final</p>
-                    <p id="subtitle"> Latitude:
-                        <input placeholder="XXºXX'" id="mbr_lat_end" class="input" type="number">
-                    </p>
-                    <p id="subtitle"> Longitude:
-                        <input placeholder="XXºXX'" id="mbr_lon_end" class="input" type="number">
-                    </p>
-                </div>
+            <div>
+                <p id="title">MBR</p>
+                <p id="subtitle2">Ponto Inicial</p>
+                <p id="subtitle"> Latitude:
+                    <input placeholder="XXºXX'" id="mbr_lat_str" class="input" type="number">
+                </p>
+                <p id="subtitle"> Longitude:
+                    <input placeholder="XXºXX'" id="mbr_lon_str" class="input" type="number">
+                </p>
+                <p id="subtitle2">Ponto Final</p>
+                <p id="subtitle"> Latitude:
+                    <input placeholder="XXºXX'" id="mbr_lat_end" class="input" type="number">
+                </p>
+                <p id="subtitle"> Longitude:
+                    <input placeholder="XXºXX'" id="mbr_lon_end" class="input" type="number">
+                </p>
             </div>
+
             <button class="btn" id="bot-calc" onclick="enviarDados()">Calcular</button>
         </div>
         <div class="short_input" id="sht_in">
@@ -73,15 +69,15 @@
             <a id="lat_2"></a>
             <a id="lon_2"></a>
         </div>
-        <div class="eye_icon" id="eye_icon"> <!--simbolo olho-->
-            <!-- <button class="eye_button" onclick="hide_show()">
-                <img src="./imgs/open_eye.png" id="open_eye" style="display: none;">
-                <img src="./imgs/closed_eye.png" id="closed_eye" style="display: block;">
-            </button> -->
-        </div>
     </div>
     <div id="graph">
+        <div id="map">
+
+        </div>
     </div>
+
+
+    <script src="./script.js"></script>
 
 </body>
 

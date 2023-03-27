@@ -10,7 +10,7 @@ public class Nodes {
     private double lon; // x
     private int elevation;
     private double hScore = 0; // Distância desse nó até o fim.
-    private double gScore = 0; // Custo do caminho mais curto encontrado até a visita desse nó.
+    private double gScore = Double.MAX_VALUE; // Custo do caminho mais curto encontrado até a visita desse nó.
     private double fScore; // gScore + fScore
     private Nodes parent; // Nó antecessor (utilizado para voltar o caminho mais curto)
     private HashMap<Integer, Double> edges; // Conteém todos os vizinhos do nó e o peso das arestas
