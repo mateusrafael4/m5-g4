@@ -42,9 +42,10 @@ public class AStar {
         }
         // Cria uma fila de nós ainda não visitados que são organizados pelo fScore (mais informações em fScore em Node)
         // e uma de visitados para não retornar a eles e entrar num loop.
-        PriorityQueue<Nodes> unvisitedList = new PriorityQueue<Nodes>((node1, node2) -> Double.compare(node1.getFScore(), node2.getFScore()));
+        PriorityQueue<Nodes> unvisitedList = new PriorityQueue<Nodes>((node1, node2) -> Double.compare(node1.getGScore(), node2.getGScore()));
         HashSet<Nodes> visitedList = new HashSet<Nodes>();
         unvisitedList.add(start);
+        start.setGScore(0.0);
         while (!unvisitedList.isEmpty()){ // Irá procurar uma rota enquanto não tiver mais nós para visitar.
             Nodes current = unvisitedList.remove();
             if (current.equals(end)){ // Se encontrar o nó final, retorne o caminho.
@@ -59,8 +60,6 @@ public class AStar {
                 // Calcula o gScore dos próximos caminhos.
                 double tentativeGScore = current.getGScore() + current.getEdges().get(neighbor.getID());
 
-                // Se não for bom, não vá.
-                // Se for bom, e procure o caminho utilizando o nó escolhido dessa vez.
                 if (tentativeGScore < neighbor.getGScore()) {
                     neighbor.setGScore(tentativeGScore);
                     neighbor.setParent(current);
@@ -68,7 +67,6 @@ public class AStar {
                 if (!unvisitedList.contains(neighbor)) {
                     unvisitedList.add(neighbor);
                 }
-                neighbor.setParent(current);
             }
         }
         return null;
@@ -82,7 +80,30 @@ public class AStar {
             current = current.getParent();
         }
         Collections.reverse(path);
+
+        sendToNeo4J(path);
+
         return path;
+    }
+
+    private static void sendToNeo4J(List<Nodes> path){
+
+        CRUD_Neo4J neo4j = new CRUD_Neo4J();
+        neo4j.connect("bolt://localhost:7687", "neo4j", "12345678");
+
+        int aux = 0;
+        int lastNodeID = 0;
+        HashMap<Integer, Double> lastNodeNeighbor = new HashMap<>();
+        for(Nodes node : path){
+            neo4j.createNode(node.getID(), node.getLat(), node.getLon(), node.getElevation());
+            if (aux != 0){
+                neo4j.createRelationship(lastNodeID, node.getID(), lastNodeNeighbor.get(node.getID()));
+            }
+            lastNodeID = node.getID();
+            lastNodeNeighbor = node.getEdges();
+            aux++;
+        }
+        neo4j.disconnect();
     }
 
 public class Neo4JConnector {

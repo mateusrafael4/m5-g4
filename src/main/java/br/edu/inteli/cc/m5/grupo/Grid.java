@@ -47,17 +47,6 @@ public class Grid {
         // latitude, longitude e elevação de cada nó no momento atual da iteração
         double currentLat = latRegInit;
         double currentLon = lonRegInit;
-        Optional<Integer> currentElevation;
-
-        // O banco de dados Dted é chamado para a descoberta das alturas por meio das latitudes e longitudes
-        DtedDatabaseHandler dbHandler = new DtedDatabaseHandler();
-        boolean dbHandlerInitializedRio = dbHandler.InitializeFromResources("dted/Rio");
-        boolean dbHandlerInitializedSP = dbHandler.InitializeFromResources("dted/SaoPaulo");
-
-        // Caso as coordenadas não pertençam ao banco de dados, o código retorna erro
-        if (!dbHandlerInitializedRio || !dbHandlerInitializedSP) {
-            throw new IllegalArgumentException("Failed to initialize DtedDatabaseHandler");
-        }
 
         // Dependendo do caso indicado pelo método checkCases() ele trata a criação da grid de uma forma diferente
         switch (checkCases()){
@@ -68,8 +57,7 @@ public class Grid {
                 lengthNodes = (int) (length)/120;
 
                 for(int i = 0; i < lengthNodes; i++){
-                    currentElevation = dbHandler.QueryLatLonElevation(currentLon, currentLat);
-                    grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
+                    grid.add(new Nodes(id++, currentLon, currentLat));
 
                     currentLon = addLongitude(currentLon, currentLat);
                 }
@@ -81,8 +69,7 @@ public class Grid {
                 lengthNodes = (int) (length)/120;
 
                 for(int i = 0; i < lengthNodes; i++){
-                    currentElevation = dbHandler.QueryLatLonElevation(currentLon, currentLat);
-                    grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
+                    grid.add(new Nodes(id++, currentLon, currentLat));
 
                     currentLon = subtractLongitude(currentLon, currentLat);
                 }
@@ -100,8 +87,7 @@ public class Grid {
 
                 for(int i = 0; i < heightNodes; i++){
                     for(int j = 0; j < lengthNodes; j++){
-                        currentElevation = dbHandler.QueryLatLonElevation(currentLon, currentLat);
-                        grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
+                        grid.add(new Nodes(id++, currentLon, currentLat));
 
                         currentLon = addLongitude(currentLon, currentLat);
                     }
@@ -123,8 +109,7 @@ public class Grid {
 
                 for(int i = 0; i < heightNodes; i++){
                     for(int j = 0; j < lengthNodes; j++){
-                        currentElevation = dbHandler.QueryLatLonElevation(currentLon, currentLat);
-                        grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
+                        grid.add(new Nodes(id++, currentLon, currentLat));
                         currentLon = addLongitude(currentLon, currentLat);
                     }
                     currentLat = addLatitude(currentLat);
@@ -144,8 +129,7 @@ public class Grid {
                 
                 for(int i = 0; i < heightNodes; i++){
                     for(int j = 0; j < lengthNodes; j++){
-                        currentElevation = dbHandler.QueryLatLonElevation(currentLon, currentLat);
-                        grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
+                        grid.add(new Nodes(id++, currentLon, currentLat));
 
                         currentLon = subtractLongitude(currentLon, currentLat);
                     }
@@ -167,12 +151,8 @@ public class Grid {
 
                 for(int i = 0; i < heightNodes; i++){
                     for(int j = 0; j < lengthNodes; j++){
-                        currentElevation = dbHandler.QueryLatLonElevation(currentLon, currentLat);
-                        if (currentElevation.isPresent()) {
-                            grid.add(new Nodes(id++, currentLon, currentLat, currentElevation.get()));
-
-                            currentLon = subtractLongitude(currentLon, currentLat);
-                        }
+                        grid.add(new Nodes(id++, currentLon, currentLat));
+                        currentLon = subtractLongitude(currentLon, currentLat);
                     }
                     currentLat = addLatitude(currentLat);
                     currentLon = lonRegInit;
@@ -219,7 +199,7 @@ public class Grid {
                 Edge edge = new Edge(neighborNodeID, weight);
                 node.addNeighbor(edge);
             };
-            if (nodeID % length != 0){ // Verifica se existe um vizinho na esquerda.
+            if (nodeID % lengthNodes != 0){ // Verifica se existe um vizinho na esquerda.
                 int neighborNodeID = nodeID - 1;
                 Nodes neighborNode = grid.get(neighborNodeID);
                 double weight = calculateNeighborWeight(node, neighborNode);
@@ -350,8 +330,12 @@ public class Grid {
         Grid grid = new Grid(-22.5889042043, -45.172953, -22.905374, -44.5794347619519);
         AStar aStar = new AStar();
         java.util.List<Nodes> path = aStar.findPath(grid, -22.5889042043, -45.172953, -22.572625513106775, -45.193966081084056);
-        //for(Nodes node : path){
-        //    System.out.println(node);
-        //} 
+        int a = 0;
+
+        for(Nodes node : path){
+            System.out.println(node);
+            a++;
+        }
+        System.out.println(a);
     }
 }
