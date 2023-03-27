@@ -1,4 +1,5 @@
 package br.edu.inteli.cc.m5.grupo.controllers;
+import java.util.List;
 
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Driver;
@@ -114,6 +115,7 @@ public class CoordinatesController {
         // }
 
     public Coordinates enviarDados(@RequestBody Coordinates newCoord) {
+
         System.out.println("lat_str: " + newCoord.getLat_str());
         System.out.println("lon_str: " + newCoord.getLon_str());
         System.out.println("lat_end: " + newCoord.getLat_end());

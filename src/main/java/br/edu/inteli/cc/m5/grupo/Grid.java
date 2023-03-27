@@ -352,6 +352,6 @@ public class Grid {
         java.util.List<Nodes> path = aStar.findPath(grid, -22.5889042043, -45.172953, -22.572625513106775, -45.193966081084056);
         //for(Nodes node : path){
         //    System.out.println(node);
-        //}
+        //} 
     }
 }
