@@ -61,7 +61,7 @@ Muitos dos conceitos utilizados no artigo são semelhantes aos utilizados no pro
 
 <p>A linguagem de programação escolhida neste projeto foi o Java, devido a sua ampla aplicação no mercado e o repertório de conteúdo didático disponível para a linguagem. </p>
 
-<p>Dentro do Java, também é utilizado a ferramenta de gerenciamento e construção de projetos Apache Maven, que tem a finalidade de facilitar o gerenciamento de dependências, a construção, o teste e a implementação de projetos Java. Em nosso caso específico, a utilizamos para gerenciar importantes dependências para nosso projeto</p>
+<p>Dentro do Java, também é utilizado a ferramenta de gerenciamento e construção de projetos Apache Maven, que tem a finalidade de facilitar o gerenciamento de dependências, a construção, o teste e a implementação de projetos Java. Em nosso caso específico, a utilizamos para gerenciar importantes dependências para nosso projeto.</p>
 
 <p>Uma dessas dependências é o GDAL (Geospacial Data Abstraction Library / Biblioteca de Abstração de Dados Geospaciais), que é uma biblioteca que permite a leitura e gravação de dados geoespaciais em vários formatos.
 Em nosso caso específico, utilizamos o GDAL para ler arquivos DTED.</p>
@@ -80,14 +80,14 @@ Em nosso caso específico, utilizamos o GDAL para ler arquivos DTED.</p>
 
 <p>Porém, não é ideal que o usuário interaja com o algoritmo diretamente, e para remediar este problema, utilizamos de uma solução web integrada com o banco de dados Neo4j e o algoritmo em Java.</p>
 
-<p>O usuário terá acesso a uma página web (Utilizando das tecnologias HTML e CSS) conectada ao banco de dados Neo4j, onde ele irá enviar, primeiramente, os parâmetros para um MBR (Minimum Bounding Rectangle), que consiste do Ponto Superior Esquerdo e Ponto Inferior Direto(Em graus de latitude e longitude), após isto ele irá inserir o ponto inicial e o ponto final da trajetória, e terá a opção de executar o algoritmo em Java com estes argumentos.</p>
+<p>O usuário terá acesso a uma página web (Utilizando das tecnologias HTML e CSS) conectada ao banco de dados Neo4j, onde ele irá enviar, primeiramente, os parâmetros para um MBR (Minimum Bounding Rectangle), que consiste do Ponto Superior Esquerdo e Ponto Inferior Direto (em graus de latitude e longitude), após isto ele irá inserir o ponto inicial e o ponto final da trajetória, e terá a opção de executar o algoritmo em Java com estes argumentos.</p>
 
 <p>A comunicação entre a aplicação web e o algoritmo em Java é feita pelo framework Spring, outra dependência inserida em nosso arquivo pom.xml, que representa o Apache Maven.</p>
 
 <p>Spring é um framework para desenvolvimento de aplicações Java que facilita o desenvolvimento de aplicações web, desktop e móveis. 
-Em nosso caso, estamos utilizando o Spring Boot , que serve para enviar utilizar as informações obtidas na aplicação web para utilizar como parâmetro em nosso algoritmo de busca do melhor caminho.</p>
+Em nosso caso, estamos utilizando o Spring Boot , que serve para enviar e utilizar as informações obtidas na aplicação web para utilizar como parâmetro em nosso algoritmo de busca do melhor caminho.</p>
 
-<p>O algoritmo de melhor caminho é constituido de algumas partes; primeiramente, precisamos saber qual a área de operações (delimitada por meio de entradas do usuário, posteriormente as transformando em um MBR), e baseado nela, podemos dizer se temos dados sobre o terreno especificado ou não (Limitado pelos arquivos DTED em possessão; como citado anteriormente, temos acesso a coordenadas dentro de São Paulo, Rio de Janeiro, Yosemite e Vale da Morte)</p>
+<p>O algoritmo de melhor caminho é constituido de algumas partes; primeiramente, precisamos saber qual a área de operações (delimitada por meio de entradas do usuário, posteriormente as transformando em um MBR), e baseado nela, podemos dizer se temos dados sobre o terreno especificado ou não (Limitado pelos arquivos DTED em possessão; como citado anteriormente, temos acesso a coordenadas dentro de São Paulo, Rio de Janeiro, Yosemite e Vale da Morte).</p>
 
 <p>Feito esta verificação, podemos atuar na criação da grade, onde cercaremos o MBR criado a partir da entrada do usuário, que será referido como área de operações, em vértices espalhados em 120m de distância máxima horizontal e vertical (Vértices relacionados pela diagonal terão uma distância de ~~ 169,71m) populando toda a área de operações e salvando estas informações em um array.</p>
 
@@ -136,7 +136,23 @@ Ainda em outro trecho de DASGUPTA et. al. (2011), temos:
 
 # Resultados obtidos
 
+<p>Com o uso do algoritmo A* integrado ao frontend, backend e Neo4j, o usuário deve inserir dados da missão, como o MBR (Minimum Bounding Rectangle), a longitude e a latitude do ponto de partida e chegada, e receberão como resultado a rota que o algoritmo considera mais eficiente. A escolha da rota leva em conta diversos fatores, mas principalmente o relevo e áreas de exclusão.</p>
+
+<p>O algoritmo desenvolvido foi avaliado com sucesso usando arquivos DTED, disponibilizados pela própria AEL. Os resultados mostram que o algoritmo é capaz de escolher o caminho ideal para a missão, sendo que em algumas situações, a rota escolhida pode passar por rios devido à sua elevação nula. Isso prova que o algoritmo está funcionando conforme o esperado e selecionando caminhos que garantem a segurança do piloto, além de aumentar a eficiência da missão.</p>
+
+<p>É importante destacar que a integração do algoritmo A* com as ferramentas de backend, frontend e Neo4j permite um processo rápido e preciso de seleção de rotas para missões aéreas militares. O backend e o frontend permitem que os usuários possam inserir dados da missão e receber o resultado em tempo real, enquanto o Neo4j oferece uma base de dados eficiente e precisa para armazenar as informações necessárias para a seleção da rota.</p>
+
+<p>Logo, o conjunto completo aparenta ser uma solução eficiente para a seleção de rotas para missões aéreas militares e pode ser utilizada como uma ferramenta poderosa no auxílio às forças militares a planejar e executar missões aéreas com sucesso.</p>
+
 # Conclusão
+
+<p>Em conclusão, a seleção da rota é uma parte crucial do planejamento e execução de missões aéreas militares bem-sucedidas. Uma rota mal traçada pode afetar consideravelmente o sucesso da operação. Por isso, é importante selecionar uma rota eficiente que permita às forças militares evitar áreas inadequadas, de acordo com o objetivo da missão e as características da aeronave.</p>
+
+<p>Nesse sentido, o algoritmo desenvolvido durante o projeto vem sendo cada vez mais utilizado, permitindo uma seleção precisa da rota com base em diversos fatores já citados anteriormente. Com a finalidade de gerar ao usuário a rota que o algoritmo identificar como mais eficiente, e consequentemente melhor.</p>
+
+<p>Além disso, a tecnologia avançada de navegação e comunicação tem sido fundamental para permitir que as forças militares planejem e executem missões aéreas com precisão, garantindo que as equipes possam realizar suas tarefas com segurança. Ou seja, a tecnologia avançada consegue garantir a segurança do pessoal envolvido independente do grau de complexidade da missão.</p>
+
+<p>Por fim, a seleção cuidadosa da rota é um elemento crucial para o sucesso das missões aéreas militares, e o uso de algoritmos traçadores de rotas e tecnologias avançadas de navegação e comunicação podem garantir que essas missões sejam executadas com sucesso e segurança.</p>
 
 # Referências Bibliográficas
 //
