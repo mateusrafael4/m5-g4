@@ -80,7 +80,30 @@ public class AStar {
             current = current.getParent();
         }
         Collections.reverse(path);
+
+        sendToNeo4J(path);
+
         return path;
+    }
+
+    private static void sendToNeo4J(List<Nodes> path){
+
+        CRUD_Neo4J neo4j = new CRUD_Neo4J();
+        neo4j.connect("bolt://localhost:7687", "neo4j", "12345678");
+
+        int aux = 0;
+        int lastNodeID = 0;
+        HashMap<Integer, Double> lastNodeNeighbor = new HashMap<>();
+        for(Nodes node : path){
+            neo4j.createNode(node.getID(), node.getLat(), node.getLon(), node.getElevation());
+            if (aux != 0){
+                neo4j.createRelationship(lastNodeID, node.getID(), lastNodeNeighbor.get(node.getID()));
+            }
+            lastNodeID = node.getID();
+            lastNodeNeighbor = node.getEdges();
+            aux++;
+        }
+        neo4j.disconnect();
     }
 
 public class Neo4JConnector {

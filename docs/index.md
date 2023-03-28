@@ -309,12 +309,16 @@ As user stories serão o norte do grupo para o desenvolvimento do algoritmo, uma
 
 #### Tomada de Decisão - Variáveis de Decisão
 
-x = <sub>ij</sub> {1  se usar o caminho i-j; 0 caso contrário
+x<sub>ij</sub> = {1  se usar o caminho i-j; 0 caso contrário
 <br>
+</br>
+
 
 #### Objetivo - Função Objetivo
 
-Min C = peso_74_5 . X<sub>af</sub> + pese_102_35 . X<sub>ag</sub> + peso_76 . X<sub>ab</sub> + peso_127 . X<sub>fk</sub> + peso_171_85 . X<sub>fl</sub> + peso_63 . X<sub>fg</sub> + peso_86_35 . X<sub>fb</sub> + {...} + peso_75_5 . X<sub>xy</sub> + peso_124_35 . X <sub>sy</sub> + peso_71 . X<sub>ty</sub>
+$Min C = peso\_74\_5 \cdot X_{af} + pese\_102\_35 \cdot X_{ag} + peso\_76 \cdot X_{ab} + peso\_127 \cdot X_{fk} + peso\_171\_85 \cdot X_{fl} + peso\_63 \cdot X_{fg} + peso\_86\_35 \cdot X_{fb} + {...} + peso\_75\_5 \cdot X_{xy} + peso\_124\_35 \cdot X_{sy} + peso\_71 \cdot X_{ty}$
+<br>
+</br>
 
 
 #### Restrições - Limitações
@@ -326,7 +330,7 @@ nó D: X<sub>cd</sub>  + X<sub>hd</sub> + X<sub>id</sub> + X<sub>jd</sub> + X<su
 nó E: X<sub>de</sub> + X<sub>ie</sub> + X<sub>je</sub> = X<sub>ed</sub> + X<sub>ei</sub> + X<sub>ej</sub><br>
 nó F: X<sub>af</sub> + X<sub>kf</sub> + X<sub>lf</sub> + X<sub>gf</sub> + X<sub>bf</sub> = X<sub>fa</sub> + X<sub>fk</sub> + X<sub>fl</sub> + X<sub>fg</sub> + X<sub>fb</sub><br>
 ...<br>
-nó Y: X<sub>xy</sub> + X<sub>sy</sub> + X<sub>ty</sub> = X<sub>yx</sub> + X<sub>ys</sub> + X<sub>yt</sub><br>
+nó Y: X<sub>xy</sub> + X<sub>sy</sub> + X<sub>ty</sub> = 1<br>
 
 
 
