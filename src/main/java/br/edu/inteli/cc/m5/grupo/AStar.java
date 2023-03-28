@@ -42,7 +42,7 @@ public class AStar {
         }
         // Cria uma fila de nós ainda não visitados que são organizados pelo fScore (mais informações em fScore em Node)
         // e uma de visitados para não retornar a eles e entrar num loop.
-        PriorityQueue<Nodes> unvisitedList = new PriorityQueue<Nodes>((node1, node2) -> Double.compare(node1.getGScore(), node2.getGScore()));
+        PriorityQueue<Nodes> unvisitedList = new PriorityQueue<Nodes>((node1, node2) -> Double.compare(node1.getFScore(), node2.getFScore()));
         HashSet<Nodes> visitedList = new HashSet<Nodes>();
         unvisitedList.add(start);
         start.setGScore(0.0);
