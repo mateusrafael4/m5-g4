@@ -18,7 +18,7 @@ abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um 
 
 <p>O propósito deste projeto é o desenvolvimento de um algoritmo que automatize o processo de escolha de um caminho ideal para missões aéreas militares quaisquer.</p>
 
-<p>Missões aéreas são parte integrante das atividades militares em muitos países pelo mundo. Elas têm uma variedade de funções, incluindo defesa, reconhecimento e resgate. No entanto, algumas missões precisam ser realizadas em baixa altitude (no máximo 500 a 1000 pés) e, portanto, apresentam desafios significativos que precisam ser enfrentados para garantir o sucesso e a segurança dos envolvidos.</p>
+<p>Missões aéreas são parte integrante das atividades militares em muitos países pelo mundo. Elas têm uma variedade de funções, incluindo defesa, reconhecimento e resgate. No entanto, algumas missões precisam ser realizadas em baixa altitude (entre 350 e 500 pés acima do nível da terra ou da água) e, portanto, apresentam desafios significativos que precisam ser enfrentados para garantir o sucesso e a segurança dos envolvidos.</p>
 
 <p>Um dos principais desafios das missões de baixa altitude é a falta de bom reconhecimento do terreno e do relevo, o que pode aumentar em grande escala o risco de colisão ou passagem por zonas de risco, como territórios inimigos ou áreas populacionais. Esses riscos podem levar à destruição da aeronave e/ou ao acidente do piloto, resultando em perdas para a missão e para o país. Pesquisadores, como Adams, Kuang e Wang (2018), propõem soluções que utilizam análise espacial em 3D para lidar com esse problema e melhorar a segurança das missões.</p>
 
@@ -37,7 +37,7 @@ Muitos dos conceitos utilizados no artigo são semelhantes aos utilizados no pro
 
 <p>Este projeto tem como finalidade o tracejamento de uma rota ideal para um piloto em operações militares, buscando priorizar sua segurança e a eficiência de sua missão.</p>
 
-<p>A segurança do piloto nestes voos pode ser violada de diversas maneiras dependendo das características específicas do voo que está sendo realizado; forças opositoras, características topográficas e propriedades da nave estão entre as possíveis causas deste problema.</p>
+<p>A segurança do piloto nestes voos pode ser violada de diversas maneiras dependendo das características específicas do voo que está sendo realizado: forças opositoras, características topográficas e propriedades da nave estão entre as possíveis causas deste problema.</p>
 
 <p>De acordo com dados publicamente disponibilizados por orgãos públicos, voos em baixa altura (LALT) compõem grande parte dos tipos de ocorrência (Taxonomia SIPAER) dos acidentes aéreos nos segmentos agrícolas, tendo feito parte dos fatores destaque em múltiplas edições da RASO (Relatório Anual de Segurança Operacional) da ANAC (Agência Nacional de Aviação Civil) e no Sumário Estatístico da Aviação Agrícola realizado entre 2010 e 2019 da CENIPA (Centro de Investigação e Prevenção de Acidentes Aeronáuticos).</p>
 
@@ -68,9 +68,9 @@ Em nosso caso específico, utilizamos o GDAL para ler arquivos DTED.</p>
 
 <p> Arquivos DTED (Digital Terrain Elevation Data / Dados Digitais de Elevação de Terreno) é um padrão de dados geoespaciais utilizado pelo Departamento de Defesa dos Estados Unidos para representar dados de elevação de terreno. Em nosso caso, utilizamos 4 conjuntos de dados que representam as localizações Rio de Janeiro, São Paulo, Yosemite e Vale da Morte. </p> 
 
-<p>Estes dados são, na verdade, um conjunto de arquivos .DT2, que é um componente do formato DTED e significa a resolução espacial dos dados de elevação dos terrenos citados, no caso, a extensão .DT2 armazena a grade com a maior resolução (aproximadamente 0,25 km x 0,25 km na linha do equador).</p>
+<p>Estes dados são, na verdade, um conjunto de arquivos .dt2, que é um componente do formato DTED e significa a resolução espacial dos dados de elevação dos terrenos citados, no caso, a extensão .dt2 armazena a grade com a maior resolução (aproximadamente 0,25 km x 0,25 km na linha do equador).</p>
 
-<p>Dependendo das necessidades do projeto, o formato DTED oferece outras 2 resoluções, sendo estas representadas por arquivos de extensão .DT0 e .DT1, sendo .DT0 o nível mais baixo de resolução (aproximadamente 1 km x 1 km na linha do equador) e .DT1 o nível intermediário (aproximadamente 0,75 km x 0,75 km na linha do equador), todas as extensões utilizam de uma grade de células, e cada célula representa uma área de 30 segundos de latitude por 30 segundos de longitude.</p>
+<p>Dependendo das necessidades do projeto, o formato DTED oferece outras 2 resoluções, sendo estas representadas por arquivos de extensão .dt0 e .dt1, sendo .dt0 o nível mais baixo de resolução (aproximadamente 1 km x 1 km na linha do equador) e .dt1 o nível intermediário (aproximadamente 0,75 km x 0,75 km na linha do equador), todas as extensões utilizam de uma grade de células, e cada célula representa uma área de 30 segundos de latitude por 30 segundos de longitude.</p>
 
 <p>Outra dependência necessária é o Neo4j Driver, que realiza a conexão e a comunicação do algoritmo com o banco de dados Neo4j e permite as manipulações de CRUD (Create, Read, Update, Delete / Criar, Ler, Atualizar e Deletar) no banco.</p>
 
@@ -78,22 +78,22 @@ Em nosso caso específico, utilizamos o GDAL para ler arquivos DTED.</p>
 
 <p>O Neo4j não só nos auxilia com o armazenamento das informações, que será instrumental na integração com a aplicação web, porém também irá nos auxiliar com a visualização dos dados inseridos, dando aos desenvolvedores uma maneira de imaginar como o grafo deveria ser visto.</p>
 
-<p>Porém, não é ideal que o usuário interaja com o algoritmo diretamente, e para remediar este problema, utilizamos de uma solução web integrada com o banco de dados Neo4j e o algoritmo em Java.</p>
+<p>Porém, não é ideal que o usuário interaja com o algoritmo diretamente e, para remediar este problema, utilizamos de uma solução web integrada com o banco de dados Neo4j e o algoritmo em Java.</p>
 
-<p>O usuário terá acesso a uma página web (Utilizando das tecnologias HTML e CSS) conectada ao banco de dados Neo4j, onde ele irá enviar, primeiramente, os parâmetros para um MBR (Minimum Bounding Rectangle), que consiste do Ponto Superior Esquerdo e Ponto Inferior Direto (em graus de latitude e longitude), após isto ele irá inserir o ponto inicial e o ponto final da trajetória, e terá a opção de executar o algoritmo em Java com estes argumentos.</p>
+<p>O usuário terá acesso a uma página web (Utilizando das tecnologias HTML e CSS) conectada ao banco de dados Neo4j, onde ele irá enviar, primeiramente, os parâmetros para um MBR (Minimum Bounding Rectangle), que consiste do Ponto Superior Esquerdo e Ponto Inferior Direto(Em graus de latitude e longitude), após isto ele irá inserir o ponto inicial e o ponto final da trajetória e terá a opção de executar o algoritmo em Java com estes argumentos.</p>
 
 <p>A comunicação entre a aplicação web e o algoritmo em Java é feita pelo framework Spring, outra dependência inserida em nosso arquivo pom.xml, que representa o Apache Maven.</p>
 
 <p>Spring é um framework para desenvolvimento de aplicações Java que facilita o desenvolvimento de aplicações web, desktop e móveis. 
-Em nosso caso, estamos utilizando o Spring Boot , que serve para enviar e utilizar as informações obtidas na aplicação web para utilizar como parâmetro em nosso algoritmo de busca do melhor caminho.</p>
+Em nosso caso, estamos utilizando o Spring Boot, que serve para enviar utilizar as informações obtidas na aplicação web para utilizar como parâmetro em nosso algoritmo de busca do melhor caminho.</p>
 
-<p>O algoritmo de melhor caminho é constituido de algumas partes; primeiramente, precisamos saber qual a área de operações (delimitada por meio de entradas do usuário, posteriormente as transformando em um MBR), e baseado nela, podemos dizer se temos dados sobre o terreno especificado ou não (Limitado pelos arquivos DTED em possessão; como citado anteriormente, temos acesso a coordenadas dentro de São Paulo, Rio de Janeiro, Yosemite e Vale da Morte).</p>
+<p>O algoritmo de melhor caminho é constituido de algumas partes: primeiramente, precisamos saber qual a área de operações (delimitada por meio de entradas do usuário, posteriormente as transformando em um MBR) e baseado nela, podemos dizer se temos dados sobre o terreno especificado ou não (limitado pelos arquivos DTED em possessão; como já citado, temos acesso a coordenadas dentro de São Paulo, Rio de Janeiro, Yosemite e Vale da Morte)</p>
 
-<p>Feito esta verificação, podemos atuar na criação da grade, onde cercaremos o MBR criado a partir da entrada do usuário, que será referido como área de operações, em vértices espalhados em 120m de distância máxima horizontal e vertical (Vértices relacionados pela diagonal terão uma distância de ~~ 169,71m) populando toda a área de operações e salvando estas informações em um array.</p>
+<p>Feita esta verificação, podemos atuar na criação da grade, onde cercaremos o MBR criado a partir da entrada do usuário, que será referido como área de operações, em vértices espalhados em 120m de distância máxima horizontal e vertical (Vértices relacionados pela diagonal terão uma distância de ~~ 169,71m) populando toda a área de operações e salvando estas informações em um array.</p>
 
 <p>Após isto, é implementado o algoritmo A*, que é uma extensão do algoritmo de Dijkstra, este que é um algoritmo de busca em grafo que encontra o caminho mais curto entre dois pontos em um grafo com pesos positivos.</p>
 
-<p>A razão pela escolha do algoritmo A* sobre o algoritmo de Dijkstra é pela sua adequação ao projeto; enquanto o algoritmo de Dijkstra se comporta melhor com grafos menores onde os pesos são positivos e iguais, o algoritmo A* consegue lidar com grafos maiores e de pesos diferentes pela sua implementação de uma heurística.</p>
+<p>A razão pela escolha do algoritmo A* sobre o algoritmo de Dijkstra é pela sua adequação ao projeto. Enquanto o algoritmo de Dijkstra se comporta melhor com grafos menores onde os pesos são positivos e iguais, o algoritmo A* consegue lidar com grafos maiores e de pesos diferentes pela sua implementação de uma heurística.</p>
 
 <p>Esta escolha entra em concordância com nossa revisão bibliográfica; "*O algoritmo A* representa um dos métodos mais amplamente utilizados para geração de caminhos, sendo aplicado a problemas de ciência robótica, exploração espacial e videogames.
 Este algoritmo combina características dos algoritmos Djikstra e Bellman-Ford, porém,
@@ -101,15 +101,15 @@ foi mais especificamente desenvolvido para analisar de forma mais eficaz o domí
 armadilhas, A* associa uma função de custo heurística combinada com uma varredura aprimorada do
 domínio, aprimorando o processo de solução com mais eficiência do que os métodos Djikstra e Bellman-Ford podem fazer*" (DE FILIPPIS; GUGLIERI; QUAGLIOTTI, 2010) </p>
 
-<p>A heurística no algoritmo A* é utilizada para estimar a distância restante do nó atual ao nó de destino. Esta heurística se prova muito adequada a este projeto, visto que utilizaremos da variação de altitude entre diferentes pontos, e este valor será alterado dependendo se estamos subindo, ou descendo.</p>
+<p>A heurística no algoritmo A* é utilizada para estimar a distância restante do nó atual ao nó de destino. Esta heurística se prova muito adequada a este projeto, visto que utilizaremos da variação de altitude entre diferentes pontos e este valor será alterado, dependendo se estamos subindo ou descendo.</p>
 
-<p>Neste caso, utilizaremos como heurística a fórmula X * distancia + Y * altura, sendo que X + Y = 1. Desta forma, podemos ponderar melhor as possíveis opções do algoritmo e obter a melhor trajetória.</p>
+<p>Neste caso, utilizaremos como heurística a fórmula "X * distancia + Y * altura, sendo que X + Y = 1". Desta forma, podemos ponderar melhor as possíveis opções do algoritmo e obter a melhor trajetória.</p>
 
-<p>Estamos, então, procurando o menor valor de peso; visto que quanto maior a distância/altura, o menos desejável é aquela trajetória.</p>
+<p>Estamos, então, procurando o menor valor de peso; uma vez que quanto maior a distância/altura, menos desejável é aquela trajetória.</p>
 
-<p>Quando finalizada a execução do algoritmo, e encontrada a melhor trajetória, o algoritmo irá enviar armazenar este resultado no banco de dados Neo4j, que irá, por sua vez, atualizar a solução web, que está conectada a ele.</p>
+<p>Quando finalizada a execução do algoritmo e encontrada a melhor trajetória, o algoritmo irá enviar armazenar este resultado no banco de dados Neo4j, que irá, por sua vez, atualizar a solução web que está conectada a ele.</p>
 
-<p>Após atualizado o banco de dados, a solução web irá exibir um grafo, utilizando da biblioteca D3.js, que oferece uma visualização de dados interativa e dinâmica através da web.</p>
+<p>Após atualizado o banco de dados, a solução web irá exibir um grafo utilizando da biblioteca D3.js, que oferece uma visualização de dados interativa e dinâmica através da web.</p>
 
 <p>E estas são nossas metodologias e ferramentas utilizadas para a realização da solução. Podemos resumi-las nas seguintes camadas: </p>
 
@@ -117,6 +117,8 @@ domínio, aprimorando o processo de solução com mais eficiência do que os mé
 <p>Back-End (Web): Spring Boot, Node.js</p>
 <p>Banco de Dados: Neo4j</p>
 <p>Back-End (Algoritmo): Java, Maven, GDAL</p>
+
+
 
 # Análise da complexidade da solução proposta
 
