@@ -61,7 +61,7 @@ Muitos dos conceitos utilizados no artigo são semelhantes aos utilizados no pro
 
 <p>A linguagem de programação escolhida neste projeto foi o Java, devido a sua ampla aplicação no mercado e o repertório de conteúdo didático disponível para a linguagem. </p>
 
-<p>Dentro do Java, também é utilizado a ferramenta de gerenciamento e construção de projetos Apache Maven, que tem a finalidade de facilitar o gerenciamento de dependências, a construção, o teste e a implementação de projetos Java. Em nosso caso específico, a utilizamos para gerenciar importantes dependências para nosso projeto</p>
+<p>Dentro do Java, também é utilizado a ferramenta de gerenciamento e construção de projetos Apache Maven, que tem a finalidade de facilitar o gerenciamento de dependências, a construção, o teste e a implementação de projetos Java. Em nosso caso específico, a utilizamos para gerenciar importantes dependências para nosso projeto.</p>
 
 <p>Uma dessas dependências é o GDAL (Geospacial Data Abstraction Library / Biblioteca de Abstração de Dados Geospaciais), que é uma biblioteca que permite a leitura e gravação de dados geoespaciais em vários formatos.
 Em nosso caso específico, utilizamos o GDAL para ler arquivos DTED.</p>

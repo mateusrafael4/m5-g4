@@ -1,12 +1,53 @@
 body {
-    background-color: #d4d9de;
+    display: flex;
+    background-color: #F2F2F2;
     font-family: 'Open Sans', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
 }
 
 .input_box {
-    background-color: rgb(162, 162, 162);
-    height: 300px;
-    border-radius: 10px;
+    background-color: #D9D9D9;
+    height: 100%;
+    width: 30%;
+    overflow-y: scroll;
+}
+
+#title {
+    color: #027065;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    margin-left: 2vw;
+
+
+}
+
+#subtitle {
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 2vw;
+
+}
+
+#subtitle2 {
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 2vw;
+    font-weight: bold;
+    color: #027065;
+
+}
+
+.input {
+    border: 0px;
+    border-radius: 5px;
+    height: 3vh;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 1vw;
+    color: #333;
+
 }
 
 .eye_icon {
@@ -33,43 +74,61 @@ body {
     height: 20px;
 }
 
-.extended_input {
-    display: block;
-    margin-left: 13px;
-}
 
 .short_input {
     display: none;
-    /* background-color: aqua;*/
 }
 
-#bot-calc{
-    border-radius: 10px;
-    border: 1px;
-    background-color: #D4D9DE;
-    height: 40px;
-    width: 80px;
+#bot-calc {
+    background-color: rgb(2, 112, 101);
+    color: rgb(242, 242, 242);
+    height: 4em;
+    width: 100%;
+    font-weight: 800;
+    margin-top: 2em;
+    text-transform: uppercase;
+    border-style: none;
+}
+
+#bot-calc:hover {
+    background-color: rgb(242, 242, 242);
+    color: rgb(2, 112, 101);
+    cursor: pointer;
+}
+
+#bot-calc:active {
+    background-color: rgb(242, 242, 242, 0.75);
 }
 
 .btn:active {
-	background-color: #333;
-    color: #474343;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+    font-size: 0.75em;
 }
-
-#graph {
-    position: relative;
-    height: 280px;
-    border: 1px solid #ccc;
-}
-
-/* svg {
-	height: 750px;
-    width: 100%;
-} */
 
 .svg {
     position: absolute;
+    width: 70vw;
+    height: 100vh;
+}
+
+#graph {
+    width: 70%;
+}
+/* #map {
+    width: 50%;
+    height: 500px;
+} */
+
+
+.mapboxgl-canvas {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.mapboxgl-map {
     width: 100%;
-    height: 280px;
+    height: 100%;
+    position: relative;
 }
