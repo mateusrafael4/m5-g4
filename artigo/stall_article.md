@@ -134,6 +134,99 @@ Ainda em outro trecho de DASGUPTA et. al. (2011), temos:
 
 # Análise da corretude da solução proposta
 
+## **Conceitos gerais**
+
+<p> A prova da "corretude" de um algoritmo consiste em mostrar que ele executa
+corretamente o processo desejado, isto é, que chega à solução procurada Existem
+métodos de prova formal da corretude, empregando Lógica Matemática. Nessa área há
+duas dasses de problemas: a prova da execução correta e a prova de que a execução
+termina para quaisquer dados de entrada. Esta última questão é denominada o
+problema da parada. (Setzer V.W. e Carvalheiro F.H. ALGORITMO E SUA ANÁLISE
+(Uma Introdução Didática); Agosto 1993) </p>
+
+<p> Para a analise de corretude, existem vários métodos matemáticos para se provar que um algoritmo funciona para todo e qualquer caso, um deles que pode ser utilizado é a "Regra do laço", na qual o método busca encontrar a invariante do laço, e assim é aplicado o "Teorema da indução finita" a fins de provar a veracidade dessa equação. </p>
+
+> Segundo Y. Gástev, (apud SOMINSKI, 1996), indução significa o raciocínio que vai do particular ao geral e desempenha papel fundamental nas ciências experimentais. Assim, apesar do nome lembrar algo empírico (que se apóia na experiência e na observação), a indução finita é considerada um método dedutivo. De acordo com o mesmo autor, a demonstração desse método constaria de duas partes: uma base, ou seja, a demonstração dedutiva da proposição para um número natural e o passo indutivo que consistiria na demonstração, também dedutiva, da proposição geral: para todo n é correto que a validade da proposição para n implica a validade para n+1. Afirma ainda que a expressão “indução finita” deve-se simplesmente à associação, em nossa consciência, com as argumentações “indutivas” tradicionais. (SAVIOLI, A.M.P.D; Uma Reflexão sobre a Indução Finita: relato de uma experiência; novembro de 2006)
+
+<p> Dada a explicação, primeiro vamos buscar dentro do nosso algoritmo qual seria a nossa invariante do laço, isto é, uma propriedade que permanece verdadeira em todas as iterações do laço do algoritmo. A invariante do laço é uma expressão algébrica que descreve o objetivo do algoritmo e é utilizada na demonstração e prova de que tal algoritmo é funcional e pode ser usado para todo e qualquer n input, mesmo que tendermos esse n ao infinito. É uma técnica muito usada em algoritmos que realizam iterações, como por exemplo algoritmos de ordenação, busca, entre outros. No caso, iremos utilizar essa técnica de demonstração para provar a corretude do algoritmo A*.
+
+Temos a nossa invariante do laço definida por $f_{score} = g_{score} + h_{score}$
+
+Onde:
+
+* $g_{score} =$ Custo do início até o nó analizado na iteração atual
+* $h_{score} =$ Distancia, calculada pela fórmula de haversine, entre  nó analizado na iteração atual até o nó de destino
+* $f_{score} =$ A estimativa do custo total indo do nó de partida ao nó de destino passando pelo nó da iteração atual
+
+Para o funcionamento do algoritmo de A* se faz necessario a utilização de conceitos como a zona de exclusão; para cada nó, uma lista de nós vizinhos; além de 2 listas: uma de nós já visitados e nós que ainda não foram visitados, mas foram descobertos. A zona de exclusão são pontos especificados pelo cliente que indicam um peso limite, tudo que ultrapassa esse peso é automaticamente recusado quando é encontrado, já a lista de nós vizinhos é usada para que o algoritmo saiba para onde ir e com isso analise o peso das arestas para percorrer no menor peso, por fim as listas são usadas para evitar que haja loopings.
+
+## **Indução Finita**
+
+<p> Como explicado anteriormente pelo artigo (SAVIOLI, 2006) precisamos de 3 suposições para que a expressão se prove correta, são elas: a suposição para n = 1, caso correta suponhamos para n = k e n = k+1, seja n a grandeza qualquer do número de iterações que serão necessárias para o funcionamento do algoritmo. Caso for possível chegarmos no resultado da iteração sucessora ou predecessora a partir da outra, podemos afirmar que o algoritmo se encontra correto.</p>
+
+* **Para n = 1**
+
+    Como a nossa suposição considera apenas 1 iteração, podemos dizer que o nó de partida e o nó de destino é o mesmo, dito isso, podemos definir que $g_{score} = 0$ e $h_{score} = 0$, ja que não há um peso do início até o atual, nem do atual até o final por isso afirmamos que:
+
+    > $f_{score} = g_{score} + h_{score}$
+    <br>
+    $f_{score} = 0 + 0$
+    <br>
+    $f_{score} = 0$
+
+    Podemos verificar que de fato confere, pois o custo total para ir de um ponto até ele mesmo, de fato é 0.
+<br>
+
+* **Para n = k**
+
+    Agora vamos tentar generalizar supondo um número de iterações igual à um k qualquer, na qual a afirmação que $\forall k \mid k  \in \mathbb{N}*$ se faz verdadeira. Assim assumimos:
+
+    >$f_{score} = f_k$
+    <br>
+    $g_{score} = g_k$
+    <br>
+    $h_{score} = h_k$
+    <br>
+    <br>
+    $f_k = g_k + h_k$
+
+    Note que as variáveis estão no índice k, pois são variáveis que mudam justamente em função do número da iteração, portanto colocamos elas em função de k.
+
+* **Para n = k+1**
+
+    Tendo definido a generalização de n = k, vamos tentar alcançar o resultado de n = k+1 a partir do resultado obtido por n = k. Para isso, vamos determinar os valores das nossas variáveis:
+
+    > $f_{score} = f_{k+1}$
+    <br>
+    $g_{score} = g_{k+1}$
+    <br>
+    $h_{score} = h_{k+1}$
+    <br>
+    <br>
+    $f_{k+1} = g_{k+1} + h_{k+1}$
+
+    Porém, podemos reescrever $g_{k+1}$ e $h_{k+1}$ de outra forma a fim de deixá-los em relação à $k$. Portanto, podemos assumir que:
+
+    > $g_{k+1} = g_{k} + \omega_{k, k+1}$
+    
+    * sendo $\omega_{k, k+1}$ o peso da aresta entre o nó $k$ e o nó $k+1$.
+  
+    <br>
+
+    > $h_{k+1} = h_{k} - C$
+
+    * considerando que $C$ é uma constante que decorre em relação à distancia, visto que todos os nós da malha analizada se encontram distribuidos uniformemente à uma distancia de 120m entre eles.
+    
+    Por conclusão substituimos a nova relação encontrada para cada um dos termos na equação geral de $f_{k+1}$
+
+    > $f_{k+1} = g_{k+1} + h_{k+1}$
+    <br>
+    $f_{k+1} = (g_k + \omega_{k, k+1}) + (h_k - C)$
+    <br>
+    $f_{k+1} = g_k + h_k + \omega_{k, k+1} - C$
+    <br>
+    $f_{k+1} = f_k + \omega_{k, k+1} - C$
+
 # Resultados obtidos
 
 # Conclusão
