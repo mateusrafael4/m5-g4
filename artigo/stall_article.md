@@ -134,8 +134,6 @@ Ainda em outro trecho de DASGUPTA et. al. (2011), temos:
 
 # Análise da corretude da solução proposta
 
-## **Conceitos gerais**
-
 <p> A prova da "corretude" de um algoritmo consiste em mostrar que ele executa
 corretamente o processo desejado, isto é, que chega à solução procurada Existem
 métodos de prova formal da corretude, empregando Lógica Matemática. Nessa área há
@@ -144,88 +142,109 @@ termina para quaisquer dados de entrada. Esta última questão é denominada o
 problema da parada. (Setzer V.W. e Carvalheiro F.H. ALGORITMO E SUA ANÁLISE
 (Uma Introdução Didática); Agosto 1993) </p>
 
-<p> Para a analise de corretude, existem vários métodos matemáticos para se provar que um algoritmo funciona para todo e qualquer caso, um deles que pode ser utilizado é a "Regra do laço", na qual o método busca encontrar a invariante do laço, e assim é aplicado o "Teorema da indução finita" a fins de provar a veracidade dessa equação. </p>
+## **Explicando o algoritmo**
 
-> Segundo Y. Gástev, (apud SOMINSKI, 1996), indução significa o raciocínio que vai do particular ao geral e desempenha papel fundamental nas ciências experimentais. Assim, apesar do nome lembrar algo empírico (que se apóia na experiência e na observação), a indução finita é considerada um método dedutivo. De acordo com o mesmo autor, a demonstração desse método constaria de duas partes: uma base, ou seja, a demonstração dedutiva da proposição para um número natural e o passo indutivo que consistiria na demonstração, também dedutiva, da proposição geral: para todo n é correto que a validade da proposição para n implica a validade para n+1. Afirma ainda que a expressão “indução finita” deve-se simplesmente à associação, em nossa consciência, com as argumentações “indutivas” tradicionais. (SAVIOLI, A.M.P.D; Uma Reflexão sobre a Indução Finita: relato de uma experiência; novembro de 2006)
+<p> O algoritmo A* (pronuncia-se "A estrela") tem a funcionalidade de realizar uma busca de menor custo, dado um grafo conexo, também chamado de malha. Dito isso, o algoritmo funcionaria da seguinte maneira: </p>
 
-<p> Dada a explicação, primeiro vamos buscar dentro do nosso algoritmo qual seria a nossa invariante do laço, isto é, uma propriedade que permanece verdadeira em todas as iterações do laço do algoritmo. A invariante do laço é uma expressão algébrica que descreve o objetivo do algoritmo e é utilizada na demonstração e prova de que tal algoritmo é funcional e pode ser usado para todo e qualquer n input, mesmo que tendermos esse n ao infinito. É uma técnica muito usada em algoritmos que realizam iterações, como por exemplo algoritmos de ordenação, busca, entre outros. No caso, iremos utilizar essa técnica de demonstração para provar a corretude do algoritmo A*.
-
-Temos a nossa invariante do laço definida por $f_{score} = g_{score} + h_{score}$
-
-Onde:
-
-* $g_{score} =$ Custo do início até o nó analizado na iteração atual
-* $h_{score} =$ Distancia, calculada pela fórmula de haversine, entre  nó analizado na iteração atual até o nó de destino
-* $f_{score} =$ A estimativa do custo total indo do nó de partida ao nó de destino passando pelo nó da iteração atual
-
-Para o funcionamento do algoritmo de A* se faz necessario a utilização de conceitos como a zona de exclusão; para cada nó, uma lista de nós vizinhos; além de 2 listas: uma de nós já visitados e nós que ainda não foram visitados, mas foram descobertos. A zona de exclusão são pontos especificados pelo cliente que indicam um peso limite, tudo que ultrapassa esse peso é automaticamente recusado quando é encontrado, já a lista de nós vizinhos é usada para que o algoritmo saiba para onde ir e com isso analise o peso das arestas para percorrer no menor peso, por fim as listas são usadas para evitar que haja loopings.
-
-## **Indução Finita**
-
-<p> Como explicado anteriormente pelo artigo (SAVIOLI, 2006) precisamos de 3 suposições para que a expressão se prove correta, são elas: a suposição para n = 1, caso correta suponhamos para n = k e n = k+1, seja n a grandeza qualquer do número de iterações que serão necessárias para o funcionamento do algoritmo. Caso for possível chegarmos no resultado da iteração sucessora ou predecessora a partir da outra, podemos afirmar que o algoritmo se encontra correto.</p>
-
-* **Para n = 1**
-
-    Como a nossa suposição considera apenas 1 iteração, podemos dizer que o nó de partida e o nó de destino é o mesmo, dito isso, podemos definir que $g_{score} = 0$ e $h_{score} = 0$, ja que não há um peso do início até o atual, nem do atual até o final por isso afirmamos que:
-
-    > $f_{score} = g_{score} + h_{score}$
-    <br>
-    $f_{score} = 0 + 0$
-    <br>
-    $f_{score} = 0$
-
-    Podemos verificar que de fato confere, pois o custo total para ir de um ponto até ele mesmo, de fato é 0.
+* **Primeiro passo:** Dito que o algoritmo tem o objetivo de tracejar uma rota entre dois pontos, faz-se trivial que a primeira coisa a ser feita seja o input de dois nós pelo usuário, um indicando o ponto de partida e um que indique o destino.
 <br>
 
-* **Para n = k**
+* **Segundo passo:** Dado os pontos de destino o algoritmo por meio de diferentes métodos de busca, localiza onde esses pontos se encontram em um determinado grafo, pode também ser chamada de malha, independentemente a função disso é como uma área de operações, é lá que o algoritmo vai começar a analisar o terreno que ele tem disponível a fim de encontrar uma rota que ligue os pontos de origem ao de destino.
+<br>
 
-    Agora vamos tentar generalizar supondo um número de iterações igual à um k qualquer, na qual a afirmação que $\forall k \mid k  \in \mathbb{N}*$ se faz verdadeira. Assim assumimos:
+* **Terceiro passo:** Com o conhecimento da malha e a localização dos pontos extremos da rota, o algoritmo comeca a fazer a sua análise. A procura de certa forma é simples, iniciando pelo nó de origem, o algoritmo analisa seus vizinhos e através da expressão $f_{score} = g_{score} + h_{score}$ ele cria uma lista e analisa sempre com prioridade os nós que possuem o menor $f_{score}$
 
-    >$f_{score} = f_k$
-    <br>
-    $g_{score} = g_k$
-    <br>
-    $h_{score} = h_k$
-    <br>
-    <br>
-    $f_k = g_k + h_k$
+> É importante ressaltar que dada a expressão $f_{score} = g_{score} + h_{score}$, cada variavel representa:
+>
+> * $g_{score} =$ O somatório de todos os pesos das arestas escolhidas partindo do nó de origem até o nó atual
+> <br>
+> 
+> * $h_{score} =$ Também chamado de "Heurística", ele representa a distancia de Haversine entre o nó atual até o nó de destino
+> <br>
+>
+> * $f_{score} =$ Uma estimativa do menor custo possível da rota completa indo da origem ao destino, passando pelo nó atual
 
-    Note que as variáveis estão no índice k, pois são variáveis que mudam justamente em função do número da iteração, portanto colocamos elas em função de k.
+* **Quarto passo:** Baseado na lista de prioridade criada, o algoritmo separa duas outras listas: umas de nós já visitados e outra de nós que ainda não foram visitados, o intúito dessa divisão é justamente impedir que o algoritmo fique dando voltas e passe por um mesmo nó mais de uma vez, visto que estamos buscando a rota de menor custo, é trivial que isso não ocorra.
 
-* **Para n = k+1**
+* **Conclusão final:** Os passos 3 e 4 ocorrem de forma iterativa, isto é, para todo e qualquer nó $n$ a qual o procedimento é realizado, o mesmo procedimento ocorre para o nó $n+1$ enquanto $n+1 \neq$ destino. Assim que o algortimo chega ao destino, a rota está tracejada e o algoritmo retorna o caminho.
 
-    Tendo definido a generalização de n = k, vamos tentar alcançar o resultado de n = k+1 a partir do resultado obtido por n = k. Para isso, vamos determinar os valores das nossas variáveis:
+Mas nada basta toda essa explicacao se o algoritmo não for correto, com isso faremos a seguir a corretude do algoritmo
 
-    > $f_{score} = f_{k+1}$
-    <br>
-    $g_{score} = g_{k+1}$
-    <br>
-    $h_{score} = h_{k+1}$
-    <br>
-    <br>
-    $f_{k+1} = g_{k+1} + h_{k+1}$
+## **Condições para otimalidade: admissibilidade e consistência**
 
-    Porém, podemos reescrever $g_{k+1}$ e $h_{k+1}$ de outra forma a fim de deixá-los em relação à $k$. Portanto, podemos assumir que:
+> De acordo com as ideias apresentadas em "Inteligência Artificial" por Peter Norvig:
+<br>
+<br>
+$\quad$ A fins de atingirmos a otimalidade do algoritmo A* é trivial que a heurística $h_{score}$ seja **admissível** e **consistente**. Para que uma heurística seja admissível, faz-se necessário que ela nunca superestime o custo de atingir o objetivo. Devido ao $g_{score}$ ser o custo real para atingir um nó qualquer $n$ ao longo do caminho atual, e $f_{score} = g_{score} + h_{score}$ temos como consequência imediata que $f_{score}$ nunca irá superestimar o verdadeiro custo de uma solução ao longo do caminho atual através de $n$.
+<br>
+$\quad$ Heurísticas admissíveis são otimistas por natureza porque imaginam que o custo de resolver o problema seja menor do que realmente é. Um exemplo óbvio é a heurística representada pela distância euclidiana. A distância em linha reta é admissível porque ela sempre será o caminho mais curto entre dois pontos quaisquer, então a reta não pode ser uma superestimativa.
 
-    > $g_{k+1} = g_{k} + \omega_{k, k+1}$
-    
-    * sendo $\omega_{k, k+1}$ o peso da aresta entre o nó $k$ e o nó $k+1$.
-  
-    <br>
+### **Heurística admissível**
 
-    > $h_{k+1} = h_{k} - C$
+$\quad$ No nosso caso, estamos utilizando a distância de Haversine para representar a heurística $h_{score}$, isso faz ela ser admissível e realista, entregando resultados mais próximos aos da realidade. <br>
 
-    * considerando que $C$ é uma constante que decorre em relação à distancia, visto que todos os nós da malha analizada se encontram distribuidos uniformemente à uma distancia de 120m entre eles.
-    
-    Por conclusão substituimos a nova relação encontrada para cada um dos termos na equação geral de $f_{k+1}$
+>$d_{Haversine} = 2r \arcsin(\sqrt{\sin^2(\frac{y_2 - y_1}{2}) + \cos(y_1) \cdot \cos(y_2) \cdot \sin^2(\frac{x_2 - x_1}{2})})$ 
 
-    > $f_{k+1} = g_{k+1} + h_{k+1}$
-    <br>
-    $f_{k+1} = (g_k + \omega_{k, k+1}) + (h_k - C)$
-    <br>
-    $f_{k+1} = g_k + h_k + \omega_{k, k+1} - C$
-    <br>
-    $f_{k+1} = f_k + \omega_{k, k+1} - C$
+$\quad$ Apesar da menor distância entre dois pontos quaisquer ser sempre a euclidiana (linha reta), precisamos lembrar que vamos utilizar o projeto em áreas muito extensas, isso faz com que a curvatura da Terra seja um fator importante e que não possa ser relevado, por isso a distância euclidiana, por menos superestimativa que seja, continuaria sendo um problema, pois não entregaria resultados palpaveis, ao utilizá-la, inconsistencias como atravessar uma montanha como se ela não existisse seriam bem frequentes, visto que todo o relevo e a curvatura da Terra não estaria em questão. Devido isso, optamos pela fórmula de Haversine, que é a menor distância entre dois pontos que se encontram na superfície de uma esfera, passando pela superfície. <br>
+**Obs.:** Apesar da Terra também não ser uma esfera perfeita, utilizar essa forma para os cálculos trás aproximações muito mais precisas do que imaginar como se ela fosse plana.
+
+### **Heurística consistente**
+
+>   O livro também diz:
+>
+> A segunda condição, diz mais sobre a consistência e é utilizada apenas nos casos da utilização do A* em grafos. No caso, ela diz que para todo e qualquer $h_n$, seja isso o $h_{score}$ de um nó qualquer $n$, obrigatóriamente seu valor deve ser maior que o $h_{score}$ do seu sucessor $n+1$ somado com o peso para chegar até esse nó.
+><br>
+><br>
+> $h_{n} \geq h_{n+1} + \omega_{n, n+1}$
+
+Estamos trabalhando no projeto com um grafo conexo planar, em que todos os nós estão distribuidos uniformemente, de modo que é possível formar uma área retângular ou quadrática, já que cada nó se liga apenas ao da sua direita e ao de baixo e todos estão distribuidos a uma distância de 120 m entre si.
+
+O formato da malha seria semelhante ao seguinte exemplo:
+<img width="730" height="470" src="artigo\img_artigo\malha.png">
+
+Com o grafo definido, vamos supor alguns nós: um nó $n$ qualquer, os dois nós $n+1$, a qual são definidos por serem adjacentes ao nó $n$ e o ponto de destino, assim podemos demonstrar que a distância entre esse nó $n$ e o destino é sempre maior que a distância entre o nó $n+1$ e o destino.
+<img width="730" height="470" src="artigo\img_artigo\malha-n-n+1.png">
+
+Por melhor definição do problema, queremos demonstrar que indpendente de qual seja o nó $n$, sua distancia $D_n$ será sempre maior que a distancia $D_{n+1}$.
+
+> $\forall n \mid D_n > D_{n+1}$
+
+<img width="730" height="470" src="artigo\img_artigo\malha-distancias.png">
+
+### **Demonstração do problema**
+
+* Vamos primeiramente, definir 2 casos: um caso o algoritmo tome o nó $n+1$ como o de baixo e outro para se ele escolher o da direita. A partir disso vamos montar dois triângulos retângulos a fim de definir $D_n$ e $D_{n+1}$ como suas hipotenusas
+<img width="730" height="470" src="artigo\img_artigo\malha-triangulos.png">
+
+* Perceba que independente da alteração de tamanho entre as hipotenusas, o cateto adjacente definido por CA é sempre constante, não importa o caso. Utilizando isso, iremos utilizar das relações fundamentais da trigonometria com fins de provar a relação entre as hipotenusas.
+
+> Sabemos por meio da trignometria que:
+>
+> $\cos \theta = \frac{CA}{D_{n+1}}$ 
+> <br>
+> 
+> $\cos( \theta + \alpha )= \frac{CA}{D_{n}}$
+>
+* Analisando a função cosseno, conseguimos perceber uma característica importante para a demonstração
+<img width="730" height="470" src="artigo\img_artigo\funcao-cosseno.png">
+Perceba que para qualquer $x$ pertencte ao intervalo $(0, \pi)$, a medida que $x$ aumenta, o valor de $\cos x$ diminui e com isso é possível concluir que quanto maior for o ângulo formado entre a hipotenusa e o cateto adjacente de um triângulo retângulo, menor será o valor do cosseno desse ângulo, visto que em um triângulo qualquer, a soma dos ângulos internos é sempre 180° ou $\pi$ em radianos
+
+> **Demonstração de porque a soma dos ângulos internos de um triângulo é sempre 180°**
+>
+> * Supondo um triângulo qualquer, vamos traçar uma reta que seja tangente ao vértice oposto da base desse triângulo e seja paralela à base (formando a reta $r$) e em seguida vamos prolongar a base (formando a reta $s$), tal que, $r//s$
+> <img width="730" height="470" src="artigo\img_artigo\demonstração angulos.png">
+>
+> * Agora, vamos prolongar os demais lados do triângulo, de forma que teremos duas retas paralelas cortadas por duas transversais
+> <img width="730" height="470" src="artigo\img_artigo\demonstração-triangulo-1.png">
+> * Como os ângulos $\hat{x}$ e $\hat{a}$ são alternos internos, podemos afirmar que $\hat{x} = \hat{a}$. Da mesma forma podemos afirmar a igualdade entre os ângulos $\hat{y}$ e $\hat{c}$. Portanto, conseguimos concluir o seguinte:
+> <img width="730" height="470" src="artigo\img_artigo\demonstração-triangulo-2.png">
+> Fazendo com que $\hat{a} + \hat{b} + \hat{c} = 180°$
+
+Dito tudo isso, podemos confirmar que $\cos(\theta + \alpha)$, que corresponde ao cosseno do triangulo cuja hipotenusa é $D_n$ é **menor** que $\cos \theta$, que corresponde ao cosseno do triangulo cuja hipotenusa é $D_{n+1}$.
+
+Se voltarmos nas relações trigonométricas vistas anteriormente e lembrarmos que independente da variação do cosseno do ângulo e do tamanho das hipotenusas ($D_n$ e $D_{n+1}$) o valor de $CA$ é constante, é possível concluir que o valor do cosseno e o tamanho da hipotenusa são inversamente proporcionais, isto é, quanto menor for o valor do cosseno, maior será o valor da hipotenusa. Portanto, se $\cos(\theta + \alpha) < \cos \theta$, pode-se assim provar que $D_{n} > D_{n+1}$ e consequentemente levando $h_n > h_{n+1}$.
+
+$c.q.d$
 
 # Resultados obtidos
 
@@ -255,3 +274,6 @@ VMTANZU. Spring. Why Spring?. [S. l.], 2023. Disponível em: https://spring.io/w
 BOSTOCK, Mike. D3.js - Data-Driven Documents. [S. l.], 2021. Disponível em: https://d3js.org/. Acesso em: 12 mar. 2023.
 
 DE FILIPPIS, Luca; GUGLIERI, Giorgio; QUAGLIOTTI, Fulvia. A Minimum Risk Approach for Path Planning of UAVs. Journal of Intelligent & Robotic Systems, Holanda, ano 2011, v. 61, n. 1-4, p. 203 - 219, Disponível em: https://doi.org/10.1007/s10846-010-9493-9 Acesso em: 12 mar. 2023.
+
+RUSSEL, S.; NORVIG, P.; Artificial Inteligence: A Modern Approach.
+Prentice-Hall, Second Edition, 2003. Disponível em: https://integrada.minhabiblioteca.com.br/reader/books/9788595156104/epubcfi/6/28[%3Bvnd.vst.idref%3Dch03.xhtml]!/4/2/2/402/11:219[tic%2Ca.].
