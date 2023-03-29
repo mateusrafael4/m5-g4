@@ -200,21 +200,21 @@ $\quad$ Apesar da menor distância entre dois pontos quaisquer ser sempre a eucl
 Estamos trabalhando no projeto com um grafo conexo planar, em que todos os nós estão distribuidos uniformemente, de modo que é possível formar uma área retângular ou quadrática, já que cada nó se liga apenas ao da sua direita e ao de baixo e todos estão distribuidos a uma distância de 120 m entre si.
 
 O formato da malha seria semelhante ao seguinte exemplo:
-<img width="730" height="470" src="artigo\img_artigo\malha.png">
+<img width="730" height="470" src="img_artigo\malha.png">
 
 Com o grafo definido, vamos supor alguns nós: um nó $n$ qualquer, os dois nós $n+1$, a qual são definidos por serem adjacentes ao nó $n$ e o ponto de destino, assim podemos demonstrar que a distância entre esse nó $n$ e o destino é sempre maior que a distância entre o nó $n+1$ e o destino.
-<img width="730" height="470" src="artigo\img_artigo\malha-n-n+1.png">
+<img width="730" height="470" src="img_artigo/malha-n-n+1.png">
 
 Por melhor definição do problema, queremos demonstrar que indpendente de qual seja o nó $n$, sua distancia $D_n$ será sempre maior que a distancia $D_{n+1}$.
 
 > $\forall n \mid D_n > D_{n+1}$
 
-<img width="730" height="470" src="artigo\img_artigo\malha-distancias.png">
+<img width="730" height="470" src="img_artigo\malha-distancias.png">
 
 ### **Demonstração do problema**
 
 * Vamos primeiramente, definir 2 casos: um caso o algoritmo tome o nó $n+1$ como o de baixo e outro para se ele escolher o da direita. A partir disso vamos montar dois triângulos retângulos a fim de definir $D_n$ e $D_{n+1}$ como suas hipotenusas
-<img width="730" height="470" src="artigo\img_artigo\malha-triangulos.png">
+<img width="730" height="470" src="img_artigo\malha-triangulos.png">
 
 * Perceba que independente da alteração de tamanho entre as hipotenusas, o cateto adjacente definido por CA é sempre constante, não importa o caso. Utilizando isso, iremos utilizar das relações fundamentais da trigonometria com fins de provar a relação entre as hipotenusas.
 
@@ -226,18 +226,18 @@ Por melhor definição do problema, queremos demonstrar que indpendente de qual 
 > $\cos( \theta + \alpha )= \frac{CA}{D_{n}}$
 >
 * Analisando a função cosseno, conseguimos perceber uma característica importante para a demonstração
-<img width="730" height="470" src="artigo\img_artigo\funcao-cosseno.png">
+<img width="730" height="470" src="img_artigo\funcao-cosseno.png">
 Perceba que para qualquer $x$ pertencte ao intervalo $(0, \pi)$, a medida que $x$ aumenta, o valor de $\cos x$ diminui e com isso é possível concluir que quanto maior for o ângulo formado entre a hipotenusa e o cateto adjacente de um triângulo retângulo, menor será o valor do cosseno desse ângulo, visto que em um triângulo qualquer, a soma dos ângulos internos é sempre 180° ou $\pi$ em radianos
 
 > **Demonstração de porque a soma dos ângulos internos de um triângulo é sempre 180°**
 >
 > * Supondo um triângulo qualquer, vamos traçar uma reta que seja tangente ao vértice oposto da base desse triângulo e seja paralela à base (formando a reta $r$) e em seguida vamos prolongar a base (formando a reta $s$), tal que, $r//s$
-> <img width="730" height="470" src="artigo\img_artigo\demonstração angulos.png">
+> <img width="730" height="470" src="img_artigo\demonstração angulos.png">
 >
 > * Agora, vamos prolongar os demais lados do triângulo, de forma que teremos duas retas paralelas cortadas por duas transversais
-> <img width="730" height="470" src="artigo\img_artigo\demonstração-triangulo-1.png">
+> <img width="730" height="470" src="img_artigo\demonstracao-triangulo-1.png">
 > * Como os ângulos $\hat{x}$ e $\hat{a}$ são alternos internos, podemos afirmar que $\hat{x} = \hat{a}$. Da mesma forma podemos afirmar a igualdade entre os ângulos $\hat{y}$ e $\hat{c}$. Portanto, conseguimos concluir o seguinte:
-> <img width="730" height="470" src="artigo\img_artigo\demonstração-triangulo-2.png">
+> <img width="730" height="470" src="img_artigo\demonstracao-triangulo-2.png">
 > Fazendo com que $\hat{a} + \hat{b} + \hat{c} = 180°$
 
 Dito tudo isso, podemos confirmar que $\cos(\theta + \alpha)$, que corresponde ao cosseno do triangulo cuja hipotenusa é $D_n$ é **menor** que $\cos \theta$, que corresponde ao cosseno do triangulo cuja hipotenusa é $D_{n+1}$.
